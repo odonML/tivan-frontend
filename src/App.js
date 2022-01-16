@@ -1,22 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BiCog } from "react-icons/bi";
+import "./App.css";
 
 function App() {
+  const help = function () {
+    console.log("hola");
+  };
+  help();
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <BiCog size={150} className="App-logo" />
+        <h1 className="text-3xl font-bold">
+          <span className="text-pink-500">Tivan</span> en proceso!
+        </h1>
       </header>
     </div>
   );
