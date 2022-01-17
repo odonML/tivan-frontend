@@ -10,7 +10,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header bg-white text-gray-200">
+      <header className="App-header bg-gray-0 text-gray-200">
         <BiCog size={150} className="App-logo fill-gray-200" />
         <h1 className="text-3xl font-bold text-gray-200 montse-rg">
           <span className="text-pink-0 fredoka">Tivan</span> en proceso!
