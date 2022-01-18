@@ -7,6 +7,7 @@ function Button({
   circle = false,
   primary = true,
   textSize = "sm",
+  wFull = true,
   hover = true,
   click = null,
   icon = null,
@@ -14,9 +15,9 @@ function Button({
   return (
     <button
       type={type ? "button" : "submit"}
-      className={`w-full h-fit mx-1 flex items-center justify-center text-white ease-out duration-300 shadow hover:shadow-md ${
-        icon !== null && children === null ? "p-1" : "px-3"
-      }
+      className={` h-fit mx-1 flex items-center justify-center text-white ease-out duration-300 shadow hover:shadow-md ${
+        wFull ? "w-full" : "w-auto"
+      } ${icon !== null && children === null ? "p-1" : "px-3"}
       ${reverse ? "flex-row-reverse" : "inline-flex"} ${
         circle ? "rounded-full" : "rounded-lg"
       } 

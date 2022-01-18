@@ -35,7 +35,7 @@ function App() {
   ];
   return (
     <div className="App">
-      <header className="App-header bg-gray-0 text-gray-200">
+      <header className="App-header bg-gray-0 text-gray-200 py-5">
         <BiCog size={150} className="App-logo fill-gray-200" />
         <h1 className="text-3xl font-bold montse-rg">
           <span className="text-pink-0 fredoka">Tivan</span> en proceso!
@@ -56,6 +56,7 @@ function App() {
             Con icono
           </Button>
         </div>
+        -----------------------------------------
         <p>Botones icono</p>
         <div className="flex">
           <ButtonIcon
@@ -73,10 +74,12 @@ function App() {
             click={() => help("boton icono")}
           />
         </div>
+        -----------------------------------------
         <p>Logo</p>
         <div>
           <Logo>Tivan</Logo>
         </div>
+        -----------------------------------------
         <p>Select</p>
         <div className="w-30">
           <Select options={op} msj="selecciona opcion" />
