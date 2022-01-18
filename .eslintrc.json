@@ -35,7 +35,7 @@
         "unnamedComponents": ["function-expression", "arrow-function"]
       }
     ],
-    "import/no-unresolved": 1,
+    "import/no-unresolved": 0,
     "react/prop-types": 0,
     "react/jsx-boolean-value": 0,
     "func-names": [0, "always"],
