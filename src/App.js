@@ -41,6 +41,13 @@ function App() {
           <span className="text-pink-0 fredoka">Tivan</span> en proceso!
         </h1>
         -----------------------------------------
+        <p>Fonts</p>
+        <p className="w-96 text-sm">
+          Las funetes de tipografia estan en el proyecto y estan en una custom
+          class de tailwind y las puedes aplicar en el className de algun
+          elemento, y las custom class son fredoka, montse-rg y montse-md.
+        </p>
+        -----------------------------------------
         <p>Botones texto</p>
         <div className="flex w-full">
           <Button>Primary (default)</Button>
