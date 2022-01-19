@@ -10,7 +10,7 @@ function ButtonIcon({
   return (
     <button
       type={type ? "button" : "submit"}
-      className={`w-full h-fit mx-1 flex items-center justify-center ease-out duration-300 rounded-full
+      className={`w-fit h-fit mx-1 flex items-center justify-center ease-out duration-300 rounded-full
       ${sales ? "bg-yellow-0 text-purple-0" : "bg-purple-0 hover:bg-purple-100"}
       ${favorite && !sales ? "text-yellow-0" : "text-white"} ${
         icon !== null ? "p-1" : "px-3"

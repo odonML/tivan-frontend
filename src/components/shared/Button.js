@@ -40,7 +40,7 @@ function Button({
           : textSize === "md"
           ? "text-base"
           : "text-sm"
-      }`}
+      } md:text-md sm:text-sm`}
       onClick={click}
     >
       {children}

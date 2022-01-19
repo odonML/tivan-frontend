@@ -1,10 +1,11 @@
 import Button from "components/shared/Button";
 import ButtonIcon from "components/shared/ButtonIcon";
 import Logo from "components/shared/Logo";
+import Navbar from "components/shared/Navbar";
 import Select from "components/shared/Select";
 import React from "react";
 import { AiFillStar } from "react-icons/ai";
-import { BiCog } from "react-icons/bi";
+import { BiCog, BiSearchAlt2 } from "react-icons/bi";
 import { FaShoppingCart } from "react-icons/fa";
 import "./App.css";
 
@@ -42,14 +43,16 @@ function App() {
         </h1>
         -----------------------------------------
         <p>Fonts</p>
-        <p className="w-96 text-sm">
-          Las funetes de tipografia estan en el proyecto y estan en una custom
-          class de tailwind y las puedes aplicar en el className de algun
-          elemento, y las custom class son fredoka, montse-rg y montse-md.
-        </p>
+        <div className="w-full">
+          <p className="w-full text-sm">
+            Las funetes de tipografia estan en el proyecto y estan en una custom
+            class de tailwind y las puedes aplicar en el className de algun
+            elemento, y las custom class son fredoka, montse-rg y montse-md.
+          </p>
+        </div>
         -----------------------------------------
         <p>Botones texto</p>
-        <div className="flex w-full">
+        <div className="w-full flex flex-wrap md:flex-nowrap">
           <Button>Primary (default)</Button>
           <Button primary={false} textSize="md">
             No Primary
@@ -96,6 +99,14 @@ function App() {
             fontSize="lg"
             full={false}
           />
+        </div>
+        -----------------------------------------
+        <p>Navbar</p>
+        <div className="w-full">
+          <Navbar>
+            <Logo>Tivan</Logo>
+            <ButtonIcon icon={<BiSearchAlt2 />} />
+          </Navbar>
         </div>
       </header>
     </div>

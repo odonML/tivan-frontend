@@ -29,7 +29,7 @@
       { "max": 80, "skipBlankLines": true, "skipComments": true }
     ],
     "react/function-component-definition": [
-      2,
+      1,
       {
         "namedComponents": "function-declaration",
         "unnamedComponents": ["function-expression", "arrow-function"]
