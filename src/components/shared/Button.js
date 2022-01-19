@@ -15,7 +15,7 @@ function Button({
   return (
     <button
       type={type ? "button" : "submit"}
-      className={` h-fit mx-1 flex items-center justify-center text-white ease-out duration-300 shadow hover:shadow-md ${
+      className={` h-fit m-1 flex items-center justify-center text-white ease-out duration-300 shadow hover:shadow-md ${
         wFull ? "w-full" : "w-auto"
       } ${icon !== null && children === null ? "p-1" : "px-3"}
       ${reverse ? "flex-row-reverse" : "inline-flex"} ${

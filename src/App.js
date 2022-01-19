@@ -1,13 +1,16 @@
 import Button from "components/shared/Button";
 import ButtonIcon from "components/shared/ButtonIcon";
+import Image from "components/shared/Image";
 import Logo from "components/shared/Logo";
 import Navbar from "components/shared/Navbar";
 import Select from "components/shared/Select";
+import TitleSection from "components/shared/TitleSection";
 import React from "react";
 import { AiFillStar } from "react-icons/ai";
 import { BiCog, BiSearchAlt2 } from "react-icons/bi";
 import { FaShoppingCart } from "react-icons/fa";
 import "./App.css";
+import CardTitle from "./components/shared/CardTitle";
 
 function App() {
   const help = (msj) => {
@@ -100,6 +103,24 @@ function App() {
             full={false}
           />
         </div>
+        -----------------------------------------
+        <p>Titulo de la seccion + boton</p>
+        <TitleSection text="Suply" locked={true} />
+        <TitleSection text="Ventas" locked={false} />
+        -----------------------------------------
+        <p>Imagen</p>
+        <div className="w-10">
+          <Image
+            img="https://images.pexels.com/photos/4355346/pexels-photo-4355346.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+            text="cara"
+          />
+        </div>
+        -----------------------------------------
+        <p>Titulo</p>
+        <CardTitle text="titulo card" />
+        -----------------------------------------
+        <p>Descripcion</p>
+        
         -----------------------------------------
         <p>Navbar</p>
         <div className="w-full">
