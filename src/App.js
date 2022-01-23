@@ -1,13 +1,13 @@
-import Button from "components/shared/Button";
+import ButtonCheckbox from "components/shared/ButtonCheckbox";
 import ButtonIcon from "components/shared/ButtonIcon";
+import ButtonText from "components/shared/ButtonText";
 import Image from "components/shared/Image";
 import Logo from "components/shared/Logo";
 import Navbar from "components/shared/Navbar";
 import Select from "components/shared/Select";
 import TitleSection from "components/shared/TitleSection";
 import React from "react";
-import { AiFillStar } from "react-icons/ai";
-import { BiCog, BiSearchAlt2 } from "react-icons/bi";
+import { BiCog, BiHomeAlt, BiSearchAlt2 } from "react-icons/bi";
 import { FaShoppingCart } from "react-icons/fa";
 import "./App.css";
 import CardTitle from "./components/shared/CardTitle";
@@ -56,37 +56,36 @@ function App() {
         -----------------------------------------
         <p>Botones texto</p>
         <div className="w-full flex flex-wrap md:flex-nowrap">
-          <Button>Primary (default)</Button>
-          <Button primary={false} textSize="md">
+          <ButtonText>Primary (default)</ButtonText>
+          <ButtonText primary={false} textSize="md">
             No Primary
-          </Button>
-          <Button
+          </ButtonText>
+          <ButtonText
             primary={false}
             textSize="lg"
             click={() => help("boton texto")}
             icon={<BiCog />}
           >
             Con icono
-          </Button>
+          </ButtonText>
         </div>
         -----------------------------------------
         <p>Botones icono</p>
         <div className="flex">
           <ButtonIcon
-            icon={<AiFillStar size={20} />}
+            icon={<BiHomeAlt size={20} />}
             click={() => help("boton icono")}
           />
           <ButtonIcon
-            favorite={true}
-            icon={<AiFillStar size={20} />}
-            click={() => help("boton icono")}
-          />
-          <ButtonIcon
-            sales={true}
+            bgColor="bg-yellow-0"
+            txColor="text-purple-0"
             icon={<FaShoppingCart size={20} />}
             click={() => help("boton icono")}
           />
         </div>
+        -----------------------------------------
+        <p>Checkbox</p>
+        <ButtonCheckbox />
         -----------------------------------------
         <p>Logo</p>
         <div>
@@ -94,8 +93,10 @@ function App() {
         </div>
         -----------------------------------------
         <p>Select</p>
+        <div className="w-auto">
+          <Select options={op} fontSize="md" msj="Selecciona opcion" />
+        </div>
         <div className="w-30">
-          <Select options={op} msj="selecciona opcion" />
           <Select
             options={op2}
             msj="selecciona letra"
@@ -120,7 +121,6 @@ function App() {
         <CardTitle text="titulo card" />
         -----------------------------------------
         <p>Descripcion</p>
-        
         -----------------------------------------
         <p>Navbar</p>
         <div className="w-full">

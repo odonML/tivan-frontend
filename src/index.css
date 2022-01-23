@@ -28,6 +28,10 @@
     font-family: "montserrat-medium";
   }
 }
+.custom-select {
+  position: relative;
+}
+
 body {
   font-family: "montserrat-medium";
   margin: 0;
