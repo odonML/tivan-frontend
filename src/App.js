@@ -39,7 +39,7 @@ function App() {
   ];
   return (
     <div className="App">
-      <header className="App-header bg-gray-0 text-gray-200 py-5">
+      <header className="App-header bg-gray-3 text-gray-1 py-5">
         <BiCog size={150} className="App-logo fill-gray-200" />
         <h1 className="text-3xl font-bold montse-rg">
           <span className="text-pink-0 fredoka">Tivan</span> en proceso!

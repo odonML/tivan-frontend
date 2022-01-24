@@ -16,7 +16,7 @@ function ButtonCheckbox({
       <label className={` cursor-pointer`}>
         <input type="checkbox" onChange={(e) => handleChecked(e)} />
         <span
-          className={`relative inline-block p-1 ${bgColor} ${txColor} rounded-full checked:bg-purple-200`}
+          className={`relative inline-block p-1 ${bgColor} ${txColor} rounded-full`}
         >
           {icon}
         </span>

@@ -6,7 +6,7 @@ function Select({ options, msj, fontSize = "sm" }) {
     <div className={` custom-select w-full h-auto`}>
       <select
         name="select"
-        className={`w-full appearance-none border px-3 pr-10 border-pink-0 bg-gray-0 focus:bg-gray-0 focus:outline-none rounded-full ${
+        className={`w-full appearance-none border px-3 pr-10 border-pink-0 bg-gray-3 focus:bg-gray-3 focus:outline-none rounded-full ${
           fontSize === "lg"
             ? "text-lg"
             : fontSize === "md"
