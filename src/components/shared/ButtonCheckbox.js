@@ -13,7 +13,7 @@ function ButtonCheckbox({
 
   return (
     <div className="custom-checkbox">
-      <label className={` cursor-pointer`}>
+      <label className={` cursor-pointer flex items-center`}>
         <input type="checkbox" onChange={(e) => handleChecked(e)} />
         <span
           className={`relative inline-block p-1 ${bgColor} ${txColor} rounded-full`}

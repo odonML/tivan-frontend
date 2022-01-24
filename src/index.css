@@ -72,7 +72,7 @@
   display: none;
 }
 .custom-checkbox label input[type="checkbox"]:checked ~ span {
-  border: solid 1px var(--pink-0);
+  outline: solid 1px var(--pink-0);
 }
 
 body {
