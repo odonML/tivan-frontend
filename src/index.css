@@ -16,6 +16,42 @@
   font-family: "montserrat-medium";
   src: url("./assets/fonts/Montserrat/Montserrat-Medium.ttf") format("truetype");
 }
+.root,
+#root,
+#docs-root {
+  --white: #FFFFFF;
+  --black: #000000;
+  /* pink */
+  --pink-0: #f21d81;
+  --pink-1: #f161a5;
+  --pink-2: #ffc6e1;
+  --pink-3: #ffe7f2;
+  /* aqua */
+  --aqua-0: #16f2b4;
+  --aqua-1: #5ffcd0;
+  --aqua-2: #a6ffe6;
+  --aqua-3: #e4fff8;
+  /* purple */
+  --purple-0: #3d2967;
+  --purple-1: #675294;
+  --purple-2: #a38fce;
+  --purple-3: #e0d5f9;
+  /* gray */
+  --gray-0: #595a60;
+  --gray-1: #96969f;
+  --gray-2: #d3d3d3;
+  --gray-3: #efefef;
+  /* yellow */
+  --yellow-0: #f2bc1b;
+  --yellow-1: #efcb5e;
+  --yellow-2: #ffeebb;
+  --yellow-3: #fff8e4;
+  /* purpleDark */
+  --purpleDark-0: #322255;
+  --purpleDark-1: #53476c;
+  --purpleDark-2: #807793;
+  --purpleDark-3: #c3bcd2;
+}
 
 @layer base {
   .fredoka {
@@ -30,6 +66,13 @@
 }
 .custom-select {
   position: relative;
+}
+/* Custom checkbox */
+.custom-checkbox label input[type="checkbox"] {
+  display: none;
+}
+.custom-checkbox label input[type="checkbox"]:checked ~ span {
+  border: solid 1px var(--pink-0);
 }
 
 body {
