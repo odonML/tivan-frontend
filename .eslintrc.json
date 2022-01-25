@@ -25,7 +25,7 @@
     "react/jsx-props-no-spreading": "off",
     "jsx-quotes": "off",
     "max-lines": [
-      1,
+      0,
       { "max": 80, "skipBlankLines": true, "skipComments": true }
     ],
     "react/function-component-definition": [
@@ -34,6 +34,14 @@
         "namedComponents": "function-declaration",
         "unnamedComponents": ["function-expression", "arrow-function"]
       }
-    ]
+    ],
+    "import/no-unresolved": 0,
+    "react/prop-types": 0,
+    "react/jsx-boolean-value": 0,
+    "func-names": [0, "always"],
+    "no-console": 0,
+    "no-nested-ternary": 0,
+    "react/self-closing-comp": 0,
+    "jsx-a11y/label-has-associated-control": 0
   }
 }
