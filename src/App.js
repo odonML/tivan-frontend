@@ -136,14 +136,14 @@ function App() {
         -----------------------------------------
         <div className="h-screen">
           <Sidebar>
-            <div className="w-full flex justify-around md:flex-col-reverse md:w-auto">
+            <div className="border w-full flex items-center justify-around md:flex-col-reverse md:w-auto">
               <ButtonIcon icon={<BiSearchAlt2 />} />
               <ButtonIcon icon={<RiMoneyDollarCircleLine size={20} />} />
               <ButtonIcon icon={<AiOutlineDropbox size={20} />} />
               <ButtonIcon icon={<FaShoppingCart size={20} />} />
               <ButtonIcon icon={<AiFillHeart size={20} />} />
             </div>
-            <div className="hidden md:block">
+            <div className="border hidden md:flex md:flex-col md:items-center">
               <ButtonIcon icon={<BsUpcScan />} />
               <ButtonIcon icon={<BiSearchAlt2 />} />
             </div>
