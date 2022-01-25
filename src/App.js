@@ -85,7 +85,7 @@ function App() {
         </div>
         -----------------------------------------
         <p>Checkbox</p>
-        <ButtonCheckbox icon={<FaShoppingCart size={20} />} />
+        <ButtonCheckbox />
         -----------------------------------------
         <p>Logo</p>
         <div>

@@ -19,7 +19,7 @@
 .root,
 #root,
 #docs-root {
-  --white: #FFFFFF;
+  --white: #ffffff;
   --black: #000000;
   /* pink */
   --pink-0: #f21d81;
@@ -64,15 +64,30 @@
     font-family: "montserrat-medium";
   }
 }
+
+/* Select */
 .custom-select {
   position: relative;
+  height: auto;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+.arrow-select {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 2em;
+  padding: 0px;
+  pointer-events: none;
 }
 /* Custom checkbox */
 .custom-checkbox label input[type="checkbox"] {
   display: none;
-}
-.custom-checkbox label input[type="checkbox"]:checked ~ span {
-  outline: solid 1px var(--pink-0);
 }
 
 body {

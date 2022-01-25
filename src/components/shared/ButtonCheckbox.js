@@ -1,24 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
 function ButtonCheckbox({
-  bgColor = "bg-purple-0",
-  txColor = "text-white",
-  icon,
+  bgColorNoActive = "bg-purple-0",
+  bgColorActive = "bg-yellow-0",
+  txColorNoActive = "text-white",
+  txColorActive = "text-purple-0",
+  iconActive = <AiFillStar size={20} />,
+  iconNoActice = <AiOutlineStar size={20} />,
 }) {
+  const [checked, setChecked] = useState(false);
+
   const handleChecked = (e) => {
     // Checked value
     const value = e.target.checked;
+    setChecked(value);
     console.log(value);
   };
 
   return (
     <div className="custom-checkbox">
       <label className={` cursor-pointer flex items-center`}>
-        <input type="checkbox" onChange={(e) => handleChecked(e)} />
+        <input
+          type="checkbox"
+          className="hidden"
+          onChange={(e) => handleChecked(e)}
+        />
         <span
-          className={`relative inline-block p-1 ${bgColor} ${txColor} rounded-full`}
+          className={`relative inline-block p-1 ${
+            checked ? bgColorActive : bgColorNoActive
+          } ${checked ? txColorActive : txColorNoActive} rounded-full`}
         >
-          {icon}
+          {checked ? iconActive : iconNoActice}
         </span>
       </label>
     </div>
