@@ -7,10 +7,14 @@ import Navbar from "components/shared/Navbar";
 import Select from "components/shared/Select";
 import TitleSection from "components/shared/TitleSection";
 import React from "react";
+import { AiFillHeart, AiOutlineDropbox } from "react-icons/ai";
 import { BiCog, BiHomeAlt, BiSearchAlt2 } from "react-icons/bi";
+import { BsUpcScan } from "react-icons/bs";
 import { FaShoppingCart } from "react-icons/fa";
+import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import "./App.css";
 import CardTitle from "./components/shared/CardTitle";
+import Sidebar from "./components/shared/Sidebar";
 
 function App() {
   const help = (msj) => {
@@ -128,6 +132,22 @@ function App() {
             <Logo>Tivan</Logo>
             <ButtonIcon icon={<BiSearchAlt2 />} />
           </Navbar>
+        </div>
+        -----------------------------------------
+        <div className="h-screen">
+          <Sidebar>
+            <div className="w-full flex justify-around md:flex-col-reverse md:w-auto">
+              <ButtonIcon icon={<BiSearchAlt2 />} />
+              <ButtonIcon icon={<RiMoneyDollarCircleLine size={20} />} />
+              <ButtonIcon icon={<AiOutlineDropbox size={20} />} />
+              <ButtonIcon icon={<FaShoppingCart size={20} />} />
+              <ButtonIcon icon={<AiFillHeart size={20} />} />
+            </div>
+            <div className="hidden md:block">
+              <ButtonIcon icon={<BsUpcScan />} />
+              <ButtonIcon icon={<BiSearchAlt2 />} />
+            </div>
+          </Sidebar>
         </div>
       </header>
     </div>
