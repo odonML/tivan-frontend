@@ -13,6 +13,7 @@ import { BsUpcScan } from "react-icons/bs";
 import { FaShoppingCart } from "react-icons/fa";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import "./App.css";
+import CardDescription from "./components/shared/CardDescription";
 import CardTitle from "./components/shared/CardTitle";
 import Sidebar from "./components/shared/Sidebar";
 
@@ -125,27 +126,38 @@ function App() {
         <CardTitle text="titulo card" />
         -----------------------------------------
         <p>Descripcion</p>
+        <CardDescription text="descripcion de la card o el producto xD" />
         -----------------------------------------
         <p>Navbar</p>
         <div className="w-full">
           <Navbar>
             <Logo>Tivan</Logo>
-            <ButtonIcon icon={<BiSearchAlt2 />} />
+            <div className="block md:hidden">
+              <ButtonIcon icon={<BiSearchAlt2 />} />
+            </div>
+            <div className="hidden md:block">
+              <input
+                className="rounded-full px-3"
+                type="text"
+                placeholder="Search..."
+              />
+            </div>
           </Navbar>
         </div>
         -----------------------------------------
-        <div className="h-screen">
+        <p>Sidebar</p>
+        <div className="w-full md:h-screen">
           <Sidebar>
-            <div className="border w-full flex items-center justify-around md:flex-col-reverse md:w-auto">
+            <div className="w-full flex items-center justify-around md:flex-col-reverse md:gap-2 md:w-auto">
               <ButtonIcon icon={<BiSearchAlt2 />} />
               <ButtonIcon icon={<RiMoneyDollarCircleLine size={20} />} />
               <ButtonIcon icon={<AiOutlineDropbox size={20} />} />
               <ButtonIcon icon={<FaShoppingCart size={20} />} />
               <ButtonIcon icon={<AiFillHeart size={20} />} />
             </div>
-            <div className="border hidden md:flex md:flex-col md:items-center">
-              <ButtonIcon icon={<BsUpcScan />} />
-              <ButtonIcon icon={<BiSearchAlt2 />} />
+            <div className="hidden md:flex md:flex-col md:items-center md:gap-2">
+              <ButtonIcon icon={<BsUpcScan size={20} />} />
+              <ButtonIcon icon={<BiSearchAlt2 size={20} />} />
             </div>
           </Sidebar>
         </div>
