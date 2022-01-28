@@ -15,6 +15,7 @@ import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import "./App.css";
 import CardDescription from "./components/shared/CardDescription";
 import CardTitle from "./components/shared/CardTitle";
+import ControlsShopping from "./components/shared/ControlsShopping";
 import Sidebar from "./components/shared/Sidebar";
 
 function App() {
@@ -62,24 +63,24 @@ function App() {
         <p>Botones texto</p>
         <div className="w-full flex flex-wrap md:flex-nowrap">
           <ButtonText>Primary (default)</ButtonText>
-          <ButtonText primary={false} textSize="md">
+          <ButtonText primary={false} fontSize="text-lg">
             No Primary
           </ButtonText>
           <ButtonText
+            id="btnIcon"
             primary={false}
-            textSize="lg"
+            fontSize="text-sm"
+            reverse={true}
             click={() => help("boton texto")}
             icon={<BiCog />}
-          >
-            Con icono
-          </ButtonText>
+          ></ButtonText>
         </div>
         -----------------------------------------
         <p>Botones icono</p>
         <div className="flex">
           <ButtonIcon
             icon={<BiHomeAlt size={20} />}
-            click={() => help("boton icono")}
+            click={() => console.log("hola")}
           />
           <ButtonIcon
             bgColor="bg-yellow-0"
@@ -90,7 +91,7 @@ function App() {
         </div>
         -----------------------------------------
         <p>Checkbox</p>
-        <ButtonCheckbox />
+        <ButtonCheckbox click={(e) => console.log("Value", e)} />
         -----------------------------------------
         <p>Logo</p>
         <div>
@@ -160,6 +161,17 @@ function App() {
               <ButtonIcon icon={<BiSearchAlt2 size={20} />} />
             </div>
           </Sidebar>
+        </div>
+        ----------------------------------------
+        <p>controls shopping cart</p>
+        <div className="w-80">
+          <ControlsShopping
+            iconLeft={<ButtonIcon icon={<BsUpcScan />} />}
+            middle={
+              <Select options={op} fontSize="text-lg" msj="Selecciona opcion" />
+            }
+            iconRight={<ButtonIcon icon={<RiMoneyDollarCircleLine />} />}
+          />
         </div>
       </header>
     </div>

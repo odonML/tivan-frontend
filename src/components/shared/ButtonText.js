@@ -1,27 +1,32 @@
 import React from "react";
 
 function Button({
+  id = null,
   children = null,
   type = true,
-  reverse = false,
-  circle = false,
   primary = true,
-  textSize = "sm",
-  wFull = true,
   hover = true,
+  flex = "flex",
+  flexDirection = "flex-row",
+  alingItem = "items-center",
+  justifyContent = "justify-center",
+  radio = "rounded-full",
+  fontSize = "text-base",
+  txColor = "text-white",
+  transitionTaiming = "ease-out",
+  transitionDuration = "duration-300",
   click = null,
   icon = null,
 }) {
+  const handleClick = (e) => {
+    if (click != null) click(e);
+  };
   return (
     <button
+      id={id}
       type={type ? "button" : "submit"}
-      className={`h-fit m-1 flex items-center justify-center text-white ease-out duration-300 shadow hover:shadow-md ${
-        wFull ? "w-full" : "w-auto"
-      } ${icon !== null && children === null ? "p-1" : "px-3"}
-      ${reverse ? "flex-row-reverse" : "inline-flex"} ${
-        circle ? "rounded-full" : "rounded-lg"
-      } 
-      ${hover && "hover:outline-1 hover:bg-transparent"}
+      className={`w-full h-fit m-1 ${flex} ${flexDirection} ${alingItem} ${justifyContent} ${radio} ${txColor} ${fontSize} ${transitionTaiming} ${transitionDuration} shadow hover:shadow-md
+      ${hover && "hover:outline-1 hover:bg-"}
        ${
          primary
            ? `bg-purple-0 ${
@@ -34,14 +39,8 @@ function Button({
                  ? "hover:text-pink-0 hover:outline hover:outline-pink-0 hover:outline-offset-0 hover:shadow-pink-0/40"
                  : ""
              }`
-       } ${
-        textSize === "lg"
-          ? "text-lg"
-          : textSize === "md"
-          ? "text-base"
-          : "text-sm"
-      } md:text-md sm:text-sm`}
-      onClick={click}
+       } md:text-md sm:text-sm`}
+      onClick={(e) => handleClick(e)}
     >
       {children}
       {icon}

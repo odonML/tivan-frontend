@@ -8,6 +8,7 @@ function ButtonCheckbox({
   txColorActive = "text-purple-0",
   iconActive = <AiFillStar size={20} />,
   iconNoActice = <AiOutlineStar size={20} />,
+  click = null,
 }) {
   const [checked, setChecked] = useState(false);
 
@@ -15,7 +16,7 @@ function ButtonCheckbox({
     // Checked value
     const value = e.target.checked;
     setChecked(value);
-    console.log(value);
+    if (click != null) click(value);
   };
 
   return (
