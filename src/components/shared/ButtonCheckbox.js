@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
 function ButtonCheckbox({
   bgColorNoActive = "bg-purple-0",
   bgColorActive = "bg-yellow-0",
   txColorNoActive = "text-white",
   txColorActive = "text-purple-0",
-  iconActive = <AiFillStar size={20} />,
-  iconNoActice = <AiOutlineStar size={20} />,
+  iconActive = null,
+  iconNoActice = null,
   click = null,
 }) {
   const [checked, setChecked] = useState(false);
@@ -28,9 +27,9 @@ function ButtonCheckbox({
           onChange={(e) => handleChecked(e)}
         />
         <span
-          className={`relative inline-block p-1 ${
+          className={`relative inline-block p-1 rounded-full ${
             checked ? bgColorActive : bgColorNoActive
-          } ${checked ? txColorActive : txColorNoActive} rounded-full`}
+          } ${checked ? txColorActive : txColorNoActive}`}
         >
           {checked ? iconActive : iconNoActice}
         </span>

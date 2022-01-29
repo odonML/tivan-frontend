@@ -7,7 +7,12 @@ import Navbar from "components/shared/Navbar";
 import Select from "components/shared/Select";
 import TitleSection from "components/shared/TitleSection";
 import React from "react";
-import { AiFillHeart, AiOutlineDropbox } from "react-icons/ai";
+import {
+  AiFillHeart,
+  AiFillStar,
+  AiOutlineDropbox,
+  AiOutlineStar,
+} from "react-icons/ai";
 import { BiCog, BiHomeAlt, BiSearchAlt2 } from "react-icons/bi";
 import { BsUpcScan } from "react-icons/bs";
 import { FaShoppingCart } from "react-icons/fa";
@@ -91,7 +96,11 @@ function App() {
         </div>
         -----------------------------------------
         <p>Checkbox</p>
-        <ButtonCheckbox click={(e) => console.log("Value", e)} />
+        <ButtonCheckbox
+          iconActive={<AiFillStar size={20} />}
+          iconNoActice={<AiOutlineStar size={20} />}
+          click={(e) => console.log("Value", e)}
+        />
         -----------------------------------------
         <p>Logo</p>
         <div>

@@ -1,15 +1,14 @@
 import React from "react";
-import { BiHomeAlt } from "react-icons/bi";
 
 function ButtonIcon({
   type = true,
-  id = "",
+  id = null,
   bgColor = "bg-purple-0",
   txColor = "text-white",
   display = "flex",
   alingItem = "items-center",
   justifyContent = "justify-center",
-  icon = <BiHomeAlt size={20} />,
+  icon = null,
   click = null,
 }) {
   const handleClick = (e) => {
@@ -20,8 +19,7 @@ function ButtonIcon({
     <button
       id={id}
       type={type ? "button" : "submit"}
-      className={`w-fit h-fit p-1.5 ${display} ${alingItem} ${justifyContent} ease-out duration-300 rounded-full
-      ${bgColor} ${txColor} hover:bg-purple-0 hover:text-pink-0`}
+      className={`w-fit h-fit p-1.5 ${display} ${alingItem} ${justifyContent} ${bgColor} ${txColor} ease-out duration-300 rounded-full hover:bg-purple-0 hover:text-pink-0`}
       onClick={(e) => handleClick(e)}
     >
       {icon}
