@@ -1,18 +1,31 @@
 import React from "react";
+import { BsUpcScan } from "react-icons/bs";
+import { RiMoneyDollarCircleLine } from "react-icons/ri";
+import ButtonIcon from "./ButtonIcon";
+import Select from "./Select";
 
 function ControlsShopping({
   bgColor = "bg-white",
-  radio = "rounded-full",
-  display = "flex",
-  alingItems = "items-center",
-  children = null,
+  reverse = false,
+  actionBtnLeft = null,
+  actionBtnRight = null,
+  selectAction = null,
+  selectOptions = [],
 }) {
   return (
-    <div className={`w-full p-1 ${radio} ${display} ${alingItems} ${bgColor}`}>
-      {/* {iconLeft}
-      <div className="w-full px-2 flex items-center border">{middle}</div>
-      {iconRight} */}
-      {children}
+    <div
+      className={`w-full p-1 rounded-full flex items-center ${
+        reverse ? "flex-row-reverse" : "flex-row"
+      } ${bgColor}`}
+    >
+      <ButtonIcon icon={<BsUpcScan size={20} />} click={actionBtnLeft} />
+      <div className="w-full px-2 flex items-center">
+        <Select msj="hola" options={selectOptions} action={selectAction} />
+      </div>
+      <ButtonIcon
+        icon={<RiMoneyDollarCircleLine size={20} />}
+        click={actionBtnRight}
+      />
     </div>
   );
 }

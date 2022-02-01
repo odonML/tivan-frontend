@@ -1,13 +1,9 @@
 import React from "react";
 
-function CardDescription({
-  text,
-  txColor = "text-gray-1",
-  fontSize = "text-lg",
-}) {
+function CardDescription({ text, txColor = "text-gray-1" }) {
   return (
     <p
-      className={`montse-rg ${txColor} ${fontSize} md:text-base lg:text-lg xl:text-xl`}
+      className={`montse-rg ${txColor} text-sm md:text-lg lg:text-xl xl:text-2xl`}
     >
       {text}
     </p>

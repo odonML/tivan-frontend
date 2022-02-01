@@ -48,6 +48,39 @@ function App() {
       value: "b",
     },
   ];
+
+  const buttonsOfPages = [
+    {
+      id: "01",
+      text: "Suply",
+      icon: <BiSearchAlt2 size={20} />,
+      action: () => console.log("Suply"),
+    },
+    {
+      id: "02",
+      text: "Ventas",
+      icon: <RiMoneyDollarCircleLine size={20} />,
+      action: () => console.log("Ventas"),
+    },
+    {
+      id: "03",
+      text: "Inventario",
+      icon: <AiOutlineDropbox size={20} />,
+      action: () => console.log("Inventario"),
+    },
+    {
+      id: "04",
+      text: "Carrito",
+      icon: <FaShoppingCart size={20} />,
+      action: () => console.log("Carrito"),
+    },
+    {
+      id: "05",
+      text: "Faboritos",
+      icon: <AiFillHeart size={20} />,
+      action: () => console.log("Favoritos"),
+    },
+  ];
   return (
     <div className="App">
       <header className="App-header bg-gray-3 text-gray-1 py-5">
@@ -67,18 +100,26 @@ function App() {
         -----------------------------------------
         <p>Botones texto</p>
         <div className="w-full flex flex-wrap md:flex-nowrap">
-          <ButtonText>Primary (default)</ButtonText>
-          <ButtonText primary={false} fontSize="text-lg">
+          <ButtonText click={() => console.log("boton default")}>
+            Primary (default)
+          </ButtonText>
+          <ButtonText
+            bgColor="bg-pink-0"
+            fontSize="text-lg"
+            click={() => console.log("boton")}
+          >
             No Primary
           </ButtonText>
           <ButtonText
             id="btnIcon"
-            primary={false}
-            fontSize="text-sm"
-            reverse={true}
-            click={() => help("boton texto")}
+            bgColor="bg-pink-0"
+            fontSize="text-2xl"
+            flexDirection="flex-row-reverse"
+            click={(e) => console.log("boton + icono", e)}
             icon={<BiCog />}
-          ></ButtonText>
+          >
+            Buton
+          </ButtonText>
         </div>
         -----------------------------------------
         <p>Botones icono</p>
@@ -157,14 +198,7 @@ function App() {
         -----------------------------------------
         <p>Sidebar</p>
         <div className="w-full md:h-screen">
-          <Sidebar>
-            <div className="w-full flex items-center justify-around md:flex-col-reverse md:gap-2 md:w-auto">
-              <ButtonIcon icon={<BiSearchAlt2 />} />
-              <ButtonIcon icon={<RiMoneyDollarCircleLine size={20} />} />
-              <ButtonIcon icon={<AiOutlineDropbox size={20} />} />
-              <ButtonIcon icon={<FaShoppingCart size={20} />} />
-              <ButtonIcon icon={<AiFillHeart size={20} />} />
-            </div>
+          <Sidebar buttonsOfPages={buttonsOfPages}>
             <div className="hidden md:flex md:flex-col md:items-center md:gap-2">
               <ButtonIcon icon={<BsUpcScan size={20} />} />
               <ButtonIcon icon={<BiSearchAlt2 size={20} />} />
@@ -175,11 +209,10 @@ function App() {
         <p>controls shopping cart</p>
         <div className="w-80">
           <ControlsShopping
-            iconLeft={<ButtonIcon icon={<BsUpcScan />} />}
-            middle={
-              <Select options={op} fontSize="text-lg" msj="Selecciona opcion" />
-            }
-            iconRight={<ButtonIcon icon={<RiMoneyDollarCircleLine />} />}
+            actionBtnLeft={() => console.log("scaner")}
+            actionBtnRight={() => console.log("cobro")}
+            selectAction={(e) => console.log("seleccion: ", e.target.value)}
+            selectOptions={op2}
           />
         </div>
       </header>

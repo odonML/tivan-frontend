@@ -5,9 +5,6 @@ function ButtonIcon({
   id = null,
   bgColor = "bg-purple-0",
   txColor = "text-white",
-  display = "flex",
-  alingItem = "items-center",
-  justifyContent = "justify-center",
   icon = null,
   click = null,
 }) {
@@ -19,7 +16,7 @@ function ButtonIcon({
     <button
       id={id}
       type={type ? "button" : "submit"}
-      className={`w-fit h-fit p-1.5 ${display} ${alingItem} ${justifyContent} ${bgColor} ${txColor} ease-out duration-300 rounded-full hover:bg-purple-0 hover:text-pink-0`}
+      className={`w-fit h-fit p-1.5 flex items-center justify-center ${bgColor} ${txColor} ease-out duration-300 rounded-full hover:bg-purple-0 hover:text-pink-0`}
       onClick={(e) => handleClick(e)}
     >
       {icon}
