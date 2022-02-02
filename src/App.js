@@ -22,6 +22,7 @@ import CardDescription from "./components/shared/CardDescription";
 import CardTitle from "./components/shared/CardTitle";
 import ControlsShopping from "./components/shared/ControlsShopping";
 import MinusPlusInput from "./components/shared/MinusPlusInput";
+import Modal from "./components/shared/Modal";
 import Sidebar from "./components/shared/Sidebar";
 
 function App() {
@@ -219,7 +220,14 @@ function App() {
         ----------------------------------------
         <p>Minus Plus input</p>
         <MinusPlusInput />
-        <MinusPlusInput />
+        ----------------------------------------
+        <p>modal</p>
+        <Modal>
+          <div className="flex items-center justify-center">
+            <BsUpcScan size={20} />
+          </div>
+          <p>Emergencia</p>
+        </Modal>
       </header>
     </div>
   );
