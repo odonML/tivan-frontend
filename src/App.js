@@ -21,6 +21,7 @@ import "./App.css";
 import CardDescription from "./components/shared/CardDescription";
 import CardTitle from "./components/shared/CardTitle";
 import ControlsShopping from "./components/shared/ControlsShopping";
+import MinusPlusInput from "./components/shared/MinusPlusInput";
 import Sidebar from "./components/shared/Sidebar";
 
 function App() {
@@ -215,6 +216,10 @@ function App() {
             selectOptions={op2}
           />
         </div>
+        ----------------------------------------
+        <p>Minus Plus input</p>
+        <MinusPlusInput />
+        <MinusPlusInput />
       </header>
     </div>
   );
