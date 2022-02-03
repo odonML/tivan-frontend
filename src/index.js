@@ -1,13 +1,17 @@
 import App from "App";
 import Login from "pages/auth/Login";
 import SignIn from "pages/auth/SignIn";
+import DetailProduct from "pages/DetailProduct";
+import DetailProductContainer from "pages/DetailProductContainer";
 import Favorites from "pages/Favorites";
 import LandingPage from "pages/LandingPage";
 import Layout from "pages/Layout";
+import NewProduct from "pages/NewProduct";
 import Sales from "pages/Sales";
 import ShoppingCar from "pages/ShoppingCar";
 import Stock from "pages/Stock";
 import Suply from "pages/Suply";
+import UpdateProduct from "pages/UpdateProduct";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -26,6 +30,11 @@ ReactDOM.render(
             <Route index element={<Favorites />} />
             <Route path="shopping-car" element={<ShoppingCar />} />
             <Route path="stock" element={<Stock />} />
+            <Route path="new" element={<NewProduct />} />
+            <Route path=":productID" element={<DetailProductContainer />}>
+              <Route index element={<DetailProduct />} />
+              <Route path="edit" element={<UpdateProduct />} />
+            </Route>
             <Route path="sales" element={<Sales />} />
             <Route path="suply" element={<Suply />} />
           </Route>
