@@ -1,47 +1,24 @@
 import React from "react";
 
-function Button({
+function ButtonText({
+  id = null,
   children = null,
   type = true,
-  reverse = false,
-  circle = false,
-  primary = true,
-  textSize = "sm",
-  wFull = true,
-  hover = true,
+  bgColor = "bg-purple-0",
+  txColor = "text-white",
   click = null,
   icon = null,
 }) {
+  const handleClick = (e) => {
+    if (click != null) click(e);
+  };
   return (
     <button
+      id={id}
       type={type ? "button" : "submit"}
-      className={`h-fit m-1 flex items-center justify-center text-white ease-out duration-300 shadow hover:shadow-md ${
-        wFull ? "w-full" : "w-auto"
-      } ${icon !== null && children === null ? "p-1" : "px-3"}
-      ${reverse ? "flex-row-reverse" : "inline-flex"} ${
-        circle ? "rounded-full" : "rounded-lg"
-      } 
-      ${hover && "hover:outline-1 hover:bg-transparent"}
-       ${
-         primary
-           ? `bg-purple-0 ${
-               hover
-                 ? "hover:text-purple-0 hover:outline hover:outline-purple-0 hover:outline-offset-0 hover:shadow-purple-0/40"
-                 : ""
-             }`
-           : `bg-pink-0 ${
-               hover
-                 ? "hover:text-pink-0 hover:outline hover:outline-pink-0 hover:outline-offset-0 hover:shadow-pink-0/40"
-                 : ""
-             }`
-       } ${
-        textSize === "lg"
-          ? "text-lg"
-          : textSize === "md"
-          ? "text-base"
-          : "text-sm"
-      } md:text-md sm:text-sm`}
-      onClick={click}
+      className={`w-full h-fit m-1 shadow hover:shadow-md md:text-md sm:text-sm hover:outline-1
+      flex items-center justify-center rounded-full ${bgColor} ${txColor} text-sm ease-out duration-300 md:text-lg lg:text-xl`}
+      onClick={(e) => handleClick(e)}
     >
       {children}
       {icon}
@@ -49,4 +26,4 @@ function Button({
   );
 }
 
-export default Button;
+export default ButtonText;

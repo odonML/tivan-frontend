@@ -1,21 +1,26 @@
 import React from "react";
 import { IoIosArrowDown } from "react-icons/io";
 
-function Select({ options, msj, fontSize = "sm" }) {
+function Select({
+  id = "",
+  selectName = "select",
+  options = [],
+  msj = "",
+  action = null,
+}) {
+  const handleChange = (e) => {
+    if (action != null) action(e);
+  };
   return (
-    <div className={` custom-select`}>
+    <div className={` w-full relative flex items-center`}>
       <select
-        name="select"
-        className={`w-full appearance-none border px-3 pr-10 border-pink-0 bg-gray-3 focus:bg-gray-3 focus:outline-none rounded-full ${
-          fontSize === "lg"
-            ? "text-lg"
-            : fontSize === "md"
-            ? "text-base"
-            : "text-sm"
-        }`}
+        id={id}
+        name={selectName}
+        className={`w-full appearance-none border border-purple-1 px-3 pr-10 bg-gray-3 focus:bg-gray-3 focus:outline-none rounded-full text-base md:text-lg lg:text-xl `}
         defaultValue={0}
+        onChange={(e) => handleChange(e)}
       >
-        <option value={0} selected disabled>
+        <option value={0} disabled>
           {msj}
         </option>
         {options.map((item) => (

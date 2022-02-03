@@ -2,18 +2,22 @@ import React from "react";
 
 function ButtonIcon({
   type = true,
+  id = null,
   bgColor = "bg-purple-0",
   txColor = "text-white",
-  click = null,
   icon = null,
+  click = null,
 }) {
+  const handleClick = (e) => {
+    if (click != null) click(e);
+  };
+
   return (
     <button
+      id={id}
       type={type ? "button" : "submit"}
-      className={`w-fit h-fit m-1 flex items-center justify-center ease-out duration-300 rounded-full
-      ${bgColor} ${txColor} hover:bg-purple-0 hover:text-pink-0
-      ${icon !== null ? "p-1.5" : "px-3"}`}
-      onClick={click}
+      className={`w-fit h-fit p-1.5 flex items-center justify-center ${bgColor} ${txColor} ease-out duration-300 rounded-full hover:bg-purple-0 hover:text-pink-0`}
+      onClick={(e) => handleClick(e)}
     >
       {icon}
     </button>

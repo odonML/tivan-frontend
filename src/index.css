@@ -65,14 +65,8 @@
   }
 }
 
-/* Select */
-.custom-select {
-  position: relative;
-  height: auto;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-}
+/* Select arrow */
+
 .arrow-select {
   position: absolute;
   top: 0;

@@ -7,13 +7,22 @@ import Navbar from "components/shared/Navbar";
 import Select from "components/shared/Select";
 import TitleSection from "components/shared/TitleSection";
 import React from "react";
-import { AiFillHeart, AiOutlineDropbox } from "react-icons/ai";
+import {
+  AiFillHeart,
+  AiFillStar,
+  AiOutlineDropbox,
+  AiOutlineStar,
+} from "react-icons/ai";
 import { BiCog, BiHomeAlt, BiSearchAlt2 } from "react-icons/bi";
 import { BsUpcScan } from "react-icons/bs";
 import { FaShoppingCart } from "react-icons/fa";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import "./App.css";
+import CardDescription from "./components/shared/CardDescription";
 import CardTitle from "./components/shared/CardTitle";
+import ControlsShopping from "./components/shared/ControlsShopping";
+import MinusPlusInput from "./components/shared/MinusPlusInput";
+import Modal from "./components/shared/Modal";
 import Sidebar from "./components/shared/Sidebar";
 
 function App() {
@@ -41,6 +50,39 @@ function App() {
       value: "b",
     },
   ];
+
+  const buttonsOfPages = [
+    {
+      id: "01",
+      text: "Suply",
+      icon: <BiSearchAlt2 size={20} />,
+      action: () => console.log("Suply"),
+    },
+    {
+      id: "02",
+      text: "Ventas",
+      icon: <RiMoneyDollarCircleLine size={20} />,
+      action: () => console.log("Ventas"),
+    },
+    {
+      id: "03",
+      text: "Inventario",
+      icon: <AiOutlineDropbox size={20} />,
+      action: () => console.log("Inventario"),
+    },
+    {
+      id: "04",
+      text: "Carrito",
+      icon: <FaShoppingCart size={20} />,
+      action: () => console.log("Carrito"),
+    },
+    {
+      id: "05",
+      text: "Faboritos",
+      icon: <AiFillHeart size={20} />,
+      action: () => console.log("Favoritos"),
+    },
+  ];
   return (
     <div className="App">
       <header className="App-header bg-gray-3 text-gray-1 py-5">
@@ -60,17 +102,25 @@ function App() {
         -----------------------------------------
         <p>Botones texto</p>
         <div className="w-full flex flex-wrap md:flex-nowrap">
-          <ButtonText>Primary (default)</ButtonText>
-          <ButtonText primary={false} textSize="md">
+          <ButtonText click={() => console.log("boton default")}>
+            Primary (default)
+          </ButtonText>
+          <ButtonText
+            bgColor="bg-pink-0"
+            fontSize="text-lg"
+            click={() => console.log("boton")}
+          >
             No Primary
           </ButtonText>
           <ButtonText
-            primary={false}
-            textSize="lg"
-            click={() => help("boton texto")}
+            id="btnIcon"
+            bgColor="bg-pink-0"
+            fontSize="text-2xl"
+            flexDirection="flex-row-reverse"
+            click={(e) => console.log("boton + icono", e)}
             icon={<BiCog />}
           >
-            Con icono
+            Buton
           </ButtonText>
         </div>
         -----------------------------------------
@@ -78,7 +128,7 @@ function App() {
         <div className="flex">
           <ButtonIcon
             icon={<BiHomeAlt size={20} />}
-            click={() => help("boton icono")}
+            click={() => console.log("hola")}
           />
           <ButtonIcon
             bgColor="bg-yellow-0"
@@ -89,7 +139,11 @@ function App() {
         </div>
         -----------------------------------------
         <p>Checkbox</p>
-        <ButtonCheckbox />
+        <ButtonCheckbox
+          iconActive={<AiFillStar size={20} />}
+          iconNoActice={<AiOutlineStar size={20} />}
+          click={(e) => console.log("Value", e)}
+        />
         -----------------------------------------
         <p>Logo</p>
         <div>
@@ -125,30 +179,55 @@ function App() {
         <CardTitle text="titulo card" />
         -----------------------------------------
         <p>Descripcion</p>
+        <CardDescription text="descripcion de la card o el producto xD" />
         -----------------------------------------
         <p>Navbar</p>
         <div className="w-full">
           <Navbar>
             <Logo>Tivan</Logo>
-            <ButtonIcon icon={<BiSearchAlt2 />} />
+            <div className="block md:hidden">
+              <ButtonIcon icon={<BiSearchAlt2 />} />
+            </div>
+            <div className="hidden md:block">
+              <input
+                className="rounded-full px-3"
+                type="text"
+                placeholder="Search..."
+              />
+            </div>
           </Navbar>
         </div>
         -----------------------------------------
-        <div className="h-screen">
-          <Sidebar>
-            <div className="border w-full flex items-center justify-around md:flex-col-reverse md:w-auto">
-              <ButtonIcon icon={<BiSearchAlt2 />} />
-              <ButtonIcon icon={<RiMoneyDollarCircleLine size={20} />} />
-              <ButtonIcon icon={<AiOutlineDropbox size={20} />} />
-              <ButtonIcon icon={<FaShoppingCart size={20} />} />
-              <ButtonIcon icon={<AiFillHeart size={20} />} />
-            </div>
-            <div className="border hidden md:flex md:flex-col md:items-center">
-              <ButtonIcon icon={<BsUpcScan />} />
-              <ButtonIcon icon={<BiSearchAlt2 />} />
+        <p>Sidebar</p>
+        <div className="w-full md:h-screen">
+          <Sidebar buttonsOfPages={buttonsOfPages}>
+            <div className="hidden md:flex md:flex-col md:items-center md:gap-2">
+              <ButtonIcon icon={<BsUpcScan size={20} />} />
+              <ButtonIcon icon={<BiSearchAlt2 size={20} />} />
             </div>
           </Sidebar>
         </div>
+        ----------------------------------------
+        <p>controls shopping cart</p>
+        <div className="w-80">
+          <ControlsShopping
+            actionBtnLeft={() => console.log("scaner")}
+            actionBtnRight={() => console.log("cobro")}
+            selectAction={(e) => console.log("seleccion: ", e.target.value)}
+            selectOptions={op2}
+          />
+        </div>
+        ----------------------------------------
+        <p>Minus Plus input</p>
+        <MinusPlusInput />
+        ----------------------------------------
+        <p>modal</p>
+        <Modal>
+          <div className="flex items-center justify-center">
+            <BsUpcScan size={20} />
+          </div>
+          <p>Emergencia</p>
+        </Modal>
       </header>
     </div>
   );
