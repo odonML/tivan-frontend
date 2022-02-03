@@ -219,7 +219,10 @@ function App() {
         </div>
         ----------------------------------------
         <p>Minus Plus input</p>
-        <MinusPlusInput />
+        <MinusPlusInput
+          value={8}
+          observerValue={(e) => console.log("las piezas", e)}
+        />
         ----------------------------------------
         <p>modal</p>
         <Modal>

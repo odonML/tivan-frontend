@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
-function MinusPlusInput({ value = 0 }) {
+function MinusPlusInput({ value = 0, observerValue = null }) {
   const [piezas, setPiezas] = useState(value);
 
   useEffect(() => {
-    // Peticion a la api
-    console.log(typeof piezas);
+    observerValue(piezas);
   }, [piezas]);
 
   const handlePlus = () => {
