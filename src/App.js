@@ -21,6 +21,8 @@ import "./App.css";
 import CardDescription from "./components/shared/CardDescription";
 import CardTitle from "./components/shared/CardTitle";
 import ControlsShopping from "./components/shared/ControlsShopping";
+import MinusPlusInput from "./components/shared/MinusPlusInput";
+import Modal from "./components/shared/Modal";
 import Sidebar from "./components/shared/Sidebar";
 import CardProduct from "./components/shared/CardProduct/CardProduct";
 import CardTicket from "./components/shared/CardTicket/CardTicket";
@@ -221,6 +223,17 @@ function App() {
             selectOptions={op2}
           />
         </div>
+        ----------------------------------------
+        <p>Minus Plus input</p>
+        <MinusPlusInput />
+        ----------------------------------------
+        <p>modal</p>
+        <Modal>
+          <div className="flex items-center justify-center">
+            <BsUpcScan size={20} />
+          </div>
+          <p>Emergencia</p>
+        </Modal>
       </header>
     </div>
   );
