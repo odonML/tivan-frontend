@@ -26,6 +26,8 @@ import Modal from "./components/shared/Modal";
 import Sidebar from "./components/shared/Sidebar";
 import CardProduct from "./components/shared/CardProduct/CardProduct";
 import CardTicket from "./components/shared/CardTicket/CardTicket";
+import CardSuply from "./components/shared/CardSuply/CardSuply";
+import CardCarrito from "./components/shared/CardCarrito/CardCarrito";
 
 function App() {
   const help = (msj) => {
@@ -87,7 +89,7 @@ function App() {
   ];
   return (
     <div className="App">
-      <header className="App-header bg-gray-3 text-gray-1 py-5">
+      <header className="space-y-4 App-header bg-gray-3 text-gray-1 py-5">
         <BiCog size={150} className="App-logo fill-gray-200" />
         <h1 className="text-3xl font-bold montse-rg">
           <span className="text-pink-0 fredoka">Tivan</span> en proceso!
@@ -186,6 +188,8 @@ function App() {
         <p>COMPONENTS CARDS</p>
         <CardProduct />
         <CardTicket />
+        <CardSuply />
+        <CardCarrito />
         -----------------------------------------
         <p>Navbar</p>
         <div className="w-full">
