@@ -22,6 +22,8 @@ import CardDescription from "./components/shared/CardDescription";
 import CardTitle from "./components/shared/CardTitle";
 import ControlsShopping from "./components/shared/ControlsShopping";
 import Sidebar from "./components/shared/Sidebar";
+import CardProduct from "./components/shared/CardProduct/CardProduct";
+import CardTicket from "./components/shared/CardTicket/CardTicket";
 
 function App() {
   const help = (msj) => {
@@ -76,7 +78,7 @@ function App() {
     },
     {
       id: "05",
-      text: "Faboritos",
+      text: "Favoritos",
       icon: <AiFillHeart size={20} />,
       action: () => console.log("Favoritos"),
     },
@@ -178,6 +180,10 @@ function App() {
         -----------------------------------------
         <p>Descripcion</p>
         <CardDescription text="descripcion de la card o el producto xD" />
+        -----------------------------------------
+        <p>COMPONENTS CARDS</p>
+        <CardProduct />
+        <CardTicket />
         -----------------------------------------
         <p>Navbar</p>
         <div className="w-full">
