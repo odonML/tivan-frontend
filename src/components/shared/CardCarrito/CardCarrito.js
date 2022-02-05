@@ -9,8 +9,8 @@ function CardCarrito() {
   return (
     <div className="flex bg-white rounded-lg shadow-md md:flex-row md:max-w-xl">
       <a
-        href="./CardProduct.js"
-        className="flex bg-white rounded-lg shadow-md md:flex-row md:max-w-xl hover:bg-gray-100"
+        href="/"
+        className="flex bg-white rounded-lg shadow-md p-2 md:flex-row md:max-w-xl hover:bg-gray-100"
       >
         <div className="w-20">
           <Image
