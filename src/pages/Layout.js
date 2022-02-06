@@ -7,41 +7,41 @@ import React from "react";
 import { AiFillHeart, AiOutlineDropbox } from "react-icons/ai";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { BsUpcScan } from "react-icons/bs";
-import { FaShoppingCart } from "react-icons/fa";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 function Layout() {
+  const navigate = useNavigate();
   const buttonsOfPages = [
     {
       id: "01",
       text: "Suply",
       icon: <BiSearchAlt2 size={20} />,
-      action: () => console.log("Suply"),
+      action: () => navigate(`suply`),
     },
     {
       id: "02",
       text: "Ventas",
       icon: <RiMoneyDollarCircleLine size={20} />,
-      action: () => console.log("Ventas"),
+      action: () => navigate(`sales`),
     },
     {
       id: "03",
       text: "Inventario",
       icon: <AiOutlineDropbox size={20} />,
-      action: () => console.log("Inventario"),
+      action: () => navigate(`stock`),
     },
-    {
-      id: "04",
-      text: "Carrito",
-      icon: <FaShoppingCart size={20} />,
-      action: () => console.log("Carrito"),
-    },
+    // {
+    //   id: "04",
+    //   text: "Carrito",
+    //   icon: <FaShoppingCart size={20} />,
+    //   action: () => console.log("Carrito"),
+    // },
     {
       id: "05",
       text: "Faboritos",
       icon: <AiFillHeart size={20} />,
-      action: () => console.log("Favoritos"),
+      action: () => navigate(`/home`),
     },
   ];
 
@@ -71,7 +71,7 @@ function Layout() {
             <ButtonIcon icon={<BiSearchAlt2 size={20} />} />
           </div>
         </Sidebar>
-        <Container>
+        <Container alingItems="items-start" justifyContent="justify-start">
           <Outlet />
         </Container>
       </Container>

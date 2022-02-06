@@ -12,7 +12,7 @@ import Navbar from "components/shared/Navbar";
 import Select from "components/shared/Select";
 import Sidebar from "components/shared/Sidebar";
 import TitleSection from "components/shared/TitleSection";
-import React from "react";
+import React, { useState } from "react";
 import {
   AiFillHeart,
   AiFillStar,
@@ -23,8 +23,12 @@ import { BiCog, BiHomeAlt, BiSearchAlt2 } from "react-icons/bi";
 import { BsUpcScan } from "react-icons/bs";
 import { FaShoppingCart } from "react-icons/fa";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
+import FormProduct from "./Form/FormProduct";
 
 function Demo() {
+  const [showModal, setShowModal] = useState(false);
+  const [data, setData] = useState({});
+
   const help = (msj) => {
     console.log(msj);
   };
@@ -84,7 +88,7 @@ function Demo() {
   ];
 
   return (
-    <div className="flex-col">
+    <div className="bg-gray-3 flex flex-col justify-center items-center">
       <BiCog size={150} className="App-logo fill-gray-200" />
       <h1 className="text-3xl font-bold montse-rg">
         <span className="text-pink-0 fredoka">Tivan</span> en proceso!
@@ -221,12 +225,55 @@ function Demo() {
       <MinusPlusInput />
       ----------------------------------------
       <p>modal</p>
-      <Modal>
-        <div className="flex items-center justify-center">
-          <BsUpcScan size={20} />
+      <div className="">
+        <ButtonText
+          click={() => {
+            setShowModal(!showModal);
+          }}
+        >
+          Modal
+        </ButtonText>
+        {showModal ? (
+          <Modal
+            icon={<BsUpcScan size={20} />}
+            click={() => setShowModal(false)}
+          >
+            <div className="text-center">
+              <p className="text-xl">Emergencia</p>
+              <p>Ocurrio un error al realizar la operacion</p>
+            </div>
+            <div className="flex justify-between w-full mt-4">
+              <div>
+                <ButtonText>Cancelar</ButtonText>
+              </div>
+              <div>
+                <ButtonText bgColor="bg-pink-0">Cancelar</ButtonText>
+              </div>
+            </div>
+          </Modal>
+        ) : (
+          ""
+        )}
+      </div>
+      ----------------------------------------
+      <p>Form</p>
+      <ButtonText
+        click={() => {
+          setShowModal(!showModal);
+          setData({ name: "odon" });
+        }}
+      >
+        Modal
+      </ButtonText>
+      {0 === 1 ? (
+        <div className="relative w-80">
+          <Modal position="absolute">
+            <FormProduct dataProduct={data} click={(e) => console.log(e)} />
+          </Modal>
         </div>
-        <p>Emergencia</p>
-      </Modal>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

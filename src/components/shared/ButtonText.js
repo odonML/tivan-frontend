@@ -16,8 +16,8 @@ function ButtonText({
     <button
       id={id}
       type={type ? "button" : "submit"}
-      className={`w-full h-fit m-1 shadow hover:shadow-md md:text-md sm:text-sm hover:outline-1
-      flex items-center justify-center rounded-full ${bgColor} ${txColor} text-sm ease-out duration-300 md:text-lg lg:text-xl`}
+      className={`w-full min-w-max h-fit px-2 m-1 shadow hover:shadow-md md:text-md sm:text-sm hover:outline-1
+      flex items-center justify-center rounded-full ${bgColor} ${txColor} text-sm ease-out duration-300 md:text-sm lg:text-lg`}
       onClick={(e) => handleClick(e)}
     >
       {children}

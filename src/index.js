@@ -1,4 +1,5 @@
 import App from "App";
+import Demo from "components/Demo";
 import Login from "pages/auth/Login";
 import SignIn from "pages/auth/SignIn";
 import DetailProduct from "pages/DetailProduct";
@@ -21,6 +22,7 @@ ReactDOM.render(
     <BrowserRouter>
       <Routes>
         <Route path="*" element={<h1>Not Found</h1>} />
+        <Route path="ui" element={<Demo />} />
         <Route path="/" element={<App />}>
           <Route index element={<LandingPage />} />
           <Route path="log-in" element={<Login />} />
