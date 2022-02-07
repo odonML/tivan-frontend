@@ -1,8 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import "./App.css";
 
-function App() {
+function DetailProductContainer() {
   return (
     <div>
       <Outlet />
@@ -10,4 +9,4 @@ function App() {
   );
 }
 
-export default App;
+export default DetailProductContainer;
