@@ -5,25 +5,25 @@ function Home() {
   const [tab, setTab] = useState(1);
 
   return (
-    <div className="relative bg-gray-3 w-full h-full grid gap-1 grid-cols-1 grid-rows-1 sm:grid-cols-3 sm:grid-rows-4">
+    <div className="relative bg-gray-3 w-full h-full grid gap-1 grid-cols-1 grid-rows-1 md:grid-cols-3 md:grid-rows-4">
       <div
         className={`${
           tab === 1 ? "grid" : "hidden"
-        } sm:grid col-span-1 row-span-1 sm:col-span-2 sm:row-span-2`}
+        } sm:grid col-span-1 row-span-1 md:col-span-2 md:row-span-2`}
       >
         <Favorites />
       </div>
       <div
         className={`${
           tab === 2 ? "grid col-span-1 row-span-1" : "hidden"
-        } sm:grid sm:row-span-4 border`}
+        } md:grid md:row-span-4 border`}
       >
         <p>Carrito</p>
       </div>
-      <div className="hidden sm:grid sm:col-span-2 sm:row-span-2 ">
+      <div className="hidden md:grid sm:col-span-2 md:row-span-2 ">
         <p>Tickets</p>
       </div>
-      <div className="absolute bottom-0 w-full h-7 px-1 flex justify-center sm:hidden">
+      <div className="absolute bottom-0 w-full h-7 px-1 flex justify-center md:hidden">
         <div className="flex w-2/3 text-white text-sm">
           <div className="w-1/2">
             <button

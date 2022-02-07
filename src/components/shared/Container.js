@@ -12,7 +12,7 @@ function Container({
 }) {
   return (
     <div
-      className={`${width} ${height} ${display} ${flexDirection} ${justifyContent} ${alingItems} ${mediaQueries}`}
+      className={`${width} ${height} ${display} ${flexDirection} ${justifyContent} ${alingItems} ${mediaQueries} overflow-y-hidden`}
     >
       {children}
     </div>
