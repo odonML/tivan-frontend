@@ -19,7 +19,7 @@ function Modal({
 }) {
   return (
     <span
-      className={`absolute top-0 left-0 w-full h-full flex ${alignItemsModal} ${justifyContentModal} ${bgTransparent}`}
+      className={`fixed top-0 left-0 w-full h-full flex ${alignItemsModal} ${justifyContentModal} ${bgTransparent}`}
     >
       <div
         className={`absolute p-3 flex items-center justify-center ${widthModal} ${heightModal} ${

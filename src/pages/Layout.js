@@ -49,16 +49,6 @@ function Layout() {
     <Container height="h-screen" flexDirection="flex-col">
       <Navbar>
         <Logo>Tivan</Logo>
-        <div className="block md:hidden">
-          <ButtonIcon icon={<BiSearchAlt2 />} />
-        </div>
-        <div className="hidden md:block">
-          <input
-            className="rounded-full px-3"
-            type="text"
-            placeholder="Search..."
-          />
-        </div>
       </Navbar>
       <Container
         height="h-full"
