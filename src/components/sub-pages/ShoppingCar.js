@@ -1,7 +1,7 @@
 import React from "react";
 
 function ShoppingCar() {
-  return <h1>Carrito</h1>;
+  return <div></div>;
 }
 
 export default ShoppingCar;
