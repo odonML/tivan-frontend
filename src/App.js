@@ -24,10 +24,10 @@ import ControlsShopping from "./components/shared/ControlsShopping";
 import MinusPlusInput from "./components/shared/MinusPlusInput";
 import Modal from "./components/shared/Modal";
 import Sidebar from "./components/shared/Sidebar";
-import CardProduct from "./components/shared/CardProduct/CardProduct";
-import CardTicket from "./components/shared/CardTicket/CardTicket";
-import CardSuply from "./components/shared/CardSuply/CardSuply";
-import CardCarrito from "./components/shared/CardCarrito/CardCarrito";
+import CardProduct from "./components/CardProduct/CardProduct";
+import CardTicket from "./components/CardTicket/CardTicket";
+import CardSuply from "./components/CardSuply/CardSuply";
+import CardCarrito from "./components/CardCarrito/CardCarrito";
 
 function App() {
   const help = (msj) => {

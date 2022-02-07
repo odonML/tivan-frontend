@@ -1,6 +1,6 @@
 import React from "react";
 import { IoTrashBinSharp } from "react-icons/io5";
-import ButtonIcon from "../ButtonIcon";
+import ButtonIcon from "../shared/ButtonIcon";
 
 function CardTicket() {
   return (

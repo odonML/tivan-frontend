@@ -1,9 +1,9 @@
 import React from "react";
 import { IoTrashBinSharp } from "react-icons/io5";
-import ButtonIcon from "../ButtonIcon";
-import Image from "../Image";
-import CardTitle from "../CardTitle";
-import MinusPlusInput from "../MinusPlusInput";
+import ButtonIcon from "../shared/ButtonIcon";
+import Image from "../shared/Image";
+import CardTitle from "../shared/CardTitle";
+import MinusPlusInput from "../shared/MinusPlusInput";
 
 function CardCarrito() {
   return (

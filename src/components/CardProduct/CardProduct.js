@@ -1,11 +1,11 @@
 import React from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
-import CardDescription from "../CardDescription";
-import CardTitle from "../CardTitle";
-import Image from "../Image";
-import ButtonIcon from "../ButtonIcon";
-import ButtonCheckbox from "../ButtonCheckbox";
+import CardDescription from "../shared/CardDescription";
+import CardTitle from "../shared/CardTitle";
+import Image from "../shared/Image";
+import ButtonIcon from "../shared/ButtonIcon";
+import ButtonCheckbox from "../shared/ButtonCheckbox";
 
 function CardProduct() {
   return (

@@ -1,8 +1,8 @@
 import React from "react";
-import CardDescription from "../CardDescription";
-import CardTitle from "../CardTitle";
-import Image from "../Image";
-import MinusPlusInput from "../MinusPlusInput";
+import CardDescription from "../shared/CardDescription";
+import CardTitle from "../shared/CardTitle";
+import Image from "../shared/Image";
+import MinusPlusInput from "../shared/MinusPlusInput";
 
 function CardSuply() {
   return (
