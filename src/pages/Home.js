@@ -28,7 +28,9 @@ function Home() {
           <div className="w-1/2">
             <button
               type="button"
-              className="w-full rounded-l-full bg-pink-1"
+              className={`w-full rounded-l-full ${
+                tab === 1 ? "bg-purple-0" : "bg-pink-0"
+              }`}
               onClick={() => setTab(1)}
             >
               Favoritos
@@ -37,7 +39,9 @@ function Home() {
           <div className="w-1/2">
             <button
               type="button"
-              className="w-full rounded-r-full bg-pink-1"
+              className={`w-full rounded-r-full ${
+                tab === 2 ? "bg-purple-0" : "bg-pink-0"
+              }`}
               onClick={() => setTab(2)}
             >
               Carrito
