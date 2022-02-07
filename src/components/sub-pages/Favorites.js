@@ -1,21 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import Search from "../shared/Search";
 
 function Favorites() {
+  const [palabra, setPalabra] = useState("");
+  const handleSearch = (e) => {
+    setPalabra(e);
+  };
   return (
-    <div className="relative w-full h-full grid grid-cols-1 sm:grid-cols-3">
-      <div className="h-10 col-span-3 border">
-        <p>Titulo</p>
-      </div>
-      <div className="h-full col-span-2 border">
-        <div className="col-span-12 border">
-          <p>Favoritos</p>
-        </div>
-        <div className="hidden col-span-12 border">
-          <p>Tickets</p>
+    <div className="w-full h-[100%] sm:p-1 bg-white sm:rounded-lg">
+      <div className="h-max-[10%] flex justify-between">
+        <p>Favoritos</p>
+        <div className="w-32 sm:w-60 sm:ml-2">
+          <Search handleSearch={handleSearch} />
         </div>
       </div>
-      <div className="hidden col-span-1 border">
-        <p>Carrito</p>
+      <div className="w-full h-[87%] grid grid-cols-3 grid-rows-2">
+        {palabra}
       </div>
     </div>
   );
