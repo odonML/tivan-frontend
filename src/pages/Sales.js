@@ -22,8 +22,16 @@ function Sales() {
             <p>Ventas</p>
             <ButtonIcon icon={<AiOutlinePlus size={22} />} />
           </ContentTitle>
-          <CardTicket />
-          <CardTicket />
+          <div className="flex flex-wrap gap-4">
+            <CardTicket />
+            <CardTicket />
+            <CardTicket />
+            <CardTicket />
+            <CardTicket />
+            <CardTicket />
+            <CardTicket />
+            <CardTicket />
+          </div>
         </div>
         <div
           className={`${
@@ -42,7 +50,7 @@ function Sales() {
                 }`}
                 onClick={() => setTab(1)}
               >
-                Favoritos
+                Ventas
               </button>
             </div>
             <div className="w-1/2">
@@ -53,7 +61,7 @@ function Sales() {
                 }`}
                 onClick={() => setTab(2)}
               >
-                Carrito
+                Ticket
               </button>
             </div>
           </div>
