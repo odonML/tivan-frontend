@@ -1,23 +1,73 @@
+import CardProduct from "components/CardProduct/CardProduct";
+import Content from "components/shared/Content";
 import React, { useState } from "react";
+import ContentTitle from "../shared/ContentTitle";
 import Search from "../shared/Search";
 
 function Favorites() {
   const [palabra, setPalabra] = useState("");
   const handleSearch = (e) => {
+    console.log(palabra);
     setPalabra(e);
   };
   return (
-    <div className="w-full h-[100%] sm:p-1 bg-white sm:rounded-lg">
-      <div className="h-max-[10%] flex justify-between">
+    <Content>
+      <ContentTitle>
         <p>Favoritos</p>
-        <div className="w-32 sm:w-60 sm:ml-2">
+        <div className="w-full ml-2 m-1 sm:m-0 sm:w-60">
           <Search handleSearch={handleSearch} />
         </div>
+      </ContentTitle>
+      {/* <ContentGrid
+        height="h-[92%]"
+        gridCol="grid-cols-1 sm:grid-cols-3"
+        extra="py-1 overflow-y-scroll custom-scrolls"
+      ></ContentGrid> */}
+      <div className="w-full h-[92%] py-1 grid grid-cols-1 sm:grid-cols-3 gap-1 overflow-y-scroll custom-scroll">
+        <div className="col-span-1 h-36 sm:h-24">
+          <CardProduct />
+        </div>
+        <div className="col-span-1 h-36 sm:h-24">
+          <CardProduct />
+        </div>
+        <div className="col-span-1 h-36 sm:h-24">
+          <CardProduct />
+        </div>
+        <div className="col-span-1 h-36 sm:h-24">
+          <CardProduct />
+        </div>
+        <div className="col-span-1 h-36 sm:h-24">
+          <CardProduct />
+        </div>
+        <div className="col-span-1 h-36 sm:h-24">
+          <CardProduct />
+        </div>
+        <div className="col-span-1 h-36 sm:h-24">
+          <CardProduct />
+        </div>
+        <div className="col-span-1 h-36 sm:h-24">
+          <CardProduct />
+        </div>
+        <div className="col-span-1 h-36 sm:h-24">
+          <CardProduct />
+        </div>
+        <div className="col-span-1 h-36 sm:h-24">
+          <CardProduct />
+        </div>
+        <div className="col-span-1 h-36 sm:h-24">
+          <CardProduct />
+        </div>
+        <div className="col-span-1 h-36 sm:h-24">
+          <CardProduct />
+        </div>
+        <div className="col-span-1 h-36 sm:h-24">
+          <CardProduct />
+        </div>
+        <div className="col-span-1 h-36 sm:h-24">
+          <CardProduct />
+        </div>
       </div>
-      <div className="w-full h-[87%] grid grid-cols-3 grid-rows-2">
-        {palabra}
-      </div>
-    </div>
+    </Content>
   );
 }
 
