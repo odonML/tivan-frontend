@@ -24,7 +24,7 @@ function Home() {
         <p>Tickets</p>
       </div> */}
       <div className="absolute bottom-0 w-full h-7 px-1 flex justify-center md:hidden">
-        <div className="flex w-2/3 text-white text-sm">
+        <div className="flex w-2/3 text-white text-base">
           <div className="w-1/2">
             <button
               type="button"

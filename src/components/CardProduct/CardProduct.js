@@ -9,16 +9,16 @@ import Image from "../shared/Image";
 function CardProduct() {
   return (
     <div
-      className={` relative w-full h-full flex items-center justify-center bg-white rounded-lg hover:ease-in-out hover:duration-200 hover:shadow-md`}
+      className={` relative w-full h-full flex items-center justify-center bg-white rounded-lg hover:sm:ease-in-out hover:sm:duration-200 hover:sm:shadow-md`}
     >
-      <div className="w-20 h-full flex items-center justify-center">
+      <div className="w-36 sm:20 h-full flex items-center justify-center">
         <Image
           className="object-cover rounded-t-lg md:h-auto md:w-48
           md:rounded-none md:rounded-l-lg"
           img="https://minisupersofy.webnode.es/_files/system_preview_detail_200000017-b9012b9fd7/Bolsa-Sabritas-Original.jpg"
         />
       </div>
-      <div className=" h-full flex flex-col justify-center pl-1">
+      <div className="w-full h-full flex flex-col justify-center pl-1">
         <CardTitle text="sabritas original 45g" />
         {/* <CardDescription text="Botana con sal" /> */}
         <p className="text-xs">3 piezas</p>
