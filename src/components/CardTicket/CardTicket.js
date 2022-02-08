@@ -4,7 +4,7 @@ import ButtonIcon from "../shared/ButtonIcon";
 
 function CardTicket() {
   return (
-    <div className="flex bg-white rounded-lg shadow-md md:flex-row md:max-w-xl">
+    <div className="flex justify-between bg-white rounded-lg shadow-md md:flex-row max-width: fit-content">
       <div className="flex flex-row p-2 gap-x-3 leading-normal justify-items-start">
         <div className="text-lg text-black">No. 01</div>
         <div className="text-lg">01-01-2022</div>
