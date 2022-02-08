@@ -16,19 +16,19 @@ function Layout() {
     {
       id: "01",
       text: "Suply",
-      icon: <BiSearchAlt2 size={20} />,
+      icon: <BiSearchAlt2 size={30} />,
       action: () => navigate(`suply`),
     },
     {
       id: "02",
       text: "Ventas",
-      icon: <RiMoneyDollarCircleLine size={20} />,
+      icon: <RiMoneyDollarCircleLine size={30} />,
       action: () => navigate(`sales`),
     },
     {
       id: "03",
-      text: "Inventario",
-      icon: <AiOutlineDropbox size={20} />,
+      text: "Stock",
+      icon: <AiOutlineDropbox size={30} />,
       action: () => navigate(`stock`),
     },
     // {
@@ -39,8 +39,8 @@ function Layout() {
     // },
     {
       id: "05",
-      text: "Faboritos",
-      icon: <AiFillHeart size={20} />,
+      text: "Home",
+      icon: <AiFillHeart size={30} />,
       action: () => navigate(`/home`),
     },
   ];
@@ -57,8 +57,8 @@ function Layout() {
       >
         <Sidebar buttonsOfPages={buttonsOfPages}>
           <div className="hidden md:flex md:flex-col md:items-center md:gap-2">
-            <ButtonIcon icon={<BsUpcScan size={20} />} />
-            <ButtonIcon icon={<BiSearchAlt2 size={20} />} />
+            <ButtonIcon icon={<BsUpcScan size={35} />} />
+            {/* <ButtonIcon icon={<BiSearchAlt2 size={20} />} /> */}
           </div>
         </Sidebar>
         <Container alingItems="items-start" justifyContent="justify-start">
