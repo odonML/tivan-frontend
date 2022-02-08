@@ -16,7 +16,7 @@ function Favorites() {
           <Search handleSearch={handleSearch} />
         </div>
       </div>
-      <div className="w-full h-[87%] grid grid-cols-1 sm:grid-cols-3 gap-1 overflow-y-scroll">
+      <div className="w-full h-[92%] py-1 grid grid-cols-1 sm:grid-cols-3 gap-1 overflow-y-scroll custom-scroll">
         <div className="col-span-1 h-24">
           <CardProduct />
         </div>
