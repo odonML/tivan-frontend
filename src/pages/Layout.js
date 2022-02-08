@@ -7,7 +7,7 @@ import React from "react";
 import { AiFillHeart, AiOutlineDropbox } from "react-icons/ai";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { BsUpcScan } from "react-icons/bs";
-import { RiMoneyDollarCircleLine } from "react-icons/ri";
+import { MdAttachMoney } from "react-icons/md";
 import { Outlet, useNavigate } from "react-router-dom";
 
 function Layout() {
@@ -22,7 +22,7 @@ function Layout() {
     {
       id: "02",
       text: "Ventas",
-      icon: <RiMoneyDollarCircleLine size={30} />,
+      icon: <MdAttachMoney size={20} />,
       action: () => navigate(`sales`),
     },
     {

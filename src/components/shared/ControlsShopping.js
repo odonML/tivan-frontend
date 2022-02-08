@@ -1,6 +1,6 @@
 import React from "react";
 import { BsUpcScan } from "react-icons/bs";
-import { RiMoneyDollarCircleLine } from "react-icons/ri";
+import { MdAttachMoney } from "react-icons/md";
 import ButtonIcon from "./ButtonIcon";
 import Select from "./Select";
 
@@ -22,10 +22,7 @@ function ControlsShopping({
       <div className="w-full px-2 flex items-center">
         <Select msj="hola" options={selectOptions} action={selectAction} />
       </div>
-      <ButtonIcon
-        icon={<RiMoneyDollarCircleLine size={20} />}
-        click={actionBtnRight}
-      />
+      <ButtonIcon icon={<MdAttachMoney size={20} />} click={actionBtnRight} />
     </div>
   );
 }
