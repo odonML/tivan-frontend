@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import ContentGrid from "../components/shared/ContentGrid";
 import Favorites from "../components/sub-pages/Favorites";
+import ShoppingCar from "../components/sub-pages/ShoppingCar";
 
 function Home() {
   const [tab, setTab] = useState(1);
 
   return (
-    <div className="relative bg-gray-3 w-full h-full grid gap-1 grid-cols-1 grid-rows-1 md:grid-cols-6 md:grid-rows-4">
+    <ContentGrid>
       <div
         className={`${
           tab === 1 ? "grid" : "hidden"
@@ -18,7 +20,7 @@ function Home() {
           tab === 2 ? "grid col-span-2 row-span-1" : "hidden"
         } md:grid md:col-span-2 md:row-span-4`}
       >
-        <p>Carrito</p>
+        <ShoppingCar />
       </div>
       {/* <div className="hidden md:grid sm:col-span-2 md:row-span-2 ">
         <p>Tickets</p>
@@ -49,7 +51,7 @@ function Home() {
           </div>
         </div>
       </div>
-    </div>
+    </ContentGrid>
   );
 }
 
