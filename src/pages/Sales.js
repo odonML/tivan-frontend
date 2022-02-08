@@ -12,7 +12,7 @@ function Sales() {
 
   return (
     <Content>
-      <ContentGrid>
+      <ContentGrid bgColor="bg-gray-3">
         <div
           className={`${
             tab === 1 ? "grid" : "hidden"

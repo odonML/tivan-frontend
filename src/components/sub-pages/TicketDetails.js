@@ -1,14 +1,12 @@
 import React from "react";
 import Content from "../shared/Content";
-import ContentTitle from "../shared/ContentTitle";
 
 function ShoppingCar() {
   return (
     <Content>
-      <ContentTitle>
+      <div className="w-full h-[100%] bg-white rounded-md p-2">
         <p>TICKET</p>
-      </ContentTitle>
-      <div className="w-full h-[85%]"></div>
+      </div>
     </Content>
   );
 }
