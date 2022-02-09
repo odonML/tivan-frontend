@@ -14,7 +14,7 @@ function ControlsShopping({
 }) {
   return (
     <div
-      className={`w-full p-1 rounded-full flex items-center ${
+      className={`w-full h-full p-1 rounded-full flex items-center ${
         reverse ? "flex-row-reverse" : "flex-row"
       } ${bgColor}`}
     >

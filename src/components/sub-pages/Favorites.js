@@ -23,47 +23,8 @@ function Favorites() {
         gridCol="grid-cols-1 sm:grid-cols-3"
         extra="py-1 overflow-y-scroll custom-scrolls"
       ></ContentGrid> */}
-      <div className="w-full h-[92%] py-1 grid grid-cols-1 sm:grid-cols-3 gap-1 overflow-y-scroll custom-scroll">
-        <div className="col-span-1 h-36 sm:h-24">
-          <CardProduct />
-        </div>
-        <div className="col-span-1 h-36 sm:h-24">
-          <CardProduct />
-        </div>
-        <div className="col-span-1 h-36 sm:h-24">
-          <CardProduct />
-        </div>
-        <div className="col-span-1 h-36 sm:h-24">
-          <CardProduct />
-        </div>
-        <div className="col-span-1 h-36 sm:h-24">
-          <CardProduct />
-        </div>
-        <div className="col-span-1 h-36 sm:h-24">
-          <CardProduct />
-        </div>
-        <div className="col-span-1 h-36 sm:h-24">
-          <CardProduct />
-        </div>
-        <div className="col-span-1 h-36 sm:h-24">
-          <CardProduct />
-        </div>
-        <div className="col-span-1 h-36 sm:h-24">
-          <CardProduct />
-        </div>
-        <div className="col-span-1 h-36 sm:h-24">
-          <CardProduct />
-        </div>
-        <div className="col-span-1 h-36 sm:h-24">
-          <CardProduct />
-        </div>
-        <div className="col-span-1 h-36 sm:h-24">
-          <CardProduct />
-        </div>
-        <div className="col-span-1 h-36 sm:h-24">
-          <CardProduct />
-        </div>
-        <div className="col-span-1 h-36 sm:h-24">
+      <div className="w-full h-[89%] md:h-[92%] py-1 px-2 grid grid-cols-1 sm:grid-cols-2 gap-2 overflow-y-scroll custom-scroll">
+        <div className="col-span-1 md:col-span-2 lg:col-span-1 h-36 sm:h-24">
           <CardProduct />
         </div>
       </div>
