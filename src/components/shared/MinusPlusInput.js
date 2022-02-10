@@ -6,7 +6,7 @@ function MinusPlusInput({ value = 0 }) {
 
   useEffect(() => {
     // Peticion a la api
-    console.log(typeof piezas);
+    // console.log(typeof piezas);
   }, [piezas]);
 
   const handlePlus = () => {
