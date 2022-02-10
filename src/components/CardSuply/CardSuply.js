@@ -7,11 +7,8 @@ import MinusPlusInput from "../shared/MinusPlusInput";
 function CardSuply() {
   return (
     <div>
-      <a
-        href="/"
-        className="flex bg-white rounded-lg shadow-md p-2 md:flex-row md:max-w-xl hover:bg-gray-100"
-      >
-        <div className="w-20">
+      <div className="flex bg-white rounded-lg shadow-md p-2 md:flex-row md:max-w-xl hover:bg-gray-100">
+        <div className="w-20 sm:20 h-full flex items-center justify-center">
           <Image
             className="object-cover rounded-t-lg md:h-auto md:w-48
           md:rounded-none md:rounded-l-lg"
@@ -22,13 +19,13 @@ function CardSuply() {
           <CardTitle text="sabritas original 45g" />
           <CardDescription text="botana de papa con sal" />
           {/* ----------------------CAMBIAR POR COMPONENTE-------------------------- */}
-          <p className="text-lg">#prod</p>
+          <p className="text-lg">#producto</p>
           {/* ----------------------CAMBIAR POR COMPONENTE-------------------------- */}
         </div>
         <div className="self-end py-3 px-2">
           <MinusPlusInput />
         </div>
-      </a>
+      </div>
     </div>
   );
 }
