@@ -19,10 +19,10 @@ function Search({ handleSearch }) {
   };
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full flex items-center">
       <input
         type="text"
-        className="w-full h-[90%] px-3 pr-6 rounded-full bg-gray-3 focus:outline focus:outline-1 focus:outline-pink-0 "
+        className="w-full h-[90%] px-3 pr-6  rounded-full bg-white outline  outline-1 outline-pink-0 "
         value={search}
         onChange={handleWrite}
         onKeyDown={(e) => enterKeyDown(e)}

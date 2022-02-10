@@ -7,11 +7,15 @@ function InputForm({
   nameInput,
   register,
   validations = {},
+  textCenter = false,
 }) {
   return (
-    <div className="flex flex-col">
-      <label>{label}</label>
+    <div className="w-full h-full flex flex-col">
+      <label className="text-xs">{label}</label>
       <input
+        className={`w-full h-full px-2 rounded-lg bg-white outline outline-1 outline-pink-0 ${
+          textCenter ? "text-center" : ""
+        } `}
         type={type}
         {...register(nameInput, validations)}
         defaultValue={value}

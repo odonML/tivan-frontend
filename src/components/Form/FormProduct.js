@@ -3,7 +3,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import InputForm from "./InputForm";
 
-function FormProduct({ dataProduct = "hola", click }) {
+function FormProduct({ dataProduct = {}, click }) {
   const {
     register,
     // formState: { errors },
@@ -13,25 +13,99 @@ function FormProduct({ dataProduct = "hola", click }) {
   const onSubmit = (data) => click(data);
   // const getErrors = (error) => `error ${error}`;
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex">
-        <InputForm
-          type="text"
-          label="Nombre"
-          nameInput="nombre"
-          register={register}
-          value={dataProduct.name || ""}
-          validations={{ required: true, min: 2 }}
-        />
-
-        <InputForm
-          type="text"
-          label="Clave"
-          nameInput="keyName"
-          register={register}
-          value={dataProduct.keyName || ""}
-          validations={{ required: true, min: 2 }}
-        />
+    <form className="w-full h-full border" onSubmit={handleSubmit(onSubmit)}>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+        <div className="col-span-2 row-span-3"></div>
+        <div className="col-span-2">
+          <InputForm
+            type="text"
+            label="Nombre"
+            nameInput="nombre"
+            register={register}
+            value={dataProduct.name || ""}
+            validations={{ required: true, min: 2 }}
+          />
+        </div>
+        <div className="col-span-1">
+          <InputForm
+            type="text"
+            label="Clave"
+            nameInput="keyName"
+            register={register}
+            value={dataProduct.keyName || ""}
+            validations={{ required: true, min: 2 }}
+          />
+        </div>
+        <div className="col-span-1">
+          <InputForm
+            type="text"
+            label="Clave"
+            nameInput="keyName"
+            register={register}
+            value={dataProduct.keyName || ""}
+            validations={{ required: true, min: 2 }}
+          />
+        </div>
+        <div className="col-span-1">
+          <InputForm
+            type="text"
+            label="Clave"
+            nameInput="keyName"
+            register={register}
+            value={dataProduct.keyName || ""}
+            validations={{ required: true, min: 2 }}
+          />
+        </div>
+        <div className="col-span-1">
+          <InputForm
+            type="text"
+            label="Clave"
+            nameInput="keyName"
+            register={register}
+            value={dataProduct.keyName || ""}
+            validations={{ required: true, min: 2 }}
+          />
+        </div>
+        <div className="col-span-2">
+          <InputForm
+            type="text"
+            label="Clave"
+            nameInput="keyName"
+            register={register}
+            value={dataProduct.keyName || ""}
+            validations={{ required: true, min: 2 }}
+          />
+        </div>
+        <div className="col-span-2">
+          <InputForm
+            type="text"
+            label="Clave"
+            nameInput="keyName"
+            register={register}
+            value={dataProduct.keyName || ""}
+            validations={{ required: true, min: 2 }}
+          />
+        </div>
+        <div className="col-span-2">
+          <InputForm
+            type="text"
+            label="Clave"
+            nameInput="keyName"
+            register={register}
+            value={dataProduct.keyName || ""}
+            validations={{ required: true, min: 2 }}
+          />
+        </div>
+        <div className="col-span-2">
+          <InputForm
+            type="text"
+            label="Clave"
+            nameInput="keyName"
+            register={register}
+            value={dataProduct.keyName || ""}
+            validations={{ required: true, min: 2 }}
+          />
+        </div>
       </div>
       <ButtonText type={false}>Enviar</ButtonText>
     </form>
