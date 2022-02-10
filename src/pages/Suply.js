@@ -1,26 +1,32 @@
 import React, { useState } from "react";
-import CardSuply from "../components/CardSuply/CardSuply";
-import TitleSection from "../components/shared/TitleSection";
+import { AiOutlinePlus } from "react-icons/ai";
+import ContentGrid from "../components/shared/ContentGrid";
+import SuplyCards from "../components/sub-pages/SuplyCards";
+import ContentTitle from "../components/shared/ContentTitle";
+import ButtonIcon from "../components/shared/ButtonIcon";
 
-function Sales() {
+function Suply() {
   const [tab] = useState(1);
 
   return (
-    <div className="relative bg-gray-3 w-full h-full grid grid-cols-1 grid-rows-1 sm:grid-cols-3 sm:grid-rows-4 p-2">
+    <ContentGrid bgColor="bg-gray-3">
       <div
         className={`${
           tab === 1 ? "grid" : "hidden"
-        } sm:grid col-span-1 row-span-1 sm:col-span-2 sm:row-span-2 gap-2`}
+        } sm:grid col-span-1 row-span-1 md:col-span-6 md:row-span-6 h-1 m-2 p-2 gap-2`}
       >
-        <div className="flex">
-          <TitleSection text="Surtir" locked={true} />
+        <div>
+          <ContentTitle>
+            <p>Surtir</p>
+            <ButtonIcon icon={<AiOutlinePlus size={22} />} />
+          </ContentTitle>
         </div>
-        <CardSuply />
-        <CardSuply />
-        <CardSuply />
+        <div className="w-200 h-200">
+          <SuplyCards />
+        </div>
       </div>
-    </div>
+    </ContentGrid>
   );
 }
 
-export default Sales;
+export default Suply;

@@ -16,7 +16,7 @@ function Sales() {
         <div
           className={`${
             tab === 1 ? "grid" : "hidden"
-          } sm:grid col-span-1 row-span-1 md:col-span-4 md:row-span-4 h-1 m-2 p-2 gap-2`}
+          } sm:grid col-span-1 row-span-1 md:col-span-4 md:row-span-6 h-1 m-2 p-2 gap-2`}
         >
           <ContentTitle>
             <p>Ventas</p>

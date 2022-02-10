@@ -8,10 +8,7 @@ import MinusPlusInput from "../shared/MinusPlusInput";
 function CardCarrito() {
   return (
     <div className="flex bg-white rounded-lg shadow-md md:flex-row md:max-w-xl">
-      <a
-        href="/"
-        className="flex bg-white rounded-lg shadow-md p-2 md:flex-row md:max-w-xl hover:bg-gray-100"
-      >
+      <div className="flex bg-white rounded-lg shadow-md p-2 md:flex-row md:max-w-xl hover:bg-gray-100">
         <div className="w-20">
           <Image
             className="object-cover rounded-t-lg md:h-auto md:w-48
@@ -33,7 +30,7 @@ function CardCarrito() {
           </div>
           {/* ----------------------CAMBIAR POR COMPONENTE-------------------------- */}
         </div>
-      </a>
+      </div>
       <div className="flex relative h-15">
         <div className="flex items-center rounded-r-lg inset-y-0 right-0 bg-pink-0">
           <ButtonIcon
