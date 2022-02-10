@@ -1,8 +1,10 @@
 import React from "react";
 
-function Content({ children }) {
+function Content({ children, bgColor = "bg-white" }) {
   return (
-    <div className="w-full h-[100%] sm:p-1 bg-gray-3 sm:rounded-lg overflow-hidden">
+    <div
+      className={`w-full h-[100%] sm:p-1 ${bgColor} sm:rounded-lg overflow-hidden`}
+    >
       {children}
     </div>
   );

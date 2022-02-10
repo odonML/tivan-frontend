@@ -103,7 +103,7 @@ code {
   /* background: var(--purple-3); color of the tracking area */
 }
 .custom-scroll::-webkit-scrollbar-thumb {
-  background-color: var(--pink-0); /* color of the scroll thumb */
+  background-color: var(--aqua-0); /* color of the scroll thumb */
   /* border-radius: 20px; roundness of the scroll thumb */
   /* border: 1px solid orange; --- creates padding around scroll thumb */
 }
