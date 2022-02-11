@@ -5,7 +5,7 @@ import Navbar from "components/shared/Navbar";
 import Sidebar from "components/shared/Sidebar";
 import React from "react";
 import { AiFillHeart, AiOutlineDropbox } from "react-icons/ai";
-import { BiSearchAlt2 } from "react-icons/bi";
+import { HiViewGridAdd } from "react-icons/hi";
 import { BsUpcScan } from "react-icons/bs";
 import { MdAttachMoney } from "react-icons/md";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -16,13 +16,13 @@ function Layout() {
     {
       id: "01",
       text: "Suply",
-      icon: <BiSearchAlt2 size={30} />,
+      icon: <HiViewGridAdd size={30} />,
       action: () => navigate(`suply`),
     },
     {
       id: "02",
       text: "Ventas",
-      icon: <MdAttachMoney size={20} />,
+      icon: <MdAttachMoney size={30} />,
       action: () => navigate(`sales`),
     },
     {

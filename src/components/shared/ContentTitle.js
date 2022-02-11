@@ -2,7 +2,7 @@ import React from "react";
 
 function ContentTitle({ children }) {
   return (
-    <div className="text-2xl h-[5%] px-2 flex items-center justify-between">
+    <div className="text-2xl m-3 h-[5%] px-2 flex items-center justify-between">
       {children}
     </div>
   );

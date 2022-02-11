@@ -26,18 +26,7 @@ function Sales() {
           }
         >
           <div className="flex flex-col">
-            <div className="grid sm:grid-cols-2 md:grid-col-3 gap-4">
-              <CardTicket />
-              <CardTicket />
-              <CardTicket />
-              <CardTicket />
-              <CardTicket />
-              <CardTicket />
-              <CardTicket />
-              <CardTicket />
-              <CardTicket />
-              <CardTicket />
-              <CardTicket />
+            <div className="grid md:grid-cols-2 gap-3">
               <CardTicket />
               <CardTicket />
               <CardTicket />

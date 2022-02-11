@@ -16,14 +16,16 @@ function Suply() {
         } md:grid col-span-1 row-span-1 md:col-span-3 lg:col-span-4 md:row-span-4`}
       >
         <ContentLeft
-          title="Favoritos"
+          title="Suply"
           element={
             <div className="w-full pl-2 sm:m-0 sm:w-60">
               <ButtonIcon icon={<AiOutlinePlus size={22} />} />
             </div>
           }
         >
-          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-36 sm:h-24">
+          <div className="grid col-span-1 md:col-span-2 lg:col-span-1 h-36 sm:h-24 gap-3">
+            <CardSuply />
+            <CardSuply />
             <CardSuply />
           </div>
         </ContentLeft>
