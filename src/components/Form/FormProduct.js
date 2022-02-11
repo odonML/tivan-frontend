@@ -12,6 +12,7 @@ function FormProduct({ dataProduct = {}, click }) {
   } = useForm();
 
   const onSubmit = (data) => {
+    
     click(data);
   };
   // const getErrors = (error) => `error ${error}`;
@@ -21,6 +22,7 @@ function FormProduct({ dataProduct = {}, click }) {
         {/* IMAGE */}
         <div className="col-span-2 h-24 py-2 bg-gray-2 rounded-lg">
           <InputFile value="" nameInput="image" register={register} />
+          {/* <input type="file" ref={register} name="image" /> */}
         </div>
         {/* Nombre Producto */}
         <div className="col-span-2">

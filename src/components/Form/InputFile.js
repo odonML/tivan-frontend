@@ -4,8 +4,15 @@ import React, { useState } from "react";
 function InputFile({ value, register, nameInput, validations = {} }) {
   const [image, setImage] = useState("");
   const showImage = (e) => {
-    const data = URL.createObjectURL(e.target.files[0]);
+    // const data = URL.createObjectURL(e.target.files[0]);
+    const data = e.target.files[0];
     setImage(data);
+  };
+
+  const onSubmit = () => {
+    const formData = new FormData();
+    formData.append("myFile", image);
+    console.log(formData);
   };
   return (
     <div className="w-full h-full flex flex-col">
@@ -31,6 +38,10 @@ function InputFile({ value, register, nameInput, validations = {} }) {
           )}
         </div>
       </label>
+      <button type="button" onClick={() => onSubmit()}>
+        {" "}
+        hola
+      </button>
     </div>
   );
 }
