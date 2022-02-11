@@ -18,12 +18,12 @@ function Suply() {
         <ContentLeft
           title="Suply"
           element={
-            <div className="w-full pl-2 sm:m-0 sm:w-60">
+            <div>
               <ButtonIcon icon={<AiOutlinePlus size={22} />} />
             </div>
           }
         >
-          <div className="grid col-span-1 md:col-span-2 lg:col-span-1 h-36 sm:h-24 gap-3">
+          <div className="grid gap-3 grid-col-2 col-span-1 md:col-span-2 lg:col-span-1 h-36 sm:h-24 ">
             <CardSuply />
             <CardSuply />
             <CardSuply />
