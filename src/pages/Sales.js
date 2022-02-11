@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { AiOutlinePlus } from "react-icons/ai";
-import ContentTitle from "../components/shared/ContentTitle";
-import Content from "../components/shared/Content";
+import { RiScissors2Line } from "react-icons/ri";
+import ContentLeft from "components/shared/ContentLeft";
+import ContentRight from "components/shared/ContentRight";
 import CardTicket from "../components/CardTicket/CardTicket";
 import ContentGrid from "../components/shared/ContentGrid";
 import ButtonIcon from "../components/shared/ButtonIcon";
@@ -11,63 +11,80 @@ function Sales() {
   const [tab, setTab] = useState(1);
 
   return (
-    <Content>
-      <ContentGrid bgColor="bg-gray-3">
-        <div
-          className={`${
-            tab === 1 ? "grid" : "hidden"
-          } sm:grid col-span-1 row-span-1 md:col-span-4 md:row-span-6 h-1 m-2 p-2 gap-2`}
+    <ContentGrid>
+      <div
+        className={`${
+          tab === 1 ? "grid" : "hidden"
+        } md:grid col-span-1 row-span-1 md:col-span-3 lg:col-span-4 md:row-span-4`}
+      >
+        <ContentLeft
+          title="Sales"
+          element={
+            <div className="flex flex-end w-full pl-2">
+              <ButtonIcon icon={<RiScissors2Line size={22} />} />
+            </div>
+          }
         >
-          <ContentTitle>
-            <p>Ventas</p>
-            <ButtonIcon icon={<AiOutlinePlus size={22} />} />
-          </ContentTitle>
-          <div className="flex flex-wrap gap-4">
-            <CardTicket />
-            <CardTicket />
-            <CardTicket />
-            <CardTicket />
-            <CardTicket />
-            <CardTicket />
-            <CardTicket />
+          <div className="col-span-1 space-1 sm:col-span-1 md:col-span-1 h-0">
             <CardTicket />
           </div>
-        </div>
-        <div
-          className={`${
-            tab === 2 ? "grid col-span-2 row-span-1" : "hidden"
-          } md:grid md:col-span-2 md:row-span-4`}
-        >
-          <TicketDetails className="bg-white" />
-        </div>
-        <div className="absolute bottom-0 w-full h-7 px-1 flex justify-center md:hidden">
-          <div className="flex w-2/3 text-white text-base">
-            <div className="w-1/2">
-              <button
-                type="button"
-                className={`w-full rounded-l-full ${
-                  tab === 1 ? "bg-purple-0" : "bg-pink-0"
-                }`}
-                onClick={() => setTab(1)}
-              >
-                Ventas
-              </button>
-            </div>
-            <div className="w-1/2">
-              <button
-                type="button"
-                className={`w-full rounded-r-full ${
-                  tab === 2 ? "bg-purple-0" : "bg-pink-0"
-                }`}
-                onClick={() => setTab(2)}
-              >
-                Ticket
-              </button>
-            </div>
+          <div className="col-span-1 space-1 sm:col-span-1 md:col-span-1 h-0">
+            <CardTicket />
+          </div>
+          <div className="col-span-1 space-1 sm:col-span-1 md:col-span-1 h-0">
+            <CardTicket />
+          </div>
+          <div className="col-span-1 space-1 sm:col-span-1 md:col-span-1 h-0">
+            <CardTicket />
+          </div>
+          <div className="col-span-1 space-1 sm:col-span-1 md:col-span-1 h-0">
+            <CardTicket />
+          </div>
+          <div className="col-span-1 space-1 sm:col-span-1 md:col-span-1 h-0">
+            <CardTicket />
+          </div>
+        </ContentLeft>
+      </div>
+      <div
+        className={` ${
+          tab === 2 ? "grid col-span-2 row-span-1" : "hidden"
+        } md:grid md:col-span-3 lg:col-span-2 md:row-span-4`}
+      >
+        <ContentRight title="Ticket">
+          <div className="col-span-1 h-full">
+            <TicketDetails />
+          </div>
+        </ContentRight>
+      </div>
+
+      <div className=" absolute border bottom-0 w-full h-[5%] py-1 flex items-center justify-center md:hidden">
+        <div className="flex w-2/3 text-white text-base">
+          <div className="w-full">
+            <button
+              type="button"
+              className={`w-full rounded-l-full ${
+                tab === 1 ? "bg-pink-0" : "bg-purple-0"
+              }`}
+              onClick={() => setTab(1)}
+            >
+              Sales
+            </button>
+          </div>
+
+          <div className="w-full">
+            <button
+              type="button"
+              className={`w-full rounded-r-full ${
+                tab === 2 ? "bg-pink-0" : "bg-purple-0"
+              }`}
+              onClick={() => setTab(2)}
+            >
+              Ticket
+            </button>
           </div>
         </div>
-      </ContentGrid>
-    </Content>
+      </div>
+    </ContentGrid>
   );
 }
 

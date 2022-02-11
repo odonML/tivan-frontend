@@ -5,7 +5,7 @@ function ShoppingCar() {
   return (
     <Content>
       <div className="w-full h-[100%] bg-white rounded-md p-2">
-        <p>TICKET</p>
+        <p className="text-xl font.bold">No.0000</p>
       </div>
     </Content>
   );
