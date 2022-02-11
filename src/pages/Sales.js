@@ -20,28 +20,30 @@ function Sales() {
         <ContentLeft
           title="Sales"
           element={
-            <div className="flex flex-end w-full pl-2">
+            <div className="flex w-full justify-end">
               <ButtonIcon icon={<RiScissors2Line size={22} />} />
             </div>
           }
         >
-          <div className="col-span-1 space-1 sm:col-span-1 md:col-span-1 h-0">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 space-1 sm:col-span-1 md:col-span-1 h-0">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 space-1 sm:col-span-1 md:col-span-1 h-0">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 space-1 sm:col-span-1 md:col-span-1 h-0">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 space-1 sm:col-span-1 md:col-span-1 h-0">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 space-1 sm:col-span-1 md:col-span-1 h-0">
-            <CardTicket />
+          <div className="flex flex-col">
+            <div className="grid sm:grid-cols-2 md:grid-col-3 gap-4">
+              <CardTicket />
+              <CardTicket />
+              <CardTicket />
+              <CardTicket />
+              <CardTicket />
+              <CardTicket />
+              <CardTicket />
+              <CardTicket />
+              <CardTicket />
+              <CardTicket />
+              <CardTicket />
+              <CardTicket />
+              <CardTicket />
+              <CardTicket />
+              <CardTicket />
+              <CardTicket />
+            </div>
           </div>
         </ContentLeft>
       </div>
@@ -56,7 +58,6 @@ function Sales() {
           </div>
         </ContentRight>
       </div>
-
       <div className=" absolute border bottom-0 w-full h-[5%] py-1 flex items-center justify-center md:hidden">
         <div className="flex w-2/3 text-white text-base">
           <div className="w-full">
