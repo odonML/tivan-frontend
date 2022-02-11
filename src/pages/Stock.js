@@ -20,7 +20,9 @@ function Stock() {
       <div className="grid col-span-2 row-span-1 md:grid md:col-span-3 lg:col-span-2 md:row-span-4">
         <ContentRight title="Detalles">
           <div className="col-span-1 h-full">
-            <FormProduct></FormProduct>
+            <FormProduct
+              click={(data) => console.log("padre", data)}
+            ></FormProduct>
           </div>
         </ContentRight>
       </div>
