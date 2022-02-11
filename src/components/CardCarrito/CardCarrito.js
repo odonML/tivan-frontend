@@ -19,9 +19,9 @@ function CardCarrito() {
           <CardTitle text="sabritas original 45g" />
           <p className="text-sm md:hidden lg:block">#prod</p>
         </div>
-        <div className="flex flex-row items-start justify-between md:flex-col lg:items-center lg:flex-row">
+        <div className="flex flex-row items-start justify-between md:flex-col lg:flex-row 2xl:flex-col lg:items-center ">
           <div>
-            <p className="text-base md:text-lg text-black">$80.00</p>
+            <p className="text-base md:text-lg lg:text-base text-black">$80.00</p>
           </div>
           <div className="w-24 sm:w-20 h-5">
             {/* h-24 sm:h-20 md:h-28 lg:h-20 */}

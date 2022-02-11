@@ -7,8 +7,8 @@ function ContentGrid({
   width = "w-full",
   bgColor = "bg-white",
   gridGap = "gap-2",
-  gridCol = "grid-cols-1 md:grid-cols-6",
-  gridRow = "grid-rows-1 md:grid-rows-4",
+  gridCol = "grid-cols-1 lg:grid-cols-6",
+  gridRow = "grid-rows-1 lg:grid-rows-4",
   extra = "",
 }) {
   return (

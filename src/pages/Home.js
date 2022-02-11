@@ -20,7 +20,7 @@ function Home() {
       <div
         className={`${
           tab === 1 ? "grid" : "hidden"
-        } md:grid col-span-1 row-span-1 md:col-span-3 lg:col-span-4 md:row-span-4`}
+        } lg:grid col-span-1 row-span-1 lg:col-span-4 md:row-span-4`}
       >
         <ContentLeft
           title="Favoritos"
@@ -30,27 +30,33 @@ function Home() {
             </div>
           }
         >
-          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-36 sm:h-24">
+          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-24 sm:h-20 md:min-h-24 md:max-h-28 md:h-auto">
+            <CardProduct />
+          </div>
+          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-24 sm:h-20 md:min-h-24 md:max-h-28 md:h-auto">
+            <CardProduct />
+          </div>
+          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-24 sm:h-20 md:min-h-24 md:max-h-28 md:h-auto">
             <CardProduct />
           </div>
         </ContentLeft>
       </div>
       <div
         className={` ${
-          tab === 2 ? "grid col-span-2 row-span-1" : "hidden"
-        } md:grid md:col-span-3 lg:col-span-2 md:row-span-4`}
+          tab === 2 ? "grid col-span-1 row-span-1" : "hidden"
+        } lg:grid md:col-span-3 lg:col-span-2 md:row-span-4`}
       >
         <ContentRight
           title="Carrito"
           controls={<ControlsShopping></ControlsShopping>}
         >
-          <div className="col-span-1 h-24 sm:h-20 md:h-28 lg:h-20">
+          <div className="col-span-1 h-24 sm:h-20 md:min-h-24 md:max-h-28 md:h-auto">
             <CardCarrito />
           </div>
         </ContentRight>
       </div>
       {/* Hacer el tab en componentes */}
-      <div className=" absolute border bottom-0 w-full h-[5%] py-1 flex items-center justify-center md:hidden">
+      <div className=" absolute border bottom-0 w-full h-[5%] py-1 flex items-center justify-center lg:hidden">
         <div className="flex w-2/3 text-white text-base">
           <div className="w-full">
             <button

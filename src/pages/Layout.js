@@ -53,10 +53,10 @@ function Layout() {
       <Container
         height="h-full"
         flexDirection="flex-col-reverse"
-        mediaQueries="md:flex-row"
+        mediaQueries="lg:flex-row"
       >
         <Sidebar buttonsOfPages={buttonsOfPages}>
-          <div className="hidden md:flex md:flex-col md:items-center md:gap-2">
+          <div className="hidden lg:flex lg:flex-col md:items-center md:gap-2">
             <ButtonIcon icon={<BsUpcScan size={35} />} />
             {/* <ButtonIcon icon={<BiSearchAlt2 size={20} />} /> */}
           </div>

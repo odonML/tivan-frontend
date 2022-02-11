@@ -19,10 +19,12 @@ function CardProduct({
 }) {
   return (
     <div
-      onClick={clickCard}
       className={` relative w-full h-full flex items-center justify-center bg-white rounded-lg shadow-md`}
     >
-      <div className="w-36 sm:w-24 h-full flex items-center justify-center">
+      <div
+        onClick={clickCard}
+        className="w-36 sm:w-24 h-full flex items-center justify-center cursor-pointer"
+      >
         <Image
           className="object-cover rounded-t-lg md:h-auto md:w-48
           md:rounded-none md:rounded-l-lg"
@@ -32,7 +34,10 @@ function CardProduct({
           }
         />
       </div>
-      <div className="w-full h-full flex flex-col justify-center pl-1">
+      <div
+        onClick={clickCard}
+        className="w-full h-full flex flex-col justify-center pl-1"
+      >
         <CardTitle text={nameProduct} />
         <CardDescription text={descriptionProduct} />
         <p className="text-xs">{piecesProduct}</p>
