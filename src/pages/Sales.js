@@ -25,14 +25,17 @@ function Sales() {
             </div>
           }
         >
-          <div className="flex flex-col">
-            <div className="grid md:grid-cols-2 gap-3">
-              <CardTicket />
-              <CardTicket />
-              <CardTicket />
-              <CardTicket />
-              <CardTicket />
-            </div>
+          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-10">
+            <CardTicket />
+          </div>
+          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-10">
+            <CardTicket />
+          </div>
+          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-10">
+            <CardTicket />
+          </div>
+          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-10">
+            <CardTicket />
           </div>
         </ContentLeft>
       </div>

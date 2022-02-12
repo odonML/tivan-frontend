@@ -4,9 +4,9 @@ import Logo from "components/shared/Logo";
 import Navbar from "components/shared/Navbar";
 import Sidebar from "components/shared/Sidebar";
 import React from "react";
-import { AiFillHeart, AiOutlineDropbox } from "react-icons/ai";
+import { AiOutlineDropbox } from "react-icons/ai";
 import { HiViewGridAdd } from "react-icons/hi";
-import { BsUpcScan } from "react-icons/bs";
+import { BsUpcScan, BsHouseDoorFill } from "react-icons/bs";
 import { MdAttachMoney } from "react-icons/md";
 import { Outlet, useNavigate } from "react-router-dom";
 
@@ -40,7 +40,7 @@ function Layout() {
     {
       id: "05",
       text: "Home",
-      icon: <AiFillHeart size={30} />,
+      icon: <BsHouseDoorFill size={29} />,
       action: () => navigate(`/home`),
     },
   ];

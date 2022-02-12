@@ -25,8 +25,6 @@ function Suply() {
         >
           <div className="grid gap-3 grid-col-2 col-span-1 md:col-span-2 lg:col-span-1 h-36 sm:h-24 ">
             <CardSuply />
-            <CardSuply />
-            <CardSuply />
           </div>
         </ContentLeft>
       </div>
