@@ -1,3 +1,4 @@
+import { Alert } from "antd";
 import CardCarrito from "components/CardCarrito/CardCarrito";
 import CardProduct from "components/CardProduct/CardProduct";
 import ContentGrid from "components/shared/ContentGrid";
@@ -10,6 +11,7 @@ import React, { useState } from "react";
 function Home() {
   const [tab, setTab] = useState(1);
   const [carrito, setCarrito] = useState([]);
+  const [productDuplicado, setProductDuplicado] = useState(false);
   const [products, setProducts] = useState([
     {
       id: 1,
@@ -41,7 +43,12 @@ function Home() {
   };
   const addProductToCar = (id, product) => {
     const existProduct = carrito.some((producto) => producto.id === id);
-    if (!existProduct) setCarrito([...carrito, product]);
+    if (existProduct) {
+      setProductDuplicado(true);
+      setTimeout(() => {
+        setProductDuplicado(false);
+      }, 2000);
+    } else setCarrito([...carrito, product]);
   };
   // peticion a la API [{}, {}]
 
@@ -82,17 +89,24 @@ function Home() {
           title="Carrito"
           controls={<ControlsShopping></ControlsShopping>}
         >
-          {carrito.map((product) => (
-            <div
-              key={product.id}
-              className="col-span-1 h-24 sm:h-20 md:min-h-24 md:max-h-28 md:h-auto"
-            >
-              <CardCarrito
-                product={product}
-                actionDeleteOfCar={() => deleteProductOfCar(product.id)}
-              />
-            </div>
-          ))}
+          {productDuplicado ? (
+            <Alert message="Success Text" type="success" />
+          ) : (
+            ""
+          )}
+          {carrito
+            .map((product) => (
+              <div
+                key={product.id}
+                className="col-span-1 h-24 sm:h-20 md:min-h-24 md:max-h-28 md:h-auto"
+              >
+                <CardCarrito
+                  product={product}
+                  actionDeleteOfCar={() => deleteProductOfCar(product.id)}
+                />
+              </div>
+            ))
+            .reverse()}
         </ContentRight>
       </div>
       {/* Hacer el tab en componentes */}

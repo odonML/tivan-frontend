@@ -1,3 +1,4 @@
+import { Form, Input } from "antd";
 import React from "react";
 
 function InputForm({
@@ -5,22 +6,29 @@ function InputForm({
   value,
   label,
   nameInput,
-  register,
-  validations = {},
+  validations = [],
   textCenter = false,
 }) {
   return (
-    <div className="w-full h-full flex flex-col">
-      <label className="text-xs">{label}</label>
-      <input
-        className={`w-full h-full px-2 rounded-lg bg-white focus:outline focus:outline-1 focus:outline-pink-0 ${
-          textCenter ? "text-center" : ""
-        }`}
+    <Form.Item
+      className="mt-0 p-0 h-full"
+      label={label}
+      name={nameInput}
+      rules={
+        validations
+        // [
+        //   {
+        //     required: true,
+        //     message: "Campo obligatorio",
+        //   },
+        // ]
+      }
+    >
+      <Input
         type={type}
-        {...register(nameInput, validations)}
-        defaultValue={value}
+        className={`mb-0 max-w-full ${textCenter ? "text-center" : ""}`}
       />
-    </div>
+    </Form.Item>
   );
 }
 

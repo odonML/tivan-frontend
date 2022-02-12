@@ -1,6 +1,8 @@
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { Form, Input, message, Upload } from "antd";
-import React, { useState } from "react";
+import ButtonText from "components/shared/ButtonText";
+import React, { useEffect, useState } from "react";
+import InputForm from "./InputForm";
 
 function getBase64(img, callback) {
   const reader = new FileReader();
@@ -22,8 +24,18 @@ function beforeUpload(file) {
   return isJpgOrPng && isLt2M;
 }
 
-function FormProduct({ onFinish, onFinishFailed, data }) {
+function FormProduct({
+  onFinish,
+  onFinishFailed,
+  data = {
+    name: "Mario",
+    productImg:
+      "https://minisupersofy.webnode.es/_files/system_preview_detail_200000017-b9012b9fd7/Bolsa-Sabritas-Original.jpg",
+  },
+}) {
+  const [dataForm, setDataForm] = useState(data);
   const [load, setLoad] = useState({});
+  const [form] = Form.useForm();
 
   const handleChange = (info) => {
     console.log(info.file.status);
@@ -36,8 +48,21 @@ function FormProduct({ onFinish, onFinishFailed, data }) {
     );
   };
   const { loading, imageUrl = "" } = load;
+
+  const loadProfile = () => {
+    console.log("setting field value");
+    form.setFieldsValue(dataForm);
+  };
+
+  useEffect(() => {
+    loadProfile();
+    console.log(form.getFieldValue());
+    console.log("dataForm", dataForm);
+  }, []);
+
   return (
     <Form
+      form={form}
       className="w-full h-full"
       name="basic"
       labelCol={{
@@ -55,16 +80,18 @@ function FormProduct({ onFinish, onFinishFailed, data }) {
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
         <Upload
-          name="avatar"
           listType="picture-card"
           className="avatar-uploader"
           showUploadList={false}
-          // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
           beforeUpload={beforeUpload}
           onChange={handleChange}
         >
           {imageUrl ? (
-            <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
+            <img
+              src={imageUrl || form.getFieldValue(["productImg"])}
+              alt="avatar"
+              style={{ width: "100%" }}
+            />
           ) : (
             <div>
               {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -74,19 +101,18 @@ function FormProduct({ onFinish, onFinishFailed, data }) {
         </Upload>
 
         <div className=" col-span-2 border">
-          <Form.Item
-            className="mt-0 p-0 h-full flex flex-col"
+          <InputForm
+            type="text"
+            value="hola"
             label="Nombre"
-            name="name"
-            rules={[
+            nameInput="nameProduct"
+            validations={[
               {
                 required: true,
                 message: "Campo obligatorio",
               },
             ]}
-          >
-            <Input className="mb-0 max-w-full" />
-          </Form.Item>
+          />
         </div>
         <div className="col-span-2 h-7">
           <Form.Item
@@ -162,6 +188,9 @@ function FormProduct({ onFinish, onFinishFailed, data }) {
             <Input className="h-full w-full" placeholder="Nombre" size="5" />
           </Form.Item>
         </div>
+        <ButtonText type={false} txColor="text-[#fff]">
+          Agregar
+        </ButtonText>
       </div>
     </Form>
     // <form className="w-full h-full" onSubmit={handleSubmit(onSubmit)}>

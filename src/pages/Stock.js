@@ -48,6 +48,7 @@ function Stock() {
     console.log("Failed:", errorInfo);
   };
 
+  console.log("data", dataProduct);
   return (
     <ContentGrid>
       <div className="grid md:grid col-span-1 row-span-1 md:col-span-3 lg:col-span-6 md:row-span-4">
@@ -74,12 +75,31 @@ function Stock() {
       </div>
 
       <Drawer
-        title="Basic Drawer"
+        title="Detalle"
         placement="right"
         onClose={onClose}
         visible={visible}
+        bodyStyle={{
+          margin: "10px",
+          padding: "10px",
+          borderRadius: "12px",
+          background: "#fff",
+          boxShadow: "1px 5px 9px 0px rgba(133,133,133,0.75)",
+        }}
+        drawerStyle={{
+          background: "#d3d3d3",
+        }}
+        headerStyle={{
+          background: "#d3d3d3",
+          paddingBottom: "0px",
+          border: "none",
+        }}
       >
-        <FormProduct onFinish={onFinish} onFinishFailed={onFinishFailed} />
+        <FormProduct
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          data={dataProduct}
+        />
       </Drawer>
       {/* <div className="grid col-span-2 row-span-1 md:grid md:col-span-3 lg:col-span-2 md:row-span-4">
         <ContentRight title="Detalles">
