@@ -23,7 +23,7 @@ import { BiCog, BiHomeAlt, BiSearchAlt2 } from "react-icons/bi";
 import { BsUpcScan } from "react-icons/bs";
 import { FaShoppingCart } from "react-icons/fa";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
-import FormProduct from "./Form/FormProduct";
+// import FormProduct from "./Form/FormProduct";
 
 function Demo() {
   const [showModal, setShowModal] = useState(false);
@@ -265,7 +265,7 @@ function Demo() {
       >
         Modal
       </ButtonText>
-      {0 === 1 ? (
+      {/* {0 === 1 ? (
         <div className="relative w-80">
           <Modal position="absolute">
             <FormProduct dataProduct={data} click={(e) => console.log(e)} />
@@ -273,7 +273,7 @@ function Demo() {
         </div>
       ) : (
         ""
-      )}
+      )} */}
     </div>
   );
 }
