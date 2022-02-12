@@ -9,9 +9,39 @@ import React, { useState } from "react";
 
 function Home() {
   const [tab, setTab] = useState(1);
+  const [carrito, setCarrito] = useState([]);
+  const [products, setProducts] = useState([
+    {
+      id: 1,
+      nameProduct: "sabritas",
+      keyNameProduct: "#SaSal",
+      descriptionProduct: "Papas con sal",
+      piecesProduct: 4,
+      priceProduct: 20.0,
+      img: "https://minisupersofy.webnode.es/_files/system_preview_detail_200000017-b9012b9fd7/Bolsa-Sabritas-Original.jpg",
+    },
+    {
+      id: 2,
+      nameProduct: "Sabritas Adobadas",
+      keyNameProduct: "#SaAdo",
+      descriptionProduct: "Papas con sal y picante",
+      piecesProduct: 10,
+      priceProduct: 20.0,
+      img: "https://minisupersofy.webnode.es/_files/system_preview_detail_200000017-b9012b9fd7/Bolsa-Sabritas-Original.jpg",
+    },
+  ]);
 
+  console.log(carrito);
   const handleSearch = (e) => {
     console.log(e);
+  };
+  const deleteProductOfCar = (id) => {
+    const car = carrito.filter((product) => product.id !== id);
+    setCarrito(car);
+  };
+  const addProductToCar = (id, product) => {
+    const existProduct = carrito.some((producto) => producto.id === id);
+    if (!existProduct) setCarrito([...carrito, product]);
   };
   // peticion a la API [{}, {}]
 
@@ -30,15 +60,17 @@ function Home() {
             </div>
           }
         >
-          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-24 sm:h-20 md:min-h-24 md:max-h-28 md:h-auto">
-            <CardProduct />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-24 sm:h-20 md:min-h-24 md:max-h-28 md:h-auto">
-            <CardProduct />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-24 sm:h-20 md:min-h-24 md:max-h-28 md:h-auto">
-            <CardProduct />
-          </div>
+          {products.map((product) => (
+            <div
+              key={product.id}
+              className="col-span-1 md:col-span-2 lg:col-span-1 h-24 sm:h-20 md:min-h-24 md:max-h-28 md:h-auto"
+            >
+              <CardProduct
+                product={product}
+                addShoppingCard={() => addProductToCar(product.id, product)}
+              />
+            </div>
+          ))}
         </ContentLeft>
       </div>
       <div
@@ -50,9 +82,17 @@ function Home() {
           title="Carrito"
           controls={<ControlsShopping></ControlsShopping>}
         >
-          <div className="col-span-1 h-24 sm:h-20 md:min-h-24 md:max-h-28 md:h-auto">
-            <CardCarrito />
-          </div>
+          {carrito.map((product) => (
+            <div
+              key={product.id}
+              className="col-span-1 h-24 sm:h-20 md:min-h-24 md:max-h-28 md:h-auto"
+            >
+              <CardCarrito
+                product={product}
+                actionDeleteOfCar={() => deleteProductOfCar(product.id)}
+              />
+            </div>
+          ))}
         </ContentRight>
       </div>
       {/* Hacer el tab en componentes */}

@@ -24,20 +24,20 @@ function MinusPlusInput({ value = 0 }) {
   return (
     <div className="h-full flex rounded-full text-sm md:text-lg lg:text-xl">
       <button
-        className="w-1/3 h-full flex items-center justify-center  rounded-l-full bg-purple-0 text-white"
+        className="w-1/4 h-full flex items-center justify-center  rounded-l-full bg-purple-0 text-white"
         type="button"
         onClick={handlePlus}
       >
         <AiOutlinePlus />
       </button>
       <input
-        className="w-1/3 h-full px-1 flex items-center justify-center text-base appearance-none outline-none"
+        className="w-2/4 h-full px-1 flex items-center justify-center text-sm appearance-none outline-none"
         type="text"
         value={piezas}
         onChange={handleWrite}
       />
       <button
-        className="w-1/3 h-full flex items-center justify-center  rounded-r-full bg-purple-0 text-white"
+        className="w-1/4 h-full flex items-center justify-center  rounded-r-full bg-purple-0 text-white"
         type="button"
         onClick={handleMinus}
       >

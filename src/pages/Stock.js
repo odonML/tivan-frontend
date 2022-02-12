@@ -11,52 +11,22 @@ function Stock() {
   const [dataProduct, setDataProduct] = useState();
   const products = [
     {
-      name: "Sabritas",
+      id: 1,
+      nameProduct: "sabritas",
+      keyNameProduct: "#SaSal",
+      descriptionProduct: "Papas con sal",
+      piecesProduct: 4,
+      priceProduct: 20.0,
+      img: "https://minisupersofy.webnode.es/_files/system_preview_detail_200000017-b9012b9fd7/Bolsa-Sabritas-Original.jpg",
     },
     {
-      name: "Sabritas2",
-    },
-    {
-      name: "Sabritas",
-    },
-    {
-      name: "Sabritas",
-    },
-    {
-      name: "Sabritas",
-    },
-    {
-      name: "Sabritas",
-    },
-    {
-      name: "Sabritas",
-    },
-    {
-      name: "Sabritas",
-    },
-    {
-      name: "Sabritas",
-    },
-    {
-      name: "Sabritas",
-    },
-    {
-      name: "Sabritas",
-    },
-    {
-      name: "Sabritas",
-    },
-    {
-      name: "Sabritas",
-    },
-    {
-      name: "Sabritas",
-    },
-    {
-      name: "Sabritas",
-    },
-    {
-      name: "Sabritas",
+      id: 2,
+      nameProduct: "Sabritas Adobadas",
+      keyNameProduct: "#SaAdo",
+      descriptionProduct: "Papas con sal y picante",
+      piecesProduct: 10,
+      priceProduct: 20.0,
+      img: "https://minisupersofy.webnode.es/_files/system_preview_detail_200000017-b9012b9fd7/Bolsa-Sabritas-Original.jpg",
     },
   ];
 
@@ -87,9 +57,12 @@ function Stock() {
           gridCols="sm:grid-cols-3"
         >
           {products.map((product) => (
-            <div className="col-span-1 md:col-span-2 lg:col-span-1 h-36 sm:h-24">
+            <div
+              key={product.id}
+              className="col-span-1 md:col-span-2 lg:col-span-1 h-36 sm:h-24"
+            >
               <CardProduct
-                nameProduct={product.name}
+                product={product}
                 clickCard={() => {
                   showDrawer();
                   setDataProduct(product);
