@@ -1,29 +1,32 @@
 import React, { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import ContentGrid from "../components/shared/ContentGrid";
-import SuplyCards from "../components/sub-pages/SuplyCards";
-import ContentTitle from "../components/shared/ContentTitle";
+import CardSuply from "../components/CardSuply/CardSuply";
+import ContentLeft from "../components/shared/ContentLeft";
 import ButtonIcon from "../components/shared/ButtonIcon";
 
 function Suply() {
   const [tab] = useState(1);
 
   return (
-    <ContentGrid bgColor="bg-gray-3">
+    <ContentGrid>
       <div
         className={`${
           tab === 1 ? "grid" : "hidden"
-        } sm:grid col-span-1 row-span-1 md:col-span-6 md:row-span-6 h-1 m-2 p-2 gap-2`}
+        } md:grid col-span-1 row-span-1 md:col-span-3 lg:col-span-4 md:row-span-4`}
       >
-        <div>
-          <ContentTitle>
-            <p>Surtir</p>
-            <ButtonIcon icon={<AiOutlinePlus size={22} />} />
-          </ContentTitle>
-        </div>
-        <div className="w-200 h-200">
-          <SuplyCards />
-        </div>
+        <ContentLeft
+          title="Suply"
+          element={
+            <div>
+              <ButtonIcon icon={<AiOutlinePlus size={22} />} />
+            </div>
+          }
+        >
+          <div className="grid gap-3 grid-col-2 col-span-1 md:col-span-2 lg:col-span-1 h-36 sm:h-24 ">
+            <CardSuply />
+          </div>
+        </ContentLeft>
       </div>
     </ContentGrid>
   );
