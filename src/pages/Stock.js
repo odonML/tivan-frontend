@@ -35,7 +35,7 @@ function Stock() {
   // form
   const onFinish = (values) => {
     // post -----------------------------
-    postProduct(values);
+    if(operation === "add") postProduct(values);
     console.log("Success:", values);
   };
 

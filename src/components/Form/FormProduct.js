@@ -119,9 +119,6 @@ function FormProduct({ onFinish, onFinishFailed, data, operation }) {
         <div className=" col-span-2 ">
           <InputForm type="number" label="Precio" nameInput="precio" />
         </div>
-        {/* <div className=" col-span-2 ">
-          <InputForm type="text" label="Fecha" nameInput="fechaCreacion" />
-        </div> */}
         <div className=" col-span-2 ">
           <InputForm
             type="text"
@@ -130,11 +127,26 @@ function FormProduct({ onFinish, onFinishFailed, data, operation }) {
           />
         </div>
 
-        <div className="col-span-2">
-          <ButtonText type={false} txColor="text-[#fff]">
-            Agregar
-          </ButtonText>
-        </div>
+        {operation === "add" ? (
+          <div className="col-span-2">
+            <ButtonText type={false} txColor="text-[#fff]">
+              Agregar
+            </ButtonText>
+          </div>
+        ) : (
+          <div className="col-span-2 flex justify-between">
+            <div className="col-span-1">
+              <ButtonText type={false} txColor="text-[#fff]">
+                Eliminar
+              </ButtonText>
+            </div>
+            <div className="col-span-1">
+              <ButtonText type={false} txColor="text-[#fff]">
+                Editar
+              </ButtonText>
+            </div>
+          </div>
+        )}
       </div>
     </Form>
   );
