@@ -4,9 +4,9 @@ import ButtonIcon from "./ButtonIcon";
 function Sidebar({ children, buttonsOfPages = [] }) {
   return (
     <div
-      className={` w-full h-14 py-2 bg-purple-1  flex items-center justify-between md:w-14 md:h-full md:py-1 md:flex-col`}
+      className={` w-full h-14 py-2 bg-purple-1  flex items-center justify-between lg:w-14 lg:h-full md:py-1 lg:flex-col`}
     >
-      <div className="w-full flex items-center justify-around md:flex-col-reverse md:gap-2 md:w-auto">
+      <div className="w-full flex items-center justify-around lg:flex-col-reverse md:gap-2 lg:w-auto">
         {buttonsOfPages.map((button) => (
           <div className="flex flex-col items-center justify-center">
             <ButtonIcon

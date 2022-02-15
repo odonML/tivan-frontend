@@ -1,3 +1,4 @@
+import "antd/dist/antd.css";
 import App from "App";
 import Demo from "components/Demo";
 import Login from "pages/auth/Login";

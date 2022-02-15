@@ -97,7 +97,7 @@ code {
 /* Custom Scroll */
 .custom-scroll::-webkit-scrollbar {
   width: 3px; /* width of the entire scrollbar */
-  margin: none  ;
+  margin: none;
 }
 .custom-scroll::-webkit-scrollbar-track {
   /* background: var(--purple-3); color of the tracking area */
