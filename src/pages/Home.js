@@ -39,6 +39,9 @@ function Home() {
           <div className="col-span-1 md:col-span-2 lg:col-span-1 h-24 sm:h-20 md:min-h-24 md:max-h-28 md:h-auto">
             <CardProduct />
           </div>
+          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-24 sm:h-20 md:min-h-24 md:max-h-28 md:h-auto">
+            <CardProduct />
+          </div>
         </ContentLeft>
       </div>
       <div
