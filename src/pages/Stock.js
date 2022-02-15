@@ -80,13 +80,6 @@ function Stock() {
 
   return (
     <ContentGrid>
-<<<<<<< HEAD
-      <div className="grid md:grid col-span-1 row-span-1 md:col-span-3 lg:col-span-4 md:row-span-4">
-        <ContentLeft title="Inventario" element={<ButtonIcon />}>
-          <div className="col-span-1 md:col-span-2 lg:col-span-1 h-36 sm:h-24">
-            <CardProduct />
-          </div>
-=======
       <div className="grid md:grid col-span-1 row-span-1 md:col-span-3 lg:col-span-6 md:row-span-4">
         <ContentLeft
           title="Inventario"
@@ -104,7 +97,6 @@ function Stock() {
               />
             </div>
           ))}
->>>>>>> develop
         </ContentLeft>
       </div>
 
