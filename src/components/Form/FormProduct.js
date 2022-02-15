@@ -98,40 +98,36 @@ function FormProduct({ onFinish, onFinishFailed, data, operation }) {
         </div>
 
         <div className=" col-span-2">
-          <InputForm type="text" label="Nombre" nameInput="nameProduct" />
+          <InputForm type="text" label="Nombre" nameInput="comun" />
         </div>
         <div className=" col-span-2">
-          <InputForm
-            type="text"
-            label="Nombre Clave"
-            nameInput="keyNameProduct"
-          />
+          <InputForm type="text" label="Nombre Clave" nameInput="clave" />
         </div>
-        <div className=" col-span-2">
-          <InputForm type="number" label="Piezas" nameInput="piecesProduct" />
+        <div className=" col-span-2 ">
+          <TextAreaForm label="Descripcion" nameInput="descripcion" />
         </div>
         <div className=" col-span-2 ">
           <InputForm
             type="number"
-            label="Minimo"
-            nameInput="minusPiecesProduct"
+            label="Piezas minimas"
+            nameInput="cantidadMinima"
           />
         </div>
-        <div className=" col-span-2 ">
-          <InputForm type="number" label="Precio" nameInput="priceProduct" />
+        <div className=" col-span-2">
+          <InputForm type="number" label="Piezas" nameInput="cantidad" />
         </div>
+        <div className=" col-span-2 ">
+          <InputForm type="number" label="Precio" nameInput="precio" />
+        </div>
+        {/* <div className=" col-span-2 ">
+          <InputForm type="text" label="Fecha" nameInput="fechaCreacion" />
+        </div> */}
         <div className=" col-span-2 ">
           <InputForm
             type="text"
-            label="Fecha"
-            nameInput="dateAddStockProduct"
+            label="Codigo de Barras"
+            nameInput="codigoBarras"
           />
-        </div>
-        <div className=" col-span-2 ">
-          <TextAreaForm label="Descripcion" nameInput="descriptionProduct" />
-        </div>
-        <div className=" col-span-2 ">
-          <InputForm type="text" label="Codigo de Barras" nameInput="barCode" />
         </div>
 
         <div className="col-span-2">

@@ -3,8 +3,8 @@ import React from "react";
 
 function InputForm({ type, label, nameInput, textCenter = false }) {
   const validations = {
-    nameProduct: { required: true, message: "El nombre es obligatorio" },
-    keyNameProduct: {
+    comun: { required: true, message: "El nombre es obligatorio" },
+    clave: {
       required: true,
       message: "El nombre clave es obligatorio",
     },

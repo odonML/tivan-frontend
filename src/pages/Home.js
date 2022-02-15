@@ -6,53 +6,26 @@ import ContentLeft from "components/shared/ContentLeft";
 import ContentRight from "components/shared/ContentRight";
 import ControlsShopping from "components/shared/ControlsShopping";
 import Search from "components/shared/Search";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import * as serviceProduct from "../services/product";
 
 function Home() {
   const [tab, setTab] = useState(1);
   const [carrito, setCarrito] = useState([]);
   const [productDuplicado, setProductDuplicado] = useState(false);
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      nameProduct: "sabritas",
-      keyNameProduct: "#SaSal",
-      descriptionProduct: "Papas con sal",
-      piecesProduct: 4,
-      priceProduct: 20.0,
-      img: "https://minisupersofy.webnode.es/_files/system_preview_detail_200000017-b9012b9fd7/Bolsa-Sabritas-Original.jpg",
-    },
-    {
-      id: 2,
-      nameProduct: "Sabritas Adobadas",
-      keyNameProduct: "#SaAdo",
-      descriptionProduct: "Papas con sal y picante",
-      piecesProduct: 10,
-      priceProduct: 10.0,
-      img: "https://minisupersofy.webnode.es/_files/system_preview_detail_200000017-b9012b9fd7/Bolsa-Sabritas-Original.jpg",
-    },
-    {
-      id: 3,
-      nameProduct: "Sabritas limon",
-      keyNameProduct: "#SaAdo",
-      descriptionProduct: "Papas con sal y picante",
-      piecesProduct: 10,
-      priceProduct: 10.0,
-      img: "https://minisupersofy.webnode.es/_files/system_preview_detail_200000017-b9012b9fd7/Bolsa-Sabritas-Original.jpg",
-    },
-  ]);
-
-  console.log(carrito);
+  const [products, setProducts] = useState([]);
+  
   const handleSearch = (e) => {
     console.log(e);
   };
+
   const deleteProductOfCar = (id) => {
-    const car = carrito.filter((product) => product.id !== id);
+    const car = carrito.filter((product) => product.idProducto !== id);
     setCarrito(car);
   };
 
   const addProductToCar = (id, product) => {
-    const existProduct = carrito.some((producto) => producto.id === id);
+    const existProduct = carrito.some((producto) => producto.idProducto === id);
     if (existProduct) {
       setProductDuplicado(true);
       setTimeout(() => {
@@ -61,6 +34,16 @@ function Home() {
     } else setCarrito([...carrito, product]);
   };
   // peticion a la API [{}, {}]
+
+  const getProducts = async () => {
+    const data = await serviceProduct.getProducts();
+    setProducts(data);
+    // console.log("data: ", data);
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
 
   return (
     <ContentGrid>
@@ -79,12 +62,14 @@ function Home() {
         >
           {products.map((product) => (
             <div
-              key={product.id}
+              key={product.idProducto}
               className="col-span-1 md:col-span-2 lg:col-span-1 h-auto md:max-h-28 md:h-auto"
             >
               <CardProduct
                 product={product}
-                addShoppingCard={() => addProductToCar(product.id, product)}
+                addShoppingCard={() =>
+                  addProductToCar(product.idProducto, product)
+                }
               />
             </div>
           ))}
@@ -107,12 +92,14 @@ function Home() {
           {carrito
             .map((product) => (
               <div
-                key={product.id}
+                key={product.idProducto}
                 className="col-span-1 h-auto sm:h-20 md:min-h-24 md:max-h-28 md:h-auto"
               >
                 <CardCarrito
                   product={product}
-                  actionDeleteOfCar={() => deleteProductOfCar(product.id)}
+                  actionDeleteOfCar={() =>
+                    deleteProductOfCar(product.idProducto)
+                  }
                 />
               </div>
             ))

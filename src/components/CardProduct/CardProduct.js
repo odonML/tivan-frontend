@@ -9,11 +9,11 @@ import Image from "../shared/Image";
 function CardProduct({
   product: {
     img = "",
-    nameProduct = "",
-    keyNameProduct = "",
-    descriptionProduct = "",
-    piecesProduct = 0,
-    priceProduct = 0,
+    comun = "",
+    clave = "",
+    descripcion = "",
+    cantidad = 0,
+    precio = 0,
   },
   addFavorite = null,
   addShoppingCard = null,
@@ -40,13 +40,13 @@ function CardProduct({
       </div>
       <div
         onClick={clickCard}
-        className="w-full h-full flex flex-col justify-center py-1"
+        className="w-full h-full flex flex-col justify-center py-1 cursor-pointer"
       >
-        <CardTitle text={nameProduct} />
-        <p className="text-xs">{keyNameProduct}</p>
-        <p className="text-xs">{descriptionProduct}</p>
-        <p className="text-xs">{piecesProduct} piezas</p>
-        <p className="text-lg">${priceProduct}</p>
+        <CardTitle text={comun} />
+        <p className="text-xs">{clave}</p>
+        <p className="text-xs">{descripcion}</p>
+        <p className="text-xs">{cantidad} piezas</p>
+        <p className="text-lg">${precio}</p>
       </div>
       <div className="absolute  bottom-0 right-0 m-1">
         {/* Shopping Car */}

@@ -5,16 +5,10 @@ import { IoTrashBinSharp } from "react-icons/io5";
 import Image from "../shared/Image";
 
 function CardCarrito({
-  product: {
-    img = "",
-    nameProduct = "",
-    keyNameProduct = "",
-    piecesProduct = 0,
-    priceProduct = 0,
-  },
+  product: { img = "", comun = "", clave = "", cantidad = 0, precio = 0 },
   actionDeleteOfCar = null,
 }) {
-  const [priceOfProduct, setPriceOfProduct] = useState(priceProduct);
+  const [priceOfProduct, setPriceOfProduct] = useState(precio);
   const [piecesForShop, setPiecesForShop] = useState(1);
 
   const handlePlus = () => {
@@ -25,7 +19,7 @@ function CardCarrito({
   };
 
   useEffect(() => {
-    setPriceOfProduct(priceProduct * piecesForShop);
+    setPriceOfProduct(precio * piecesForShop);
   }, [piecesForShop]);
 
   return (
@@ -39,10 +33,8 @@ function CardCarrito({
       </div>
       <div className="w-full h-full flex flex-col justify-between pl-1">
         <div className="flex flex-col">
-          <CardTitle text={nameProduct} />
-          <p className="text-sm sm:hidden md:block lg:block">
-            {keyNameProduct}
-          </p>
+          <CardTitle text={comun} />
+          <p className="text-sm sm:hidden md:block lg:block">{clave}</p>
         </div>
         <div className="flex flex-row items-start justify-between flex-wrap lg:flex-row lg:items-center ">
           <div>
