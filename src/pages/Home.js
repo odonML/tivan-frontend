@@ -28,7 +28,16 @@ function Home() {
       keyNameProduct: "#SaAdo",
       descriptionProduct: "Papas con sal y picante",
       piecesProduct: 10,
-      priceProduct: 20.0,
+      priceProduct: 10.0,
+      img: "https://minisupersofy.webnode.es/_files/system_preview_detail_200000017-b9012b9fd7/Bolsa-Sabritas-Original.jpg",
+    },
+    {
+      id: 3,
+      nameProduct: "Sabritas limon",
+      keyNameProduct: "#SaAdo",
+      descriptionProduct: "Papas con sal y picante",
+      piecesProduct: 10,
+      priceProduct: 10.0,
       img: "https://minisupersofy.webnode.es/_files/system_preview_detail_200000017-b9012b9fd7/Bolsa-Sabritas-Original.jpg",
     },
   ]);
@@ -41,6 +50,7 @@ function Home() {
     const car = carrito.filter((product) => product.id !== id);
     setCarrito(car);
   };
+
   const addProductToCar = (id, product) => {
     const existProduct = carrito.some((producto) => producto.id === id);
     if (existProduct) {
@@ -70,7 +80,7 @@ function Home() {
           {products.map((product) => (
             <div
               key={product.id}
-              className="col-span-1 md:col-span-2 lg:col-span-1 h-24 sm:h-20 md:min-h-24 md:max-h-28 md:h-auto"
+              className="col-span-1 md:col-span-2 lg:col-span-1 h-auto md:max-h-28 md:h-auto"
             >
               <CardProduct
                 product={product}
@@ -98,7 +108,7 @@ function Home() {
             .map((product) => (
               <div
                 key={product.id}
-                className="col-span-1 h-24 sm:h-20 md:min-h-24 md:max-h-28 md:h-auto"
+                className="col-span-1 h-auto sm:h-20 md:min-h-24 md:max-h-28 md:h-auto"
               >
                 <CardCarrito
                   product={product}
@@ -110,19 +120,17 @@ function Home() {
         </ContentRight>
       </div>
       {/* Hacer el tab en componentes */}
-      <div className=" absolute border bottom-0 w-full h-[5%] py-1 flex items-center justify-center lg:hidden">
-        <div className="flex w-2/3 text-white text-base">
-          <div className="w-full">
-            <button
-              type="button"
-              className={`w-full rounded-l-full ${
-                tab === 1 ? "bg-pink-0" : "bg-purple-0"
-              }`}
-              onClick={() => setTab(1)}
-            >
-              Favoritos
-            </button>
-          </div>
+      <div className=" absolute left-1/2 bottom-0 w-full h-[5%] py-4 lg:hidden">
+        <div className="flex w-2/3 md:h-[90%] text-white text-base">
+          <button
+            type="button"
+            className={`w-full  h-full rounded-l-full ${
+              tab === 1 ? "bg-pink-0" : "bg-purple-0"
+            }`}
+            onClick={() => setTab(1)}
+          >
+            Favoritos
+          </button>
 
           <div className="w-full">
             <button

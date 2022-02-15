@@ -1,28 +1,24 @@
 import { Form, Input } from "antd";
 import React from "react";
 
-function InputForm({
-  type,
-  value,
-  label,
-  nameInput,
-  validations = [],
-  textCenter = false,
-}) {
+function InputForm({ type, label, nameInput, textCenter = false }) {
+  const validations = {
+    nameProduct: { required: true, message: "El nombre es obligatorio" },
+    keyNameProduct: {
+      required: true,
+      message: "El nombre clave es obligatorio",
+    },
+  };
+  let validation;
+  if (nameInput in validations) validation = [validations[nameInput]];
+  else validation = [];
+
   return (
     <Form.Item
       className="mt-0 p-0 h-full"
       label={label}
       name={nameInput}
-      rules={
-        validations
-        // [
-        //   {
-        //     required: true,
-        //     message: "Campo obligatorio",
-        //   },
-        // ]
-      }
+      rules={validation}
     >
       <Input
         type={type}

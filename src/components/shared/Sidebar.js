@@ -8,7 +8,10 @@ function Sidebar({ children, buttonsOfPages = [] }) {
     >
       <div className="w-full flex items-center justify-around lg:flex-col-reverse md:gap-2 lg:w-auto">
         {buttonsOfPages.map((button) => (
-          <div className="flex flex-col items-center justify-center">
+          <div
+            key={button.id}
+            className="flex flex-col items-center justify-center"
+          >
             <ButtonIcon
               key={button.id}
               icon={button.icon}

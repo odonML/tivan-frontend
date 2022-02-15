@@ -6,7 +6,7 @@ function ContentLeft({
   children,
   title,
   element,
-  gridCols = "sm:grid-cols-2 2xl:grid-cols-4",
+  gridCols = "sm:grid-cols-2 2xl:grid-cols-2",
 }) {
   return (
     <Content>
@@ -15,7 +15,7 @@ function ContentLeft({
         {element}
       </ContentTitle>
       <div
-        className={`w-full max-h-[89%] lg:max-h-[92%] lg:h-auto py-1 px-2 grid grid-cols-1 ${gridCols} gap-2 overflow-y-scroll custom-scroll`}
+        className={` w-full max-h-[90%] lg:max-h-[92%] lg:h-auto py-1 px-2 pb-5 grid grid-cols-1 ${gridCols} gap-2 overflow-y-scroll custom-scroll`}
       >
         {children}
       </div>

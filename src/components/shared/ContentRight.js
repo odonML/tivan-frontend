@@ -11,7 +11,7 @@ function ContentRight({ children, title, element, controls }) {
       </ContentTitle>
       <div className={`${controls ? "h-[83%]" : "h-[90%]"} lg:h-[85%] `}>
         <div
-          className={` max-h-full h-auto py-1 px-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 2xl:grid-cols-2 gap-2 overflow-y-scroll custom-scroll`}
+          className={` border max-h-full h-auto py-1 px-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-2 overflow-y-scroll custom-scroll`}
         >
           {children}
         </div>

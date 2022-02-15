@@ -2,7 +2,7 @@ import ButtonCheckbox from "components/shared/ButtonCheckbox";
 import ButtonIcon from "components/shared/ButtonIcon";
 import React from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import { FaShoppingCart } from "react-icons/fa";
+import { MdOutlineAddShoppingCart } from "react-icons/md";
 import CardTitle from "../shared/CardTitle";
 import Image from "../shared/Image";
 
@@ -23,11 +23,10 @@ function CardProduct({
     <div
       className={` relative w-full h-full flex items-center justify-center bg-white rounded-lg shadow-md`}
     >
-      <div className=" relative w-36 sm:w-24 h-full flex items-center justify-center cursor-pointer">
+      <div className=" w-16 sm:w-20 h-full flex items-center justify-center cursor-pointer">
         <Image
           click={clickCard}
-          className="object-cover rounded-t-lg md:h-auto md:w-48
-          md:rounded-none md:rounded-l-lg"
+          className="object-cover rounded-t-lg md:rounded-none md:rounded-l-lg"
           img={img}
         />
         <div className="absolute bottom-0 left-0 m-1">
@@ -41,7 +40,7 @@ function CardProduct({
       </div>
       <div
         onClick={clickCard}
-        className="w-full h-full flex flex-col justify-center pl-1"
+        className="w-full h-full flex flex-col justify-center py-1"
       >
         <CardTitle text={nameProduct} />
         <p className="text-xs">{keyNameProduct}</p>
@@ -54,7 +53,7 @@ function CardProduct({
         <ButtonIcon
           bgColor="bg-yellow-0"
           txColor="text-purple-0"
-          icon={<FaShoppingCart size={22} />}
+          icon={<MdOutlineAddShoppingCart size={22} />}
           click={addShoppingCard}
         />
       </div>

@@ -1,6 +1,6 @@
 import CardTitle from "components/shared/CardTitle";
 import MinusPlusInput from "components/shared/MinusPlusInput";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoTrashBinSharp } from "react-icons/io5";
 import Image from "../shared/Image";
 
@@ -14,6 +14,20 @@ function CardCarrito({
   },
   actionDeleteOfCar = null,
 }) {
+  const [priceOfProduct, setPriceOfProduct] = useState(priceProduct);
+  const [piecesForShop, setPiecesForShop] = useState(1);
+
+  const handlePlus = () => {
+    setPiecesForShop(piecesForShop + 1);
+  };
+  const handleMinus = () => {
+    setPiecesForShop(piecesForShop - 1);
+  };
+
+  useEffect(() => {
+    setPriceOfProduct(priceProduct * piecesForShop);
+  }, [piecesForShop]);
+
   return (
     <div className="relative w-full h-full pr-6 p-1 flex items-center justify-center bg-white rounded-lg shadow-md">
       <div className="w-16 sm:w-20 h-full flex items-center justify-center">
@@ -26,16 +40,22 @@ function CardCarrito({
       <div className="w-full h-full flex flex-col justify-between pl-1">
         <div className="flex flex-col">
           <CardTitle text={nameProduct} />
-          <p className="text-sm md:hidden lg:block">{keyNameProduct}</p>
+          <p className="text-sm sm:hidden md:block lg:block">
+            {keyNameProduct}
+          </p>
         </div>
-        <div className="flex flex-row items-start justify-between md:flex-col lg:flex-row 2xl:flex-col lg:items-center ">
+        <div className="flex flex-row items-start justify-between flex-wrap lg:flex-row lg:items-center ">
           <div>
             <p className="text-base md:text-lg lg:text-base text-black">
-              ${priceProduct}
+              ${priceOfProduct}
             </p>
           </div>
-          <div className="w-24 sm:w-20 lg:w-24 border h-5">
-            <MinusPlusInput value={1} />
+          <div className="w-24 sm:w-20 lg:w-24 h-5">
+            <MinusPlusInput
+              callbackPlus={handlePlus}
+              callbackMinus={handleMinus}
+              value={piecesForShop}
+            />
           </div>
         </div>
       </div>
