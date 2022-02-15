@@ -32,42 +32,6 @@ function Suply() {
       description: "botana de papa con sal",
       tag: "#SASAL",
     },
-    {
-      imag: "https://minisupersofy.webnode.es/_files/system_preview_detail_200000017-b9012b9fd7/Bolsa-Sabritas-Original.jpg",
-      name: "Sabritas Original 45g",
-      description: "botana de papa con sal",
-      tag: "#SASAL",
-    },
-    {
-      imag: "https://minisupersofy.webnode.es/_files/system_preview_detail_200000017-b9012b9fd7/Bolsa-Sabritas-Original.jpg",
-      name: "Sabritas Original 45g",
-      description: "botana de papa con sal",
-      tag: "#SASAL",
-    },
-    {
-      imag: "https://minisupersofy.webnode.es/_files/system_preview_detail_200000017-b9012b9fd7/Bolsa-Sabritas-Original.jpg",
-      name: "Sabritas Original 45g",
-      description: "botana de papa con sal",
-      tag: "#SASAL",
-    },
-    {
-      imag: "https://minisupersofy.webnode.es/_files/system_preview_detail_200000017-b9012b9fd7/Bolsa-Sabritas-Original.jpg",
-      name: "Sabritas Original 45g",
-      description: "botana de papa con sal",
-      tag: "#SASAL",
-    },
-    {
-      imag: "https://minisupersofy.webnode.es/_files/system_preview_detail_200000017-b9012b9fd7/Bolsa-Sabritas-Original.jpg",
-      name: "Sabritas Original 45g",
-      description: "botana de papa con sal",
-      tag: "#SASAL",
-    },
-    {
-      imag: "https://minisupersofy.webnode.es/_files/system_preview_detail_200000017-b9012b9fd7/Bolsa-Sabritas-Original.jpg",
-      name: "Sabritas Original 45g",
-      description: "botana de papa con sal",
-      tag: "#SASAL",
-    },
   ];
 
   return (
@@ -75,7 +39,7 @@ function Suply() {
       <div
         className={`${
           tab === 1 ? "grid" : "hidden"
-        } md:grid col-span-1 row-span-1 md:col-span-3 lg:col-span-4 md:row-span-4`}
+        } grid col-span-1 md:col-span-3 lg:col-span-6 row-span-4 md:row-span-4`}
       >
         <ContentLeft
           title="Suply"

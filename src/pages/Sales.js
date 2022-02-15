@@ -16,62 +16,29 @@ function Sales() {
       <div
         className={`${
           tab === 1 ? "grid" : "hidden"
-        } grid md:grid col-span-1 row-span-1 md:col-span-3 lg:col-span-4 md:row-span-4`}
+        } grid md:grid col-span-1 row-span-1 md:col-span-3 lg:col-span-4 md:row-span-2`}
       >
         <ContentLeft
           title="Sales"
           element={
-            <div className="flex w-full justify-end py-1">
+            <div className="flex justify-end py-1">
               <ButtonIcon icon={<RiScissors2Line size={22} />} />
             </div>
           }
         >
-          <div className="col-span-1 md:col-span-2 lg:col-span-1">
+          <div className="col-span-1 md:col-span-2 lg:col-span-1 co-span-1">
             <CardTicket />
           </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-1">
+          <div className="col-span-1 md:col-span-2 lg:col-span-1 co-span-1">
             <CardTicket />
           </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-1">
+          <div className="col-span-1 md:col-span-2 lg:col-span-1 co-span-1">
             <CardTicket />
           </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-1">
+          <div className="col-span-1 md:col-span-2 lg:col-span-1 co-span-1">
             <CardTicket />
           </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-1">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-1">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-1">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-1">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-1">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-1">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-1">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-1">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-1">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-1">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-1">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-1">
+          <div className="col-span-1 md:col-span-2 lg:col-span-1 co-span-1">
             <CardTicket />
           </div>
         </ContentLeft>
