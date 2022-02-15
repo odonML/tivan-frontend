@@ -1,60 +1,59 @@
 import ButtonCheckbox from "components/shared/ButtonCheckbox";
 import ButtonIcon from "components/shared/ButtonIcon";
-import CardDescription from "components/shared/CardDescription";
 import React from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import { FaShoppingCart } from "react-icons/fa";
+import { MdOutlineAddShoppingCart } from "react-icons/md";
 import CardTitle from "../shared/CardTitle";
 import Image from "../shared/Image";
 
 function CardProduct({
-  img,
-  nameProduct,
-  descriptionProduct,
-  piecesProduct,
-  priceProduct,
-  addFavorite,
-  addShoppingCard,
-  clickCard,
+  product: {
+    img = "",
+    comun = "",
+    clave = "",
+    descripcion = "",
+    cantidad = 0,
+    precio = 0,
+  },
+  addFavorite = null,
+  addShoppingCard = null,
+  clickCard = null,
 }) {
   return (
     <div
       className={` relative w-full h-full flex items-center justify-center bg-white rounded-lg shadow-md`}
     >
-      <div
-        onClick={clickCard}
-        className="w-36 sm:w-24 h-full flex items-center justify-center cursor-pointer"
-      >
+      <div className=" w-16 sm:w-20 h-full flex items-center justify-center cursor-pointer">
         <Image
-          className="object-cover rounded-t-lg md:h-auto md:w-48
-          md:rounded-none md:rounded-l-lg"
-          img={
-            img ||
-            "https://minisupersofy.webnode.es/_files/system_preview_detail_200000017-b9012b9fd7/Bolsa-Sabritas-Original.jpg"
-          }
+          click={clickCard}
+          className="object-cover rounded-t-lg md:rounded-none md:rounded-l-lg"
+          img={img}
         />
+        <div className="absolute bottom-0 left-0 m-1">
+          {/* Favorite */}
+          <ButtonCheckbox
+            iconActive={<AiFillStar size={20} />}
+            iconNoActice={<AiOutlineStar size={20} />}
+            click={addFavorite}
+          />
+        </div>
       </div>
       <div
         onClick={clickCard}
-        className="w-full h-full flex flex-col justify-center pl-1"
+        className="w-full h-full flex flex-col justify-center py-1 cursor-pointer"
       >
-        <CardTitle text={nameProduct} />
-        <CardDescription text={descriptionProduct} />
-        <p className="text-xs">{piecesProduct}</p>
-        <p className="text-lg">{priceProduct}</p>
+        <CardTitle text={comun} />
+        <p className="text-xs">{clave}</p>
+        <p className="text-xs">{descripcion}</p>
+        <p className="text-xs">{cantidad} piezas</p>
+        <p className="text-lg">${precio}</p>
       </div>
-      <div className="absolute flex w-full bottom-0 p-1 justify-between">
-        {/* Favorite */}
-        <ButtonCheckbox
-          iconActive={<AiFillStar size={20} />}
-          iconNoActice={<AiOutlineStar size={20} />}
-          click={addFavorite}
-        />
+      <div className="absolute  bottom-0 right-0 m-1">
         {/* Shopping Car */}
         <ButtonIcon
           bgColor="bg-yellow-0"
           txColor="text-purple-0"
-          icon={<FaShoppingCart size={22} />}
+          icon={<MdOutlineAddShoppingCart size={22} />}
           click={addShoppingCard}
         />
       </div>

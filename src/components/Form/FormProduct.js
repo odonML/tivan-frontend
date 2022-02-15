@@ -1,6 +1,9 @@
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import { Form, Input, message, Upload } from "antd";
-import React, { useState } from "react";
+import { Form, message, Upload } from "antd";
+import ButtonText from "components/shared/ButtonText";
+import React, { useEffect, useState } from "react";
+import InputForm from "./InputForm";
+import TextAreaForm from "./TextAreaForm";
 
 function getBase64(img, callback) {
   const reader = new FileReader();
@@ -22,11 +25,12 @@ function beforeUpload(file) {
   return isJpgOrPng && isLt2M;
 }
 
-function FormProduct({ onFinish, onFinishFailed, data }) {
+function FormProduct({ onFinish, onFinishFailed, data, operation }) {
   const [load, setLoad] = useState({});
+  const [form] = Form.useForm();
 
   const handleChange = (info) => {
-    console.log(info.file.status);
+    // console.log(info.file.status);
     // Get this url from response in real world.
     getBase64(info.file.originFileObj, (imageUrl) =>
       setLoad({
@@ -36,9 +40,25 @@ function FormProduct({ onFinish, onFinishFailed, data }) {
     );
   };
   const { loading, imageUrl = "" } = load;
+
+  const loadProfile = () => {
+    // console.log("setting field value");
+    form.setFieldsValue(data);
+  };
+
+  const resetFields = () => {
+    form.resetFields();
+  };
+
+  useEffect(() => {
+    if (operation === "edit") loadProfile();
+    else resetFields();
+  }, [data]);
+
   return (
     <Form
-      className="w-full h-full"
+      form={form}
+      className=" w-full h-auto"
       name="basic"
       labelCol={{
         span: 8,
@@ -53,218 +73,82 @@ function FormProduct({ onFinish, onFinishFailed, data }) {
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-        <Upload
-          name="avatar"
-          listType="picture-card"
-          className="avatar-uploader"
-          showUploadList={false}
-          // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-          beforeUpload={beforeUpload}
-          onChange={handleChange}
-        >
-          {imageUrl ? (
-            <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
-          ) : (
-            <div>
-              {loading ? <LoadingOutlined /> : <PlusOutlined />}
-              <div style={{ marginTop: 8 }}>Upload</div>
-            </div>
-          )}
-        </Upload>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
+        <div className="col-span-2 flex items-center justify-center">
+          <Upload
+            listType="picture-card"
+            className="avatar-uploader"
+            showUploadList={false}
+            beforeUpload={beforeUpload}
+            onChange={handleChange}
+          >
+            {imageUrl ? (
+              <img
+                src={imageUrl || form.getFieldValue(["productImg"])}
+                alt="avatar"
+                style={{ width: "100%" }}
+              />
+            ) : (
+              <div>
+                {loading ? <LoadingOutlined /> : <PlusOutlined />}
+                <div style={{ marginTop: 8 }}>Upload</div>
+              </div>
+            )}
+          </Upload>
+        </div>
 
-        <div className=" col-span-2 border">
-          <Form.Item
-            className="mt-0 p-0 h-full flex flex-col"
-            label="Nombre"
-            name="name"
-            rules={[
-              {
-                required: true,
-                message: "Campo obligatorio",
-              },
-            ]}
-          >
-            <Input className="mb-0 max-w-full" />
-          </Form.Item>
+        <div className=" col-span-2">
+          <InputForm type="text" label="Nombre" nameInput="comun" />
         </div>
-        <div className="col-span-2 h-7">
-          <Form.Item
-            className="mt-0 h-full"
-            label="Nombre Clave"
-            name="keyName"
-            rules={[
-              {
-                required: true,
-                message: "Campo obligatorio",
-              },
-            ]}
-          >
-            <Input className="h-full ml-1" />
-          </Form.Item>
+        <div className=" col-span-2">
+          <InputForm type="text" label="Nombre Clave" nameInput="clave" />
         </div>
-        <div className="relative col-span-2 h-7 border">
-          <Form.Item
-            className="absolute mt-0 h-full"
-            label="Nombre"
-            name="name"
-            rules={[
-              {
-                required: true,
-                message: "Campo obligatorio",
-              },
-            ]}
-          >
-            <Input className="h-full" />
-          </Form.Item>
+        <div className=" col-span-2 ">
+          <TextAreaForm label="Descripcion" nameInput="descripcion" />
         </div>
-        <div className="relative col-span-2 h-7 border">
-          <Form.Item
-            className="absolute mt-0 h-full"
-            label="Nombre"
-            name="name"
-            rules={[
-              {
-                required: true,
-                message: "Campo obligatorio",
-              },
-            ]}
-          >
-            <Input className="h-full" />
-          </Form.Item>
+        <div className=" col-span-2 ">
+          <InputForm
+            type="number"
+            label="Piezas minimas"
+            nameInput="cantidadMinima"
+          />
         </div>
-        <div className="relative col-span-2 h-7 border">
-          <Form.Item
-            className="absolute mt-0 h-full"
-            label="Nombre"
-            name="name"
-            rules={[
-              {
-                required: true,
-                message: "Campo obligatorio",
-              },
-            ]}
-          >
-            <Input className="h-full" />
-          </Form.Item>
+        <div className=" col-span-2">
+          <InputForm type="number" label="Piezas" nameInput="cantidad" />
         </div>
-        <div className="relative col-span-2 h-7 border">
-          <Form.Item
-            className="absolute w-full mb-0 h-full"
-            name="name"
-            rules={[
-              {
-                required: true,
-                message: "Campo obligatorio",
-              },
-            ]}
-          >
-            <Input className="h-full w-full" placeholder="Nombre" size="5" />
-          </Form.Item>
+        <div className=" col-span-2 ">
+          <InputForm type="number" label="Precio" nameInput="precio" />
         </div>
+        <div className=" col-span-2 ">
+          <InputForm
+            type="text"
+            label="Codigo de Barras"
+            nameInput="codigoBarras"
+          />
+        </div>
+
+        {operation === "add" ? (
+          <div className="col-span-2">
+            <ButtonText type={false} txColor="text-[#fff]">
+              Agregar
+            </ButtonText>
+          </div>
+        ) : (
+          <div className="col-span-2 flex justify-between">
+            <div className="col-span-1">
+              <ButtonText type={false} txColor="text-[#fff]">
+                Eliminar
+              </ButtonText>
+            </div>
+            <div className="col-span-1">
+              <ButtonText type={false} txColor="text-[#fff]">
+                Editar
+              </ButtonText>
+            </div>
+          </div>
+        )}
       </div>
     </Form>
-    // <form className="w-full h-full" onSubmit={handleSubmit(onSubmit)}>
-    //   <div className="">
-    //     {/* IMAGE */}
-    //     <div className="col-span-2 h-24 py-2 bg-gray-2 rounded-lg">
-    //       <InputFile value="" nameInput="image" register={register} />
-    //       {/* <input type="file" ref={register} name="image" /> */}
-    //     </div>
-    //     {/* Nombre Producto */}
-    //     <div className="col-span-2">
-    //       <InputForm
-    //         type="text"
-    //         label="Nombre"
-    //         nameInput="nombre"
-    //         register={register}
-    //         value={dataProduct.name || ""}
-    //         // validations={{ required: true, min: 2 }}
-    //       />
-    //     </div>
-    //     {/* Nombre clave */}
-    //     <div className="col-span-2">
-    //       <InputForm
-    //         type="text"
-    //         label="Clave"
-    //         nameInput="keyName"
-    //         register={register}
-    //         value={dataProduct.keyName || ""}
-    //         // validations={{ required: true, min: 2 }}
-    //       />
-    //     </div>
-    //     {/* Piezas */}
-    //     <div className="col-span-1">
-    //       <InputForm
-    //         type="text"
-    //         label="Piezas"
-    //         nameInput="keyName"
-    //         register={register}
-    //         value={dataProduct.keyName || ""}
-    //         // validations={{ required: true, min: 2 }}
-    //       />
-    //     </div>
-    //     {/* Precio */}
-    //     <div className="col-span-1">
-    //       <InputForm
-    //         type="text"
-    //         label="Precio"
-    //         nameInput="keyName"
-    //         register={register}
-    //         value={dataProduct.keyName || ""}
-    //         // validations={{ required: true, min: 2 }}
-    //       />
-    //     </div>
-    //     {/* Minimo de piezas */}
-    //     <div className="col-span-1">
-    //       <InputForm
-    //         type="text"
-    //         label="Minimo"
-    //         nameInput="keyName"
-    //         register={register}
-    //         value={dataProduct.keyName || ""}
-    //         // validations={{ required: true, min: 2 }}
-    //       />
-    //     </div>
-    //     {/* Fecha */}
-    //     <div className="col-span-1">
-    //       <InputForm
-    //         type="text"
-    //         label="Fecha"
-    //         nameInput="keyName"
-    //         register={register}
-    //         value={dataProduct.keyName || ""}
-    //         // validations={{ required: true, min: 2 }}
-    //       />
-    //     </div>
-    //     {/* Descripcion */}
-    //     <div className="col-span-2">
-    //       <InputForm
-    //         type="text"
-    //         label="Descripcion"
-    //         nameInput="keyName"
-    //         register={register}
-    //         value={dataProduct.keyName || ""}
-    //         // validations={{ required: true, min: 2 }}
-    //       />
-    //     </div>
-    //     {/* Codigo de Barras */}
-    //     <div className="col-span-2">
-    //       <InputForm
-    //         type="text"
-    //         label="Codigo de barras"
-    //         textCenter={true}
-    //         nameInput="keyName"
-    //         register={register}
-    //         value={dataProduct.keyName || ""}
-    //         // validations={{ required: true, min: 2 }}
-    //       />
-    //     </div>
-    //     <div className="col-span-1">
-    //       <ButtonText type={false}>Enviar</ButtonText>
-    //     </div>
-    //   </div>
-    // </form>
   );
 }
 

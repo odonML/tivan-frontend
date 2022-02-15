@@ -14,35 +14,35 @@ function Layout() {
   const navigate = useNavigate();
   const buttonsOfPages = [
     {
-      id: "01",
+      id: "1",
       text: "Suply",
       icon: <HiViewGridAdd size={30} />,
       action: () => navigate(`suply`),
     },
     {
-      id: "02",
+      id: "2",
       text: "Ventas",
       icon: <MdAttachMoney size={30} />,
       action: () => navigate(`sales`),
     },
     {
-      id: "03",
+      id: "3",
       text: "Stock",
       icon: <AiOutlineDropbox size={30} />,
       action: () => navigate(`stock`),
     },
-    // {
-    //   id: "04",
-    //   text: "Carrito",
-    //   icon: <FaShoppingCart size={20} />,
-    //   action: () => console.log("Carrito"),
-    // },
     {
-      id: "05",
+      id: "4",
       text: "Home",
       icon: <MdHome size={29} />,
       action: () => navigate(`/home`),
     },
+    // {
+    //   id: "05",
+    //   text: "Carrito",
+    //   icon: <FaShoppingCart size={20} />,
+    //   action: () => console.log("Carrito"),
+    // },
   ];
 
   return (

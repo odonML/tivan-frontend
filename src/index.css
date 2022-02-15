@@ -107,3 +107,60 @@ code {
   /* border-radius: 20px; roundness of the scroll thumb */
   /* border: 1px solid orange; --- creates padding around scroll thumb */
 }
+
+/* Ant Design custom */
+/* drawer */
+/* .ant-drawer-content-wrapper {
+  width: 500px !important;
+} */
+.ant-drawer-wrapper-body {
+  position: relative;
+  justify-content: center;
+  background: #d3d3d3;
+}
+.ant-drawer-body {
+  flex-grow: 0;
+  margin: 5px;
+  margin-top: 0px;
+  padding: 6px;
+  border-radius: 12px;
+  height: auto !important;
+  background: #fff;
+  /* box-shadow: 1px 5px 9px 0px rgba(133, 133, 133, 0.75); */
+}
+.ant-drawer-header {
+  background: #d3d3d3;
+  padding: 5px;
+  padding-left: 15px;
+  border: none;
+}
+/* upload form */
+.ant-upload-picture-card-wrapper {
+  width: auto;
+}
+/* item form */
+.ant-form-item {
+  margin-bottom: 0px;
+}
+/* label form */
+.ant-form-item-label {
+  /* border: solid 1px black; */
+  width: auto;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+.ant-form-item-label.ant-col-8 {
+  width: 40%;
+  flex: none;
+}
+/* input form */
+.ant-input {
+  border: solid #d3d3d3 1px;
+  border-radius: 15px;
+}
+.ant-form-item-control.ant-col-16 {
+  max-width: none;
+  margin-top: 5px;
+}
