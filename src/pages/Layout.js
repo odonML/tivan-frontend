@@ -6,8 +6,8 @@ import Sidebar from "components/shared/Sidebar";
 import React from "react";
 import { AiOutlineDropbox } from "react-icons/ai";
 import { HiViewGridAdd } from "react-icons/hi";
-import { BsUpcScan, BsHouseDoorFill } from "react-icons/bs";
-import { MdAttachMoney } from "react-icons/md";
+import { BsUpcScan } from "react-icons/bs";
+import { MdAttachMoney, MdHome } from "react-icons/md";
 import { Outlet, useNavigate } from "react-router-dom";
 
 function Layout() {
@@ -34,7 +34,7 @@ function Layout() {
     {
       id: "4",
       text: "Home",
-      icon: <BsHouseDoorFill size={29} />,
+      icon: <MdHome size={29} />,
       action: () => navigate(`/home`),
     },
     // {
