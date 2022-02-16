@@ -4,9 +4,20 @@ const PATH = "productos";
 
 const getProducts = async () => {
   const response = await fetch(`${constants.API_URL}${PATH}`);
-
   return response.json();
 };
+
+const updateProduct = async (data, id) => {
+  const response = await fetch(`${constants.API_URL}${PATH}/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return response.json();
+};
+
 const postProduct = async (data) => {
   const d = new Date();
   const fecha = d.toISOString().split("T")[0];
@@ -27,4 +38,4 @@ const postProduct = async (data) => {
   return response.json();
 };
 
-export { getProducts, postProduct };
+export { getProducts, updateProduct, postProduct };
