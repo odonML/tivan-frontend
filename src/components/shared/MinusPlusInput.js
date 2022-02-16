@@ -1,46 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
-function MinusPlusInput({ callbackPlus, callbackMinus, value = 0 }) {
-  // const [piezas, setPiezas] = useState(value);
-
-  useEffect(() => {
-    // Peticion a la api
-    // console.log(typeof piezas);
-  }, []);
+function MinusPlusInput({ callback, id }) {
+  const [piezas, setPiezas] = useState(1);
 
   const handlePlus = () => {
-    callbackPlus();
+    setPiezas(piezas + 1);
+    callback({ piezas, id });
   };
   const handleMinus = () => {
-    callbackMinus();
-    // if (piezas > 0) {
-    //   setPiezas(piezas - 1);
-    // }
+    if (piezas > 1) {
+      setPiezas(piezas - 1);
+    }
+    callback({ piezas, id });
   };
-  // const handleWrite = (e) => {
-  //   const data = Number(e.target.value);
-  //   if (!isNaN(data)) setPiezas(data);
-  // };
+
+  const handleWrite = (e) => {
+    const data = Number(e.target.value);
+    if (!isNaN(data) && data >= 1) setPiezas(data);
+    callback({ piezas, id });
+  };
+
+  useEffect(() => {
+    callback({ piezas, id });
+  }, [piezas]);
+
   return (
     <div className="h-full flex rounded-full text-sm md:text-lg lg:text-xl">
       <button
         className="w-1/4 h-full flex items-center justify-center  rounded-l-full bg-purple-0 text-white"
         type="button"
-        onClick={handlePlus}
+        onClick={() => handlePlus()}
       >
         <AiOutlinePlus />
       </button>
       <input
         className="w-2/4 h-full px-1 flex items-center justify-center text-sm appearance-none outline-none"
         type="text"
-        value={value}
-        // onChange={handleWrite}
+        value={piezas}
+        onChange={handleWrite}
       />
       <button
         className="w-1/4 h-full flex items-center justify-center  rounded-r-full bg-purple-0 text-white"
         type="button"
-        onClick={handleMinus}
+        onClick={() => handleMinus()}
       >
         <AiOutlineMinus />
       </button>

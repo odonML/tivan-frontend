@@ -1,4 +1,3 @@
-import { Alert } from "antd";
 import CardCarrito from "components/CardCarrito/CardCarrito";
 import CardProduct from "components/CardProduct/CardProduct";
 import ContentGrid from "components/shared/ContentGrid";
@@ -11,29 +10,60 @@ import * as serviceProduct from "../services/product";
 
 function Home() {
   const [tab, setTab] = useState(1);
-  const [carrito, setCarrito] = useState([]);
-  const [productDuplicado, setProductDuplicado] = useState(false);
+  // const [productDuplicado, setProductDuplicado] = useState(false);
+  const [carrito, setCarrito] = useState({});
   const [products, setProducts] = useState([]);
-  
+
+  const handleCaptureDataPieces = ({ piezas, id }) => {
+    console.log("Capture Data Of Pieces: ", piezas, id);
+    const newCarrito = { ...carrito };
+    newCarrito[id].cantidadCarrito = piezas;
+    setCarrito(newCarrito);
+  };
+
   const handleSearch = (e) => {
     console.log(e);
   };
 
   const deleteProductOfCar = (id) => {
-    const car = carrito.filter((product) => product.idProducto !== id);
-    setCarrito(car);
+    const newCarrito = { ...carrito };
+    if (delete newCarrito[id]) setCarrito(newCarrito);
   };
 
   const addProductToCar = (id, product) => {
-    const existProduct = carrito.some((producto) => producto.idProducto === id);
-    if (existProduct) {
-      setProductDuplicado(true);
-      setTimeout(() => {
-        setProductDuplicado(false);
-      }, 2000);
-    } else setCarrito([...carrito, product]);
+    setCarrito({
+      ...carrito,
+      [id]: {
+        ...product,
+        cantidadCarrito: 1,
+        totalPricesByProduct: product.precio,
+      },
+    });
+
+    // const existProduct = carrito.some((producto) => producto.idProducto === id);
+    // if (existProduct) {
+    //   setProductDuplicado(true);
+    //   setTimeout(() => {
+    //     setProductDuplicado(false);
+    //   }, 2000);
+    // } else
   };
-  // peticion a la API [{}, {}]
+
+  const showProductsListCarrito = () =>
+    Object.values(carrito)
+      .map((product) => (
+        <div
+          key={product.idProducto}
+          className="col-span-1 h-auto sm:h-20 md:min-h-24 md:max-h-28 md:h-auto"
+        >
+          <CardCarrito
+            product={product}
+            actionDeleteOfCar={() => deleteProductOfCar(product.idProducto)}
+            handleCapture={handleCaptureDataPieces}
+          />
+        </div>
+      ))
+      .reverse();
 
   const getProducts = async () => {
     const data = await serviceProduct.getProducts();
@@ -45,6 +75,11 @@ function Home() {
     getProducts();
   }, []);
 
+  useEffect(() => {
+    showProductsListCarrito();
+  }, [carrito]);
+
+  console.log(carrito);
   return (
     <ContentGrid>
       <div
@@ -84,26 +119,13 @@ function Home() {
           title="Carrito"
           controls={<ControlsShopping></ControlsShopping>}
         >
-          {productDuplicado ? (
+          {/* volver el alerta un componente con el setTimeout */}
+          {/* {productDuplicado ? (
             <Alert message="Success Text" type="success" />
           ) : (
             ""
-          )}
-          {carrito
-            .map((product) => (
-              <div
-                key={product.idProducto}
-                className="col-span-1 h-auto sm:h-20 md:min-h-24 md:max-h-28 md:h-auto"
-              >
-                <CardCarrito
-                  product={product}
-                  actionDeleteOfCar={() =>
-                    deleteProductOfCar(product.idProducto)
-                  }
-                />
-              </div>
-            ))
-            .reverse()}
+          )} */}
+          {showProductsListCarrito()}
         </ContentRight>
       </div>
       {/* Hacer el tab en componentes */}
