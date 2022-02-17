@@ -19,7 +19,7 @@ function Home() {
   const handleCaptureDataPieces = ({ piezas, id }) => {
     const newCarrito = { ...carrito };
     const { precio } = newCarrito[id];
-    newCarrito[id].cantidadCarrito = piezas;
+    newCarrito[id].amountProductByCar = piezas;
     newCarrito[id].totalPricesByProduct = precio * piezas;
     setCarrito(newCarrito);
     setTotalCarrito({
@@ -42,7 +42,7 @@ function Home() {
       ...carrito,
       [id]: {
         ...product,
-        cantidadCarrito: 1,
+        amountProductByCar: 1,
         totalPricesByProduct: product.precio,
       },
     });
@@ -84,6 +84,25 @@ function Home() {
   const getProducts = async () => {
     const data = await serviceProduct.getProducts();
     setProducts(data);
+  };
+
+  const paymendListShoppingCar = () => {
+    const total = getCostoTotal();
+
+    const productos = Object.values(carrito).map(
+      ({ idProducto, amountProductByCar, totalPricesByProduct }) => ({
+        idProducto,
+        amountProductByCar,
+        totalPricesByProduct,
+      })
+    );
+    const objListShoppingCar = {
+      method: metodoPago,
+      totalPorPagar: total,
+      products: productos,
+    };
+    // hacer post -------------------------------------
+    console.log(objListShoppingCar);
   };
 
   useEffect(() => {
@@ -133,6 +152,7 @@ function Home() {
           title="Carrito"
           controls={
             <ControlsShopping
+              actionPaymend={paymendListShoppingCar}
               selectAction={selectMethodPaymend}
               costoTotal={getCostoTotal()}
             ></ControlsShopping>

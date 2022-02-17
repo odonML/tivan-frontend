@@ -11,7 +11,6 @@ function CardCarrito({
     comun = "",
     clave = "",
     totalPricesByProduct,
-    cantidadCarrito,
   },
   actionDeleteOfCar = null,
   handleCapture = null,

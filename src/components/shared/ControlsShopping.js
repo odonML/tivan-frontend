@@ -7,8 +7,8 @@ import Select from "./Select";
 function ControlsShopping({
   bgColor = "bg-white",
   reverse = false,
-  actionBtnLeft = null,
-  actionBtnRight = null,
+  actionScan = null,
+  actionPaymend = null,
   selectAction = null,
   costoTotal = 0,
 }) {
@@ -22,7 +22,7 @@ function ControlsShopping({
         reverse ? "flex-row-reverse" : "flex-row"
       } ${bgColor}`}
     >
-      <ButtonIcon icon={<BsUpcScan size={20} />} click={actionBtnLeft} />
+      <ButtonIcon icon={<BsUpcScan size={20} />} click={actionScan} />
       <div className="w-full px-1 flex items-center justify-between">
         <div className="w-auto max-w-20 mx-2 ">
           <Select msj="Pago" options={metodos} action={selectAction} />
@@ -31,7 +31,7 @@ function ControlsShopping({
           <p className="text-lg text">${costoTotal}</p>
         </div>
       </div>
-      <ButtonIcon icon={<MdAttachMoney size={20} />} click={actionBtnRight} />
+      <ButtonIcon icon={<MdAttachMoney size={20} />} click={actionPaymend} />
     </div>
   );
 }
