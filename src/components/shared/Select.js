@@ -9,14 +9,14 @@ function Select({
   action = null,
 }) {
   const handleChange = (e) => {
-    if (action != null) action(e);
+    if (action != null) action(e.target.value);
   };
   return (
     <div className={` w-full relative flex items-center`}>
       <select
         id={id}
         name={selectName}
-        className={`w-full appearance-none border border-purple-1 px-3 pr-10 bg-gray-3 focus:bg-gray-3 focus:outline-none rounded-full text-base md:text-lg lg:text-xl `}
+        className={`w-full appearance-none text-purple-0 border border-purple-1 px-2 pr-5 bg-gray-3 focus:bg-gray-3 focus:outline-none rounded-full text-base md:text-base `}
         defaultValue={0}
         onChange={(e) => handleChange(e)}
       >

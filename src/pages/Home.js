@@ -10,15 +10,22 @@ import * as serviceProduct from "../services/product";
 
 function Home() {
   const [tab, setTab] = useState(1);
+  const [products, setProducts] = useState([]);
   // const [productDuplicado, setProductDuplicado] = useState(false);
   const [carrito, setCarrito] = useState({});
-  const [products, setProducts] = useState([]);
+  const [totalCarrito, setTotalCarrito] = useState({});
+  const [metodoPago, setMetodoPago] = useState("");
 
   const handleCaptureDataPieces = ({ piezas, id }) => {
-    console.log("Capture Data Of Pieces: ", piezas, id);
     const newCarrito = { ...carrito };
+    const { precio } = newCarrito[id];
     newCarrito[id].cantidadCarrito = piezas;
+    newCarrito[id].totalPricesByProduct = precio * piezas;
     setCarrito(newCarrito);
+    setTotalCarrito({
+      ...totalCarrito,
+      [id]: newCarrito[id].totalPricesByProduct,
+    });
   };
 
   const handleSearch = (e) => {
@@ -39,7 +46,6 @@ function Home() {
         totalPricesByProduct: product.precio,
       },
     });
-
     // const existProduct = carrito.some((producto) => producto.idProducto === id);
     // if (existProduct) {
     //   setProductDuplicado(true);
@@ -48,6 +54,16 @@ function Home() {
     //   }, 2000);
     // } else
   };
+
+  const selectMethodPaymend = (methodPaymend) => {
+    setMetodoPago(methodPaymend);
+  };
+
+  const getCostoTotal = () =>
+    Object.values(totalCarrito).reduce(
+      (acumulador, valor) => acumulador + valor,
+      0
+    );
 
   const showProductsListCarrito = () =>
     Object.values(carrito)
@@ -68,7 +84,6 @@ function Home() {
   const getProducts = async () => {
     const data = await serviceProduct.getProducts();
     setProducts(data);
-    // console.log("data: ", data);
   };
 
   useEffect(() => {
@@ -79,7 +94,6 @@ function Home() {
     showProductsListCarrito();
   }, [carrito]);
 
-  console.log(carrito);
   return (
     <ContentGrid>
       <div
@@ -117,7 +131,12 @@ function Home() {
       >
         <ContentRight
           title="Carrito"
-          controls={<ControlsShopping></ControlsShopping>}
+          controls={
+            <ControlsShopping
+              selectAction={selectMethodPaymend}
+              costoTotal={getCostoTotal()}
+            ></ControlsShopping>
+          }
         >
           {/* volver el alerta un componente con el setTimeout */}
           {/* {productDuplicado ? (

@@ -33,7 +33,7 @@ function CardCarrito({
         <div className="flex flex-row items-start justify-between flex-wrap lg:flex-row lg:items-center ">
           <div>
             <p className="text-base md:text-lg lg:text-base text-black">
-              ${totalPricesByProduct * cantidadCarrito}
+              ${totalPricesByProduct}
             </p>
           </div>
           <div className="w-24 sm:w-20 lg:w-24 h-5">

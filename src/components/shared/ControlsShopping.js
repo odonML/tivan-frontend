@@ -10,8 +10,12 @@ function ControlsShopping({
   actionBtnLeft = null,
   actionBtnRight = null,
   selectAction = null,
-  selectOptions = [],
+  costoTotal = 0,
 }) {
+  const metodos = [
+    { id: 1, value: "Efectivo" },
+    { id: 2, value: "Tarjeta" },
+  ];
   return (
     <div
       className={`w-full h-full p-1 rounded-full flex items-center ${
@@ -19,8 +23,13 @@ function ControlsShopping({
       } ${bgColor}`}
     >
       <ButtonIcon icon={<BsUpcScan size={20} />} click={actionBtnLeft} />
-      <div className="w-full px-2 flex items-center">
-        <Select msj="hola" options={selectOptions} action={selectAction} />
+      <div className="w-full px-1 flex items-center justify-between">
+        <div className="w-auto max-w-20 mx-2 ">
+          <Select msj="Pago" options={metodos} action={selectAction} />
+        </div>
+        <div className="mx-2">
+          <p className="text-lg text">${costoTotal}</p>
+        </div>
       </div>
       <ButtonIcon icon={<MdAttachMoney size={20} />} click={actionBtnRight} />
     </div>
