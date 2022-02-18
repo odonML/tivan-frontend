@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
-function MinusPlusInput({ callback, id }) {
-  const [piezas, setPiezas] = useState(1);
+function MinusPlusInput({ callback, id, value = 1 }) {
+  const [piezas, setPiezas] = useState(value);
 
   const handlePlus = () => {
     setPiezas(piezas + 1);
