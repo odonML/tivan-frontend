@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { AiOutlinePlus } from "react-icons/ai";
+// import { AiOutlinePlus } from "react-icons/ai";
 import ContentGrid from "../components/shared/ContentGrid";
 import CardSuply from "../components/CardSuply/CardSuply";
 import ContentLeft from "../components/shared/ContentLeft";
-import ButtonIcon from "../components/shared/ButtonIcon";
+// import ButtonIcon from "../components/shared/ButtonIcon";
+import Search from "../components/shared/Search";
 import * as serviceProduct from "../services/product";
+import ButtonText from "../components/shared/ButtonText";
 
 function Suply() {
   const [tab] = useState(1);
   const [suply, setSuply] = useState([]);
+
+  const handleSearch = (e) => {
+    console.log(e);
+  };
+
   const getProducts = async () => {
     const data = await serviceProduct.getProducts();
     setSuply(data);
@@ -32,8 +39,11 @@ function Suply() {
           title="Suply"
           element={
             <div>
-              <ButtonIcon icon={<AiOutlinePlus size={22} />} />
+              <Search handleSearch={handleSearch} />
             </div>
+            /* <div>
+            <ButtonIcon icon={<AiOutlinePlus size={22} />} />
+          </div> */
           }
         >
           {suply.map((product) => (
@@ -45,6 +55,9 @@ function Suply() {
             </div>
           ))}
         </ContentLeft>
+        <div className="flex w-40 justify-self-end m-3">
+          <ButtonText>To Suply</ButtonText>
+        </div>
       </div>
     </ContentGrid>
   );
