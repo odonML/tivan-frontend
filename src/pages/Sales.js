@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RiScissors2Line } from "react-icons/ri";
 import ContentLeft from "components/shared/ContentLeft";
 import ContentRight from "components/shared/ContentRight";
@@ -6,10 +6,19 @@ import CardTicket from "../components/CardTicket/CardTicket";
 import ContentGrid from "../components/shared/ContentGrid";
 import ButtonIcon from "../components/shared/ButtonIcon";
 import TicketDetails from "../components/sub-pages/TicketDetails";
+import * as serviceSales from "../services/sales";
 
 function Sales() {
   const [tab, setTab] = useState(1);
-  // const [dataProduct, setDataProduct] = useState();
+  const [sales, setSales] = useState([]);
+  const getTickets = async () => {
+    const data = await serviceSales.getTickets();
+    setSales(data);
+  };
+  useEffect(() => {
+    getTickets();
+  }, []);
+  console.log(sales);
 
   return (
     <ContentGrid
@@ -22,130 +31,24 @@ function Sales() {
         } grid col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-4 row-span-4`}
       >
         <ContentLeft
-          title="Sales"
-          element={
-            <div className="flex justify-end py-1">
-              <ButtonIcon
-                click={() => console.log("corte de caja")}
-                icon={<RiScissors2Line size={22} />}
-              />
-            </div>
-          }
+          title="Ventas"
+          // element={
+          //   <div className="flex justify-end py-1">
+          //     <ButtonIcon
+          //       click={() => console.log("corte de caja")}
+          //       icon={<RiScissors2Line size={22} />}
+          //     />
+          //   </div>
+          // }
         >
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <CardTicket />
-          </div>
+          {sales.map((ticket) => (
+            <div
+              key={ticket.idOrden}
+              className="col-span-1 md:col-span-1 lg:col-span-1"
+            >
+              <CardTicket ticket={ticket} />
+            </div>
+          ))}
         </ContentLeft>
       </div>
       <div
@@ -154,12 +57,12 @@ function Sales() {
         } lg:grid lg:col-span-2 md:row-span-4`}
       >
         <ContentRight title="Ticket">
-          <div className="col-span-2 h-full">
+          {/* <div className="col-span-2 h-full">
             <TicketDetails />
-          </div>
+          </div> */}
         </ContentRight>
       </div>
-      <div className=" absolute border bottom-0 w-full h-[5%] py-1 flex items-center justify-center lg:hidden">
+      <div className=" absolute bottom-0 w-full h-[5%] py-1 flex items-center justify-center lg:hidden">
         <div className="flex w-2/3 text-white text-base">
           <div className="w-full">
             <button
