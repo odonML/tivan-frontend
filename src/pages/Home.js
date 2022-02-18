@@ -113,6 +113,8 @@ function Home() {
     showProductsListCarrito();
   }, [carrito]);
 
+  console.log(carrito);
+
   return (
     <ContentGrid>
       <div
