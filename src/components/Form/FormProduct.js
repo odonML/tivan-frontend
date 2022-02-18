@@ -25,7 +25,13 @@ function beforeUpload(file) {
   return isJpgOrPng && isLt2M;
 }
 
-function FormProduct({ onFinish, onFinishFailed, data, operation }) {
+function FormProduct({
+  onFinish,
+  onFinishFailed,
+  deleteProduct,
+  data,
+  operation,
+}) {
   const [load, setLoad] = useState({});
   const [form] = Form.useForm();
 
@@ -136,7 +142,12 @@ function FormProduct({ onFinish, onFinishFailed, data, operation }) {
         ) : (
           <div className="col-span-2 flex justify-between">
             <div className="col-span-1">
-              <ButtonText type={false} txColor="text-[#fff]">
+              <ButtonText
+                type={true}
+                bgColor="bg-pink-0"
+                txColor="text-[#fff]"
+                click={deleteProduct}
+              >
                 Eliminar
               </ButtonText>
             </div>

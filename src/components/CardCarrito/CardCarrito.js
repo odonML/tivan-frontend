@@ -1,27 +1,20 @@
 import CardTitle from "components/shared/CardTitle";
 import MinusPlusInput from "components/shared/MinusPlusInput";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { IoTrashBinSharp } from "react-icons/io5";
 import Image from "../shared/Image";
 
 function CardCarrito({
-  product: { img = "", comun = "", clave = "", cantidad = 0, precio = 0 },
+  product: {
+    idProducto,
+    img = "",
+    comun = "",
+    clave = "",
+    totalPricesByProduct,
+  },
   actionDeleteOfCar = null,
+  handleCapture = null,
 }) {
-  const [priceOfProduct, setPriceOfProduct] = useState(precio);
-  const [piecesForShop, setPiecesForShop] = useState(1);
-
-  const handlePlus = () => {
-    setPiecesForShop(piecesForShop + 1);
-  };
-  const handleMinus = () => {
-    setPiecesForShop(piecesForShop - 1);
-  };
-
-  useEffect(() => {
-    setPriceOfProduct(precio * piecesForShop);
-  }, [piecesForShop]);
-
   return (
     <div className="relative w-full h-full pr-6 p-1 flex items-center justify-center bg-white rounded-lg shadow-md">
       <div className="w-16 sm:w-20 h-full flex items-center justify-center">
@@ -39,14 +32,14 @@ function CardCarrito({
         <div className="flex flex-row items-start justify-between flex-wrap lg:flex-row lg:items-center ">
           <div>
             <p className="text-base md:text-lg lg:text-base text-black">
-              ${priceOfProduct}
+              ${totalPricesByProduct}
             </p>
           </div>
           <div className="w-24 sm:w-20 lg:w-24 h-5">
             <MinusPlusInput
-              callbackPlus={handlePlus}
-              callbackMinus={handleMinus}
-              value={piecesForShop}
+              callback={handleCapture}
+              id={idProducto}
+              // value={piecesForShop}
             />
           </div>
         </div>

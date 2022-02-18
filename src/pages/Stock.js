@@ -6,17 +6,28 @@ import ContentGrid from "components/shared/ContentGrid";
 import ContentLeft from "components/shared/ContentLeft";
 import React, { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
 import * as serviceProduct from "../services/product";
 
 function Stock() {
-  const navigate = useNavigate();
   const [dataProduct, setDataProduct] = useState();
   const [operation, setOperation] = useState("add");
   const [products, setProducts] = useState([]);
 
   // drawer
   const [visible, setVisible] = useState(false);
+
+  const postProduct = async (data) => {
+    await serviceProduct.postProduct(data);
+  };
+  const updateProduct = async (data, id) => {
+    const response = await serviceProduct.updateProduct(data, id);
+    console.log(response);
+  };
+  const getProducts = async () => {
+    const data = await serviceProduct.getProducts();
+    setProducts(data);
+  };
+
   const showDrawer = (op) => {
     setVisible(true);
     setOperation(op);
@@ -25,18 +36,15 @@ function Stock() {
     setVisible(false);
     setDataProduct({});
     setOperation("add");
+    getProducts();
   };
 
-  const postProduct = async (data) => {
-    await serviceProduct.postProduct(data);
-    navigate("/home");
-    navigate("/home/stock");
-  };
   // form
   const onFinish = (values) => {
     // post -----------------------------
-    if(operation === "add") postProduct(values);
-    console.log("Success:", values);
+    if (operation === "add") postProduct(values);
+    else updateProduct(values, dataProduct.idProducto);
+    onClose();
   };
 
   // form error
@@ -44,9 +52,8 @@ function Stock() {
     console.log("Failed:", errorInfo);
   };
 
-  const getProducts = async () => {
-    const data = await serviceProduct.getProducts();
-    setProducts(data);
+  const onDeleteWithForm = () => {
+    console.log("delete", dataProduct);
   };
 
   useEffect(() => {
@@ -92,6 +99,7 @@ function Stock() {
         <FormProduct
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
+          deleteProduct={onDeleteWithForm}
           operation={operation}
           data={dataProduct}
         />

@@ -1,4 +1,3 @@
-import { Alert } from "antd";
 import CardCarrito from "components/CardCarrito/CardCarrito";
 import CardProduct from "components/CardProduct/CardProduct";
 import ContentGrid from "components/shared/ContentGrid";
@@ -11,46 +10,115 @@ import * as serviceProduct from "../services/product";
 
 function Home() {
   const [tab, setTab] = useState(1);
-  const [carrito, setCarrito] = useState([]);
-  const [productDuplicado, setProductDuplicado] = useState(false);
   const [products, setProducts] = useState([]);
-  
+  // const [productDuplicado, setProductDuplicado] = useState(false);
+  const [carrito, setCarrito] = useState({});
+  const [totalCarrito, setTotalCarrito] = useState({});
+  const [metodoPago, setMetodoPago] = useState("");
+
+  const handleCaptureDataPieces = ({ piezas, id }) => {
+    const newCarrito = { ...carrito };
+    const { precio } = newCarrito[id];
+    newCarrito[id].amountProductByCar = piezas;
+    newCarrito[id].totalPricesByProduct = precio * piezas;
+    setCarrito(newCarrito);
+    setTotalCarrito({
+      ...totalCarrito,
+      [id]: newCarrito[id].totalPricesByProduct,
+    });
+  };
+
   const handleSearch = (e) => {
     console.log(e);
   };
 
   const deleteProductOfCar = (id) => {
-    const car = carrito.filter((product) => product.idProducto !== id);
-    setCarrito(car);
+    const newCarrito = { ...carrito };
+    if (delete newCarrito[id]) setCarrito(newCarrito);
   };
 
   const addProductToCar = (id, product) => {
-    const existProduct = carrito.some((producto) => producto.idProducto === id);
-    if (existProduct) {
-      setProductDuplicado(true);
-      setTimeout(() => {
-        setProductDuplicado(false);
-      }, 2000);
-    } else setCarrito([...carrito, product]);
+    setCarrito({
+      ...carrito,
+      [id]: {
+        ...product,
+        amountProductByCar: 1,
+        totalPricesByProduct: product.precio,
+      },
+    });
+    // const existProduct = carrito.some((producto) => producto.idProducto === id);
+    // if (existProduct) {
+    //   setProductDuplicado(true);
+    //   setTimeout(() => {
+    //     setProductDuplicado(false);
+    //   }, 2000);
+    // } else
   };
-  // peticion a la API [{}, {}]
+
+  const selectMethodPaymend = (methodPaymend) => {
+    setMetodoPago(methodPaymend);
+  };
+
+  const getCostoTotal = () =>
+    Object.values(totalCarrito).reduce(
+      (acumulador, valor) => acumulador + valor,
+      0
+    );
+
+  const showProductsListCarrito = () =>
+    Object.values(carrito)
+      .map((product) => (
+        <div
+          key={product.idProducto}
+          className="col-span-1 h-auto sm:h-20 md:min-h-24 md:max-h-28 md:h-auto"
+        >
+          <CardCarrito
+            product={product}
+            actionDeleteOfCar={() => deleteProductOfCar(product.idProducto)}
+            handleCapture={handleCaptureDataPieces}
+          />
+        </div>
+      ))
+      .reverse();
 
   const getProducts = async () => {
     const data = await serviceProduct.getProducts();
     setProducts(data);
-    // console.log("data: ", data);
+  };
+
+  const paymendListShoppingCar = () => {
+    const total = getCostoTotal();
+
+    const productos = Object.values(carrito).map(
+      ({ idProducto, amountProductByCar, totalPricesByProduct }) => ({
+        idProducto,
+        amountProductByCar,
+        totalPricesByProduct,
+      })
+    );
+    const objListShoppingCar = {
+      method: metodoPago,
+      totalPorPagar: total,
+      products: productos,
+    };
+    // hacer post -------------------------------------
+    console.log(objListShoppingCar);
   };
 
   useEffect(() => {
     getProducts();
   }, []);
 
+  useEffect(() => {
+    showProductsListCarrito();
+  }, [carrito]);
+
   return (
     <ContentGrid>
       <div
         className={`${
           tab === 1 ? "grid" : "hidden"
-        } lg:grid col-span-1 row-span-1 lg:col-span-4 md:row-span-4`}
+        } lg:grid col-span-6 row-span-1 lg:col-span-4 md:row-span-4`}
       >
         <ContentLeft
           title="Favoritos"
@@ -77,52 +145,46 @@ function Home() {
       </div>
       <div
         className={` ${
-          tab === 2 ? "grid col-span-1 row-span-1" : "hidden"
+          tab === 2 ? "grid col-span-6 row-span-1" : "hidden"
         } lg:grid md:col-span-3 lg:col-span-2 md:row-span-4`}
       >
         <ContentRight
           title="Carrito"
-          controls={<ControlsShopping></ControlsShopping>}
+          controls={
+            <ControlsShopping
+              actionPaymend={paymendListShoppingCar}
+              selectAction={selectMethodPaymend}
+              costoTotal={getCostoTotal()}
+            ></ControlsShopping>
+          }
         >
-          {productDuplicado ? (
+          {/* volver el alerta un componente con el setTimeout */}
+          {/* {productDuplicado ? (
             <Alert message="Success Text" type="success" />
           ) : (
             ""
-          )}
-          {carrito
-            .map((product) => (
-              <div
-                key={product.idProducto}
-                className="col-span-1 h-auto sm:h-20 md:min-h-24 md:max-h-28 md:h-auto"
-              >
-                <CardCarrito
-                  product={product}
-                  actionDeleteOfCar={() =>
-                    deleteProductOfCar(product.idProducto)
-                  }
-                />
-              </div>
-            ))
-            .reverse()}
+          )} */}
+          {showProductsListCarrito()}
         </ContentRight>
       </div>
       {/* Hacer el tab en componentes */}
-      <div className=" absolute left-1/2 bottom-0 w-full h-[5%] py-4 lg:hidden">
-        <div className="flex w-2/3 md:h-[90%] text-white text-base">
-          <button
-            type="button"
-            className={`w-full  h-full rounded-l-full ${
-              tab === 1 ? "bg-pink-0" : "bg-purple-0"
-            }`}
-            onClick={() => setTab(1)}
-          >
-            Favoritos
-          </button>
-
-          <div className="w-full">
+      <div className=" absolute flex items-center justify-center bottom-2 w-full h-[5%] lg:hidden">
+        <div className="flex px-6 w-full h-full  text-white text-base">
+          <div className="w-full h-full border border-pink-0">
             <button
               type="button"
-              className={`w-full rounded-r-full ${
+              className={`w-full h-full px-2 flex items-center justify-center rounded-l-full ${
+                tab === 1 ? "bg-pink-0" : "bg-purple-0"
+              }`}
+              onClick={() => setTab(1)}
+            >
+              <p>Favoritos</p>
+            </button>
+          </div>
+          <div className="w-full h-full border border-pink-0">
+            <button
+              type="button"
+              className={`w-full h-full px-2 flex items-center justify-center  rounded-r-full ${
                 tab === 2 ? "bg-pink-0" : "bg-purple-0"
               }`}
               onClick={() => setTab(2)}
