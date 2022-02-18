@@ -36,7 +36,7 @@ function Suply() {
         } grid col-span-1 md:col-span-6 lg:col-span-6 row-span-4`}
       >
         <ContentLeft
-          title="Suply"
+          title="Surtir"
           element={
             <div>
               <Search handleSearch={handleSearch} />
@@ -56,7 +56,7 @@ function Suply() {
           ))}
         </ContentLeft>
         <div className="flex w-40 justify-self-end m-3">
-          <ButtonText>To Suply</ButtonText>
+          <ButtonText>Surtir</ButtonText>
         </div>
       </div>
     </ContentGrid>

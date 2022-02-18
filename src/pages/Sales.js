@@ -31,15 +31,15 @@ function Sales() {
         } grid col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-4 row-span-4`}
       >
         <ContentLeft
-          title="Sales"
-          element={
-            <div className="flex justify-end py-1">
-              <ButtonIcon
-                click={() => console.log("corte de caja")}
-                icon={<RiScissors2Line size={22} />}
-              />
-            </div>
-          }
+          title="Ventas"
+          // element={
+          //   <div className="flex justify-end py-1">
+          //     <ButtonIcon
+          //       click={() => console.log("corte de caja")}
+          //       icon={<RiScissors2Line size={22} />}
+          //     />
+          //   </div>
+          // }
         >
           {sales.map((ticket) => (
             <div
@@ -62,7 +62,7 @@ function Sales() {
           </div> */}
         </ContentRight>
       </div>
-      <div className=" absolute border bottom-0 w-full h-[5%] py-1 flex items-center justify-center lg:hidden">
+      <div className=" absolute bottom-0 w-full h-[5%] py-1 flex items-center justify-center lg:hidden">
         <div className="flex w-2/3 text-white text-base">
           <div className="w-full">
             <button
