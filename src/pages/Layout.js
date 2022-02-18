@@ -5,8 +5,8 @@ import Navbar from "components/shared/Navbar";
 import Sidebar from "components/shared/Sidebar";
 import React from "react";
 import { AiOutlineDropbox } from "react-icons/ai";
-import { HiViewGridAdd } from "react-icons/hi";
 import { BsUpcScan } from "react-icons/bs";
+import { HiViewGridAdd } from "react-icons/hi";
 import { MdAttachMoney, MdHome } from "react-icons/md";
 import { Outlet, useNavigate } from "react-router-dom";
 
@@ -61,6 +61,7 @@ function Layout() {
             {/* <ButtonIcon icon={<BiSearchAlt2 size={20} />} /> */}
           </div>
         </Sidebar>
+
         <Container alingItems="items-start" justifyContent="justify-start">
           <Outlet />
         </Container>

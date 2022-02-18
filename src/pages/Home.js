@@ -168,22 +168,23 @@ function Home() {
         </ContentRight>
       </div>
       {/* Hacer el tab en componentes */}
-      <div className=" absolute flex items-center justify-center bottom-0 w-full h-[5%] py-4 lg:hidden">
-        <div className="flex w-2/3 md:h-[90%] text-white text-base">
-          <button
-            type="button"
-            className={`w-full rounded-l-full ${
-              tab === 1 ? "bg-pink-0" : "bg-purple-0"
-            }`}
-            onClick={() => setTab(1)}
-          >
-            Favoritos
-          </button>
-
-          <div className="w-full">
+      <div className=" absolute flex items-center justify-center bottom-2 w-full h-[5%] lg:hidden">
+        <div className="flex px-6 w-full h-full  text-white text-base">
+          <div className="w-full h-full border border-pink-0">
             <button
               type="button"
-              className={`w-full rounded-r-full ${
+              className={`w-full h-full px-2 flex items-center justify-center rounded-l-full ${
+                tab === 1 ? "bg-pink-0" : "bg-purple-0"
+              }`}
+              onClick={() => setTab(1)}
+            >
+              <p>Favoritos</p>
+            </button>
+          </div>
+          <div className="w-full h-full border border-pink-0">
+            <button
+              type="button"
+              className={`w-full h-full px-2 flex items-center justify-center  rounded-r-full ${
                 tab === 2 ? "bg-pink-0" : "bg-purple-0"
               }`}
               onClick={() => setTab(2)}
