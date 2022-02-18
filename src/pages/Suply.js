@@ -49,7 +49,7 @@ function Suply() {
           {suply.map((product) => (
             <div
               key={product.idProducto}
-              className="grid gap-3 grid-col-1 sm:grid-col-2 col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-1 h-24"
+              className="grid gap-3 grid-col-1 sm:grid-col-2 col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-1 h-24 m-2"
             >
               <CardSuply productSuply={product} />
             </div>
