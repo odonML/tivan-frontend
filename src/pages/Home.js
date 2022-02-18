@@ -118,7 +118,7 @@ function Home() {
       <div
         className={`${
           tab === 1 ? "grid" : "hidden"
-        } lg:grid col-span-1 row-span-1 lg:col-span-4 md:row-span-4`}
+        } lg:grid col-span-6 row-span-1 lg:col-span-4 md:row-span-4`}
       >
         <ContentLeft
           title="Favoritos"
@@ -145,7 +145,7 @@ function Home() {
       </div>
       <div
         className={` ${
-          tab === 2 ? "grid col-span-1 row-span-1" : "hidden"
+          tab === 2 ? "grid col-span-6 row-span-1" : "hidden"
         } lg:grid md:col-span-3 lg:col-span-2 md:row-span-4`}
       >
         <ContentRight
@@ -168,11 +168,11 @@ function Home() {
         </ContentRight>
       </div>
       {/* Hacer el tab en componentes */}
-      <div className=" absolute left-1/2 bottom-0 w-full h-[5%] py-4 lg:hidden">
+      <div className=" absolute flex items-center justify-center bottom-0 w-full h-[5%] py-4 lg:hidden">
         <div className="flex w-2/3 md:h-[90%] text-white text-base">
           <button
             type="button"
-            className={`w-full  h-full rounded-l-full ${
+            className={`w-full rounded-l-full ${
               tab === 1 ? "bg-pink-0" : "bg-purple-0"
             }`}
             onClick={() => setTab(1)}
