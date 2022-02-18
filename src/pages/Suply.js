@@ -11,6 +11,9 @@ import ButtonText from "../components/shared/ButtonText";
 function Suply() {
   const [tab] = useState(1);
   const [suply, setSuply] = useState([]);
+  const handleCaptureDataPieces = ({ id, piezas }) => {
+    console.log("suplyId", id, piezas);
+  };
 
   const handleSearch = (e) => {
     console.log(e);
@@ -24,6 +27,10 @@ function Suply() {
     getProducts();
   }, []);
   console.log(suply);
+  // 1- filtrar comparando el minimo de piezas con las piezas actuales
+  // 2- crear un estado donde tendre mis productos filtrados
+  // 3- renderizar las cards en el estado que tiene el filtrado
+  // * usar metodo filter *
 
   return (
     <ContentGrid
@@ -49,15 +56,18 @@ function Suply() {
           {suply.map((product) => (
             <div
               key={product.idProducto}
-              className="grid gap-3 grid-col-1 sm:grid-col-2 col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-1 h-24 m-2"
+              className="grid grid-col-1 sm:grid-col-2 col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-1 h-24 m-2"
             >
-              <CardSuply productSuply={product} />
+              <CardSuply
+                productSuply={product}
+                handleCapture={handleCaptureDataPieces}
+              />
             </div>
           ))}
+          <div className="flex w-40 justify-self-end m-5 col-span-1 sm:col-span-2">
+            <ButtonText>Surtir</ButtonText>
+          </div>
         </ContentLeft>
-        <div className="flex w-40 justify-self-end m-3">
-          <ButtonText>Surtir</ButtonText>
-        </div>
       </div>
     </ContentGrid>
   );

@@ -5,7 +5,14 @@ import Image from "../shared/Image";
 import MinusPlusInput from "../shared/MinusPlusInput";
 
 function CardSuply({
-  productSuply: { comun = "", descripcion = "", clave = "" },
+  productSuply: {
+    idProducto,
+    comun = "",
+    descripcion = "",
+    clave = "",
+    cantidadMinima = "",
+  },
+  handleCapture,
 }) {
   return (
     <div className="relative w-full h-full pr-6 p-1 flex items-center justify-center bg-white rounded-lg shadow-md">
@@ -21,10 +28,16 @@ function CardSuply({
           <CardTitle text={comun} />
           <CardDescription text={descripcion} />
           <p>{clave}</p>
+          <p>minimo de piezas: {cantidadMinima}</p>
         </div>
         <div className="flex justify-end">
           <div className="w-24 sm:w-20 h-5">
-            <MinusPlusInput />
+            <MinusPlusInput
+              callback={handleCapture}
+              id={idProducto}
+              value={0}
+              minValue={0}
+            />
           </div>
         </div>
       </div>

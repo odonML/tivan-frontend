@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
-function MinusPlusInput({ callback, id, value = 1 }) {
+function MinusPlusInput({ callback, id, value = 1, minValue = 1 }) {
   const [piezas, setPiezas] = useState(value);
 
   const handlePlus = () => {
@@ -9,7 +9,7 @@ function MinusPlusInput({ callback, id, value = 1 }) {
     callback({ piezas, id });
   };
   const handleMinus = () => {
-    if (piezas > 1) {
+    if (piezas > minValue) {
       setPiezas(piezas - 1);
     }
     callback({ piezas, id });
@@ -17,7 +17,7 @@ function MinusPlusInput({ callback, id, value = 1 }) {
 
   const handleWrite = (e) => {
     const data = Number(e.target.value);
-    if (!isNaN(data) && data >= 1) setPiezas(data);
+    if (!isNaN(data) && data >= minValue) setPiezas(data);
     callback({ piezas, id });
   };
 

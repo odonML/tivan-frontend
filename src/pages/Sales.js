@@ -57,9 +57,7 @@ function Sales() {
         } lg:grid lg:col-span-2 md:row-span-4`}
       >
         <ContentRight title="Ticket">
-          {/* <div className="col-span-2 h-full">
-            <TicketDetails />
-          </div> */}
+          <div className="col-span-2 h-full">{/* <TicketDetails /> */}</div>
         </ContentRight>
       </div>
       <div className=" absolute bottom-0 w-full h-[5%] py-1 flex items-center justify-center lg:hidden">
