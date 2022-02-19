@@ -11,10 +11,18 @@ import * as serviceProduct from "../services/product";
 function Home() {
   const [tab, setTab] = useState(1);
   const [products, setProducts] = useState([]);
-  // const [productDuplicado, setProductDuplicado] = useState(false);
+  const [searchResult, setSearchResult] = useState([]);
   const [carrito, setCarrito] = useState({});
   const [totalCarrito, setTotalCarrito] = useState({});
   const [metodoPago, setMetodoPago] = useState("");
+
+  const getProducts = async () => {
+    const allData = await serviceProduct.getProducts();
+    const data = allData.filter((product) => product.eliminar === 0);
+    const favoritos = data.filter((product) => product.favorito === 1);
+    setSearchResult(data);
+    setProducts(favoritos);
+  };
 
   const handleCaptureDataPieces = ({ piezas, id }) => {
     const newCarrito = { ...carrito };
@@ -28,13 +36,13 @@ function Home() {
     });
   };
 
-  const handleSearch = (e) => {
-    console.log(e);
-  };
-
   const deleteProductOfCar = (id) => {
     const newCarrito = { ...carrito };
-    if (delete newCarrito[id]) setCarrito(newCarrito);
+    const newTotalCarrito = { ...totalCarrito };
+    if (delete newCarrito[id] && delete newTotalCarrito[id]) {
+      setCarrito(newCarrito);
+      setTotalCarrito(newTotalCarrito);
+    }
   };
 
   const addProductToCar = (id, product) => {
@@ -46,6 +54,7 @@ function Home() {
         totalPricesByProduct: product.precio,
       },
     });
+
     // const existProduct = carrito.some((producto) => producto.idProducto === id);
     // if (existProduct) {
     //   setProductDuplicado(true);
@@ -81,14 +90,8 @@ function Home() {
       ))
       .reverse();
 
-  const getProducts = async () => {
-    const data = await serviceProduct.getProducts();
-    setProducts(data);
-  };
-
   const paymendListShoppingCar = () => {
     const total = getCostoTotal();
-
     const productos = Object.values(carrito).map(
       ({ idProducto, amountProductByCar, totalPricesByProduct }) => ({
         idProducto,
@@ -105,6 +108,17 @@ function Home() {
     console.log(objListShoppingCar);
   };
 
+  const handleSearch = (valueSearch) => {
+    if (valueSearch === "") getProducts();
+    const valueSearchLowerCase = valueSearch.toLowerCase();
+    const productsSearch = searchResult.filter(
+      (product) =>
+        product.comun.toLowerCase().includes(valueSearchLowerCase) ||
+        product.clave.toLowerCase().includes(valueSearchLowerCase)
+    );
+    setProducts(productsSearch);
+  };
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -113,7 +127,7 @@ function Home() {
     showProductsListCarrito();
   }, [carrito]);
 
-  console.log(carrito);
+  console.log(searchResult);
 
   return (
     <ContentGrid>
@@ -137,6 +151,7 @@ function Home() {
             >
               <CardProduct
                 product={product}
+                addFavorite={(e) => console.log(e)}
                 addShoppingCard={() =>
                   addProductToCar(product.idProducto, product)
                 }
