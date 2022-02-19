@@ -62,14 +62,6 @@ function Home() {
         totalPricesByProduct: product.precio,
       },
     });
-
-    // const existProduct = carrito.some((producto) => producto.idProducto === id);
-    // if (existProduct) {
-    //   setProductDuplicado(true);
-    //   setTimeout(() => {
-    //     setProductDuplicado(false);
-    //   }, 2000);
-    // } else
   };
 
   const selectMethodPaymend = (methodPaymend) => {
@@ -142,7 +134,7 @@ function Home() {
       <div
         className={`${
           tab === 1 ? "grid" : "hidden"
-        } lg:grid col-span-6 row-span-1 lg:col-span-4 md:row-span-4`}
+        } col-span-6 lg:grid  row-span-1 lg:col-span-4 md:row-span-4`}
       >
         <ContentLeft
           title="Favoritos"
@@ -193,9 +185,22 @@ function Home() {
         </ContentRight>
       </div>
       {/* Hacer el tab en componentes */}
-      <div className=" absolute flex items-center justify-center bottom-2 w-full h-[5%] lg:hidden">
-        <div className="flex px-6 w-full h-full  text-white text-base">
-          <div className="w-full h-full border border-pink-0">
+
+      <div className=" absolute flex items-center justify-center bottom-0 w-full h-[5%] py-4 lg:hidden">
+        <div className="flex w-2/3 md:h-[90%] text-white text-base">
+          <div className="w-full">
+            <button
+              type="button"
+              className={`w-full rounded-l-full ${
+                tab === 1 ? "bg-pink-0" : "bg-purple-0"
+              }`}
+              onClick={() => setTab(1)}
+            >
+              Favoritos
+            </button>
+          </div>
+
+          <div className="w-full">
             <button
               type="button"
               className={`w-full h-full px-2 flex items-center justify-center rounded-l-full ${
