@@ -1,3 +1,4 @@
+import { Alert } from "antd";
 import CardCarrito from "components/CardCarrito/CardCarrito";
 import CardProduct from "components/CardProduct/CardProduct";
 import ContentGrid from "components/shared/ContentGrid";
@@ -9,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import * as serviceProduct from "../services/product";
 
 function Home() {
+  const [productDuplicado, setProductDuplicado] = useState(false);
   const [tab, setTab] = useState(1);
   const [products, setProducts] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
@@ -46,6 +48,12 @@ function Home() {
   };
 
   const addProductToCar = (id, product) => {
+    if (id in carrito) {
+      setProductDuplicado(true);
+      setTimeout(() => {
+        setProductDuplicado(false);
+      }, 2000);
+    }
     setCarrito({
       ...carrito,
       [id]: {
@@ -176,11 +184,11 @@ function Home() {
           }
         >
           {/* volver el alerta un componente con el setTimeout */}
-          {/* {productDuplicado ? (
-            <Alert message="Success Text" type="success" />
+          {productDuplicado ? (
+            <Alert message="El producto ya fue agregado" type="error" />
           ) : (
             ""
-          )} */}
+          )}
           {showProductsListCarrito()}
         </ContentRight>
       </div>
