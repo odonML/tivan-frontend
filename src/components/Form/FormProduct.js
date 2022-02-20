@@ -5,26 +5,6 @@ import React, { useEffect, useState } from "react";
 import InputForm from "./InputForm";
 import TextAreaForm from "./TextAreaForm";
 
-function getBase64(img, callback) {
-  const reader = new FileReader();
-  reader.addEventListener("load", () => callback(reader.result));
-  reader.readAsDataURL(img);
-}
-
-function beforeUpload(file) {
-  // VALIDACIONES de formato
-  const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-  if (!isJpgOrPng) {
-    message.error("You can only upload JPG/PNG file!");
-  }
-  // VALIDACIONES de tamaño
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
-    message.error("Image must smaller than 2MB!");
-  }
-  return isJpgOrPng && isLt2M;
-}
-
 function FormProduct({
   onFinish,
   onFinishFailed,
@@ -34,6 +14,27 @@ function FormProduct({
 }) {
   const [load, setLoad] = useState({});
   const [form] = Form.useForm();
+
+  const getBase64 = (img, callback) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(img);
+    reader.addEventListener("load", () => callback(reader.result));
+  };
+
+  const beforeUpload = (file) => {
+    // VALIDACIONES de formato
+    const isValidFormat =
+      file.type === "image/jpeg" || file.type === "image/png";
+    if (!isValidFormat) {
+      message.error("You can only upload JPG/PNG file!");
+    }
+    // VALIDACIONES de tamaño
+    const isValidSize = file.size / 1024 / 1024 < 2;
+    if (!isValidSize) {
+      message.error("Image must smaller than 2MB!");
+    }
+    return isValidFormat && isValidSize;
+  };
 
   const handleChange = (info) => {
     // console.log(info.file.status);
@@ -75,7 +76,7 @@ function FormProduct({
       initialValues={{
         remember: true,
       }}
-      onFinish={onFinish}
+      onFinish={(values) => onFinish(values, load.imageUrl)}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
@@ -83,7 +84,6 @@ function FormProduct({
         <div className="col-span-2 flex items-center justify-center">
           <Upload
             listType="picture-card"
-            className="avatar-uploader"
             showUploadList={false}
             beforeUpload={beforeUpload}
             onChange={handleChange}
@@ -92,7 +92,7 @@ function FormProduct({
               <img
                 src={imageUrl || form.getFieldValue(["productImg"])}
                 alt="avatar"
-                style={{ width: "100%" }}
+                className="w-auto max-h-full border"
               />
             ) : (
               <div>

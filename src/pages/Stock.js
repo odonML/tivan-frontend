@@ -40,10 +40,13 @@ function Stock() {
   };
 
   // form
-  const onFinish = (values) => {
+  const onFinish = (values, image) => {
+    // const vals = values;
+    const obj = { ...values, image };
+    console.log("form data", obj);
     // post -----------------------------
-    if (operation === "add") postProduct(values);
-    else updateProduct(values, dataProduct.idProducto);
+    // if (operation === "add") postProduct(values);
+    // else updateProduct(values, dataProduct.idProducto);
     onClose();
   };
 
