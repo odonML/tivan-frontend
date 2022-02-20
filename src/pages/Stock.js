@@ -44,6 +44,7 @@ function Stock() {
     // post -----------------------------
     if (operation === "add") postProduct(values);
     else updateProduct(values, dataProduct.idProducto);
+    console.log(values);
     onClose();
   };
 

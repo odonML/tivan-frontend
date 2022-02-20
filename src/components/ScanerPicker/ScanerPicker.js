@@ -12,23 +12,23 @@ const configScan = configure(
   }
 );
 
-function ScanerPicker({ scanProps, code }) {
+function ScanerPicker({ scanProps }) {
   const {
-    visible,
-    playSoundOnScan,
-    vibrateOnScan,
-    scanningPaused,
-    guiStyle,
-    videoFit,
-    scanSettings,
-    enableCameraSwitcher,
-    enableTorchToggle = true,
-    enableTapToFocus,
-    enablePinchToZoom,
-    accessCamera,
-    camera,
-    cameraSettings,
-    targetScanningFPS,
+    // visible,
+    // playSoundOnScan,
+    // vibrateOnScan,
+    // scanningPaused,
+    // guiStyle,
+    // videoFit,
+    // scanSettings,
+    // enableCameraSwitcher,
+    // enableTorchToggle = true,
+    // enableTapToFocus,
+    // enablePinchToZoom,
+    // accessCamera,
+    // camera,
+    // cameraSettings,
+    // targetScanningFPS,
     onScan,
     onError,
   } = scanProps;
@@ -54,7 +54,6 @@ function ScanerPicker({ scanProps, code }) {
 
   return (
     <div className="w-full">
-      <p>{code}</p>
       <div ref={ref} />
     </div>
   );

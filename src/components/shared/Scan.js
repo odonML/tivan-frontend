@@ -1,10 +1,8 @@
 import ScanerPicker from "components/ScanerPicker/ScanerPicker";
-import React, { useState } from "react";
+import React from "react";
 import { ScanSettings } from "scandit-sdk";
 
-function Scan() {
-  const [code, setCode] = useState();
-
+function Scan({ getCodeDetected }) {
   // configuracion de deteccion del scaner
   const configScan = {
     enabledSymbologies: [
@@ -22,12 +20,12 @@ function Scan() {
   };
   // cuando se logre escaner de manera correcta pasara esot
   const runScaner = (scanResult) => {
-    console.log("resultados", scanResult.barcodes);
+    // console.log("resultados", scanResult.barcodes);
     const scaningDetected = scanResult.barcodes.reduce(
       (string, barcode) => barcode.data,
       ""
     );
-    setCode(scaningDetected);
+    getCodeDetected(scaningDetected);
   };
   // cuando ocurra un erro en el escaner pasara esto
   const errorScaner = (error) => {
@@ -43,8 +41,8 @@ function Scan() {
     onError: errorScaner,
   };
   return (
-    <div className="w-[50%]">
-      <ScanerPicker scanProps={scanProps} code={code} />
+    <div className="w-[90%]">
+      <ScanerPicker scanProps={scanProps} />
     </div>
   );
 }

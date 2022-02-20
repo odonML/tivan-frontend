@@ -5,18 +5,30 @@ import ContentGrid from "components/shared/ContentGrid";
 import ContentLeft from "components/shared/ContentLeft";
 import ContentRight from "components/shared/ContentRight";
 import ControlsShopping from "components/shared/ControlsShopping";
+import Modal from "components/shared/Modal";
+import Scan from "components/shared/Scan";
 import Search from "components/shared/Search";
 import React, { useEffect, useState } from "react";
 import * as serviceProduct from "../services/product";
 
 function Home() {
-  const [productDuplicado, setProductDuplicado] = useState(false);
-  const [tab, setTab] = useState(1);
   const [products, setProducts] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
   const [carrito, setCarrito] = useState({});
   const [totalCarrito, setTotalCarrito] = useState({});
+
+  const [tab, setTab] = useState(1);
   const [metodoPago, setMetodoPago] = useState("");
+  const [productDuplicado, setProductDuplicado] = useState(false);
+  const [visibleModal, setVisibleModal] = useState(false);
+
+  const showModal = () => {
+    setVisibleModal(true);
+  };
+
+  const closeModal = () => {
+    setVisibleModal(false);
+  };
 
   const getProducts = async () => {
     const allData = await serviceProduct.getProducts();
@@ -48,6 +60,8 @@ function Home() {
   };
 
   const addProductToCar = (id, product) => {
+    console.log("add === ", id, product);
+
     if (id in carrito) {
       setProductDuplicado(true);
       setTimeout(() => {
@@ -119,6 +133,15 @@ function Home() {
     setProducts(productsSearch);
   };
 
+  const getCodeDetected = (barCode) => {
+    const [productDetected] = products.filter(
+      (product) => product.codigoBarras === Number(barCode)
+    );
+    const { idProducto } = productDetected;
+    addProductToCar(idProducto, productDetected);
+    console.log(productDetected);
+  };
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -172,6 +195,7 @@ function Home() {
               actionPaymend={paymendListShoppingCar}
               selectAction={selectMethodPaymend}
               costoTotal={getCostoTotal()}
+              actionScan={showModal}
             ></ControlsShopping>
           }
         >
@@ -182,24 +206,19 @@ function Home() {
             ""
           )}
           {showProductsListCarrito()}
+          {visibleModal ? (
+            <Modal closeModal={closeModal}>
+              <Scan getCodeDetected={getCodeDetected} />
+            </Modal>
+          ) : (
+            ""
+          )}
         </ContentRight>
       </div>
       {/* Hacer el tab en componentes */}
 
       <div className=" absolute flex items-center justify-center bottom-0 w-full h-[5%] py-4 lg:hidden">
         <div className="flex w-2/3 md:h-[90%] text-white text-base">
-          <div className="w-full">
-            <button
-              type="button"
-              className={`w-full rounded-l-full ${
-                tab === 1 ? "bg-pink-0" : "bg-purple-0"
-              }`}
-              onClick={() => setTab(1)}
-            >
-              Favoritos
-            </button>
-          </div>
-
           <div className="w-full">
             <button
               type="button"

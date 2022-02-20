@@ -15,7 +15,7 @@ function ContentLeft({
         {element}
       </ContentTitle>
       <div
-        className={` w-full md:h-[50%] max-h-[90%] lg:max-h-[92%] lg:h-auto py-1 px-2 pb-5 grid grid-cols-1 ${gridCols} gap-2 overflow-y-scroll custom-scroll`}
+        className={` w-full h-auto max-h-[90%] lg:max-h-[92%] lg:h-auto py-1 px-2 pb-5 grid grid-cols-1 ${gridCols} gap-2 overflow-y-scroll custom-scroll`}
       >
         {children}
       </div>
