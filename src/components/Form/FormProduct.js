@@ -13,13 +13,14 @@ function FormProduct({
   operation,
 }) {
   const [load, setLoad] = useState({});
+  const [image, setImage] = useState("");
   const [form] = Form.useForm();
 
-  const getBase64 = (img, callback) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(img);
-    reader.addEventListener("load", () => callback(reader.result));
-  };
+  // const getBase64 = (img, callback) => {
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(img);
+  //   reader.addEventListener("load", () => callback(reader.result));
+  // };
 
   const beforeUpload = (file) => {
     // VALIDACIONES de formato
@@ -37,24 +38,36 @@ function FormProduct({
   };
 
   const handleChange = (info) => {
-    // console.log(info.file.status);
+    const imagenInfo = info.file.originFileObj;
+    const imgUrl = URL.createObjectURL(imagenInfo);
+    setLoad({ loading: false, imagenInfo });
+    setImage(imgUrl);
     // Get this url from response in real world.
-    getBase64(info.file.originFileObj, (imageUrl) =>
-      setLoad({
-        imageUrl,
-        loading: false,
-      })
-    );
+    // getBase64(info.file.originFileObj, (imageUrl) =>
+    //   setLoad({
+    //     imageUrl,
+    //     loading: false,
+    //   })
+    // );
   };
-  const { loading, imageUrl = "" } = load;
+  const { loading, imagenInfo = null } = load;
 
   const loadProfile = () => {
-    // console.log("setting field value");
     form.setFieldsValue(data);
+    setImage(
+      data.image ||
+        "https://i.pinimg.com/originals/36/fa/e9/36fae915516a6e4371ac095bfbade2cc.png"
+    );
   };
 
   const resetFields = () => {
     form.resetFields();
+    setImage("");
+    setLoad({ loading: false, imagenInfo: null });
+  };
+  const submitOnFinish = (values) => {
+    if (imagenInfo !== null) onFinish(values, imagenInfo);
+    else message.error("Agrega una imagen del producto");
   };
 
   useEffect(() => {
@@ -76,7 +89,7 @@ function FormProduct({
       initialValues={{
         remember: true,
       }}
-      onFinish={(values) => onFinish(values, load.imageUrl)}
+      onFinish={submitOnFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
@@ -88,9 +101,9 @@ function FormProduct({
             beforeUpload={beforeUpload}
             onChange={handleChange}
           >
-            {imageUrl ? (
+            {image ? (
               <img
-                src={imageUrl || form.getFieldValue(["productImg"])}
+                src={image}
                 alt="avatar"
                 className="w-auto max-h-full border"
               />

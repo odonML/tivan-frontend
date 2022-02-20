@@ -8,6 +8,22 @@ function InputForm({ type, label, nameInput, textCenter = false }) {
       required: true,
       message: "El nombre clave es obligatorio",
     },
+    cantidad: {
+      required: true,
+      message: "Las Piezas son obligatorias",
+    },
+    cantidadMinima: {
+      required: true,
+      message: "La piezas minimas es obligatorias",
+    },
+    precio: {
+      required: true,
+      message: "El precio es obligatorio",
+    },
+    codigoBarras: {
+      required: true,
+      message: "El codigo de barras es obligatorio",
+    },
   };
   let validation;
   if (nameInput in validations) validation = [validations[nameInput]];

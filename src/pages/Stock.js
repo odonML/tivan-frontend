@@ -41,7 +41,6 @@ function Stock() {
 
   // form
   const onFinish = (values, image) => {
-    // const vals = values;
     const obj = { ...values, image };
     console.log("form data", obj);
     // post -----------------------------
