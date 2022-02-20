@@ -12,7 +12,9 @@ function Stock() {
   const [dataProduct, setDataProduct] = useState();
   const [operation, setOperation] = useState("add");
   const [products, setProducts] = useState([]);
+  const [getError, setGetError] = useState(false);
 
+  console.log(products);
   // drawer
   const [visible, setVisible] = useState(false);
 
@@ -25,6 +27,10 @@ function Stock() {
   };
   const getProducts = async () => {
     const data = await serviceProduct.getProducts();
+    if (data === undefined) {
+      setGetError(true);
+      return;
+    }
     setProducts(data);
   };
 
@@ -74,6 +80,13 @@ function Stock() {
           }
           gridCols="sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4"
         >
+          {getError ? (
+            <div className="text-center">
+              <p>lo sentimos o se puedieron cargar los productos</p>
+            </div>
+          ) : (
+            ""
+          )}
           {products.map((product) => (
             <div
               key={product.idProducto}

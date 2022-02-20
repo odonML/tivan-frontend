@@ -15,6 +15,7 @@ function Home() {
   const [carrito, setCarrito] = useState({});
   const [totalCarrito, setTotalCarrito] = useState({});
   const [metodoPago, setMetodoPago] = useState("");
+  const [getError, setGetError] = useState(false);
 
   const handleCaptureDataPieces = ({ piezas, id }) => {
     const newCarrito = { ...carrito };
@@ -83,6 +84,10 @@ function Home() {
 
   const getProducts = async () => {
     const data = await serviceProduct.getProducts();
+    if (data === undefined) {
+      setGetError(true);
+      return;
+    }
     setProducts(data);
   };
 
@@ -130,6 +135,13 @@ function Home() {
             </div>
           }
         >
+          {getError ? (
+            <div className="text-center">
+              <p>lo sentimos o se puedieron cargar los productos</p>
+            </div>
+          ) : (
+            ""
+          )}
           {products.map((product) => (
             <div
               key={product.idProducto}

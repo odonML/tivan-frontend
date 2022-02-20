@@ -4,7 +4,7 @@ const PATH = "productos";
 
 const getProducts = async () => {
   const response = await fetch(`${constants.API_URL}${PATH}`);
-  return response.json();
+  if (!response.ok) response.json();
 };
 
 const updateProduct = async (data, id) => {
