@@ -19,6 +19,7 @@ function Home() {
 
   const [tab, setTab] = useState(1);
   const [metodoPago, setMetodoPago] = useState("");
+  const [getError, setGetError] = useState(false);
   const [productDuplicado, setProductDuplicado] = useState(false);
   const [visibleModal, setVisibleModal] = useState(false);
 
@@ -104,6 +105,16 @@ function Home() {
       ))
       .reverse();
 
+  const getProducts = async () => {
+    const data = await serviceProduct.getProducts();
+    if (data === undefined) {
+      setGetError(true);
+      return;
+    }
+    setProducts(data);
+  };
+
+
   const paymendListShoppingCar = () => {
     const total = getCostoTotal();
     const productos = Object.values(carrito).map(
@@ -167,6 +178,13 @@ function Home() {
             </div>
           }
         >
+          {getError ? (
+            <div className="text-center">
+              <p>lo sentimos o se puedieron cargar los productos</p>
+            </div>
+          ) : (
+            ""
+          )}
           {products.map((product) => (
             <div
               key={product.idProducto}

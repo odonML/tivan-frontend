@@ -5,26 +5,6 @@ import React, { useEffect, useState } from "react";
 import InputForm from "./InputForm";
 import TextAreaForm from "./TextAreaForm";
 
-function getBase64(img, callback) {
-  const reader = new FileReader();
-  reader.addEventListener("load", () => callback(reader.result));
-  reader.readAsDataURL(img);
-}
-
-function beforeUpload(file) {
-  // VALIDACIONES de formato
-  const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-  if (!isJpgOrPng) {
-    message.error("You can only upload JPG/PNG file!");
-  }
-  // VALIDACIONES de tamaño
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
-    message.error("Image must smaller than 2MB!");
-  }
-  return isJpgOrPng && isLt2M;
-}
-
 function FormProduct({
   onFinish,
   onFinishFailed,
@@ -33,27 +13,61 @@ function FormProduct({
   operation,
 }) {
   const [load, setLoad] = useState({});
+  const [image, setImage] = useState("");
   const [form] = Form.useForm();
 
-  const handleChange = (info) => {
-    // console.log(info.file.status);
-    // Get this url from response in real world.
-    getBase64(info.file.originFileObj, (imageUrl) =>
-      setLoad({
-        imageUrl,
-        loading: false,
-      })
-    );
+  // const getBase64 = (img, callback) => {
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(img);
+  //   reader.addEventListener("load", () => callback(reader.result));
+  // };
+
+  const beforeUpload = (file) => {
+    // VALIDACIONES de formato
+    const isValidFormat =
+      file.type === "image/jpeg" || file.type === "image/png";
+    if (!isValidFormat) {
+      message.error("You can only upload JPG/PNG file!");
+    }
+    // VALIDACIONES de tamaño
+    const isValidSize = file.size / 1024 / 1024 < 2;
+    if (!isValidSize) {
+      message.error("Image must smaller than 2MB!");
+    }
+    return isValidFormat && isValidSize;
   };
-  const { loading, imageUrl = "" } = load;
+
+  const handleChange = (info) => {
+    const imagenInfo = info.file.originFileObj;
+    const imgUrl = URL.createObjectURL(imagenInfo);
+    setLoad({ loading: false, imagenInfo });
+    setImage(imgUrl);
+    // Get this url from response in real world.
+    // getBase64(info.file.originFileObj, (imageUrl) =>
+    //   setLoad({
+    //     imageUrl,
+    //     loading: false,
+    //   })
+    // );
+  };
+  const { loading, imagenInfo = null } = load;
 
   const loadProfile = () => {
-    // console.log("setting field value");
     form.setFieldsValue(data);
+    setImage(
+      data.image ||
+        "https://i.pinimg.com/originals/36/fa/e9/36fae915516a6e4371ac095bfbade2cc.png"
+    );
   };
 
   const resetFields = () => {
     form.resetFields();
+    setImage("");
+    setLoad({ loading: false, imagenInfo: null });
+  };
+  const submitOnFinish = (values) => {
+    if (imagenInfo !== null) onFinish(values, imagenInfo);
+    else message.error("Agrega una imagen del producto");
   };
 
   useEffect(() => {
@@ -75,7 +89,7 @@ function FormProduct({
       initialValues={{
         remember: true,
       }}
-      onFinish={onFinish}
+      onFinish={submitOnFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
@@ -83,16 +97,15 @@ function FormProduct({
         <div className="col-span-2 flex items-center justify-center">
           <Upload
             listType="picture-card"
-            className="avatar-uploader"
             showUploadList={false}
             beforeUpload={beforeUpload}
             onChange={handleChange}
           >
-            {imageUrl ? (
+            {image ? (
               <img
-                src={imageUrl || form.getFieldValue(["productImg"])}
+                src={image}
                 alt="avatar"
-                style={{ width: "100%" }}
+                className="w-auto max-h-full border"
               />
             ) : (
               <div>
