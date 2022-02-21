@@ -25,7 +25,7 @@ const postProduct = async (data) => {
     ...data,
     fechaCreacion: fecha,
     fechaModificacion: fecha,
-    favorito: 0,
+    favorito: 1,
     eliminar: 0,
   };
   const response = await fetch(`${constants.API_URL}${PATH}`, {

@@ -1,21 +1,43 @@
+import { Alert } from "antd";
 import CardCarrito from "components/CardCarrito/CardCarrito";
 import CardProduct from "components/CardProduct/CardProduct";
 import ContentGrid from "components/shared/ContentGrid";
 import ContentLeft from "components/shared/ContentLeft";
 import ContentRight from "components/shared/ContentRight";
 import ControlsShopping from "components/shared/ControlsShopping";
+import Modal from "components/shared/Modal";
+import Scan from "components/shared/Scan";
 import Search from "components/shared/Search";
 import React, { useEffect, useState } from "react";
 import * as serviceProduct from "../services/product";
 
 function Home() {
-  const [tab, setTab] = useState(1);
   const [products, setProducts] = useState([]);
-  // const [productDuplicado, setProductDuplicado] = useState(false);
+  const [searchResult, setSearchResult] = useState([]);
   const [carrito, setCarrito] = useState({});
   const [totalCarrito, setTotalCarrito] = useState({});
+
+  const [tab, setTab] = useState(1);
   const [metodoPago, setMetodoPago] = useState("");
   const [getError, setGetError] = useState(false);
+  const [productDuplicado, setProductDuplicado] = useState(false);
+  const [visibleModal, setVisibleModal] = useState(false);
+
+  const showModal = () => {
+    setVisibleModal(true);
+  };
+
+  const closeModal = () => {
+    setVisibleModal(false);
+  };
+
+  const getProducts = async () => {
+    const allData = await serviceProduct.getProducts();
+    const data = allData.filter((product) => product.eliminar === 0);
+    const favoritos = data.filter((product) => product.favorito === 1);
+    setSearchResult(data);
+    setProducts(favoritos);
+  };
 
   const handleCaptureDataPieces = ({ piezas, id }) => {
     const newCarrito = { ...carrito };
@@ -29,16 +51,24 @@ function Home() {
     });
   };
 
-  const handleSearch = (e) => {
-    console.log(e);
-  };
-
   const deleteProductOfCar = (id) => {
     const newCarrito = { ...carrito };
-    if (delete newCarrito[id]) setCarrito(newCarrito);
+    const newTotalCarrito = { ...totalCarrito };
+    if (delete newCarrito[id] && delete newTotalCarrito[id]) {
+      setCarrito(newCarrito);
+      setTotalCarrito(newTotalCarrito);
+    }
   };
 
   const addProductToCar = (id, product) => {
+    console.log("add === ", id, product);
+
+    if (id in carrito) {
+      setProductDuplicado(true);
+      setTimeout(() => {
+        setProductDuplicado(false);
+      }, 2000);
+    }
     setCarrito({
       ...carrito,
       [id]: {
@@ -47,13 +77,6 @@ function Home() {
         totalPricesByProduct: product.precio,
       },
     });
-    // const existProduct = carrito.some((producto) => producto.idProducto === id);
-    // if (existProduct) {
-    //   setProductDuplicado(true);
-    //   setTimeout(() => {
-    //     setProductDuplicado(false);
-    //   }, 2000);
-    // } else
   };
 
   const selectMethodPaymend = (methodPaymend) => {
@@ -91,9 +114,9 @@ function Home() {
     setProducts(data);
   };
 
+
   const paymendListShoppingCar = () => {
     const total = getCostoTotal();
-
     const productos = Object.values(carrito).map(
       ({ idProducto, amountProductByCar, totalPricesByProduct }) => ({
         idProducto,
@@ -110,6 +133,26 @@ function Home() {
     console.log(objListShoppingCar);
   };
 
+  const handleSearch = (valueSearch) => {
+    if (valueSearch === "") getProducts();
+    const valueSearchLowerCase = valueSearch.toLowerCase();
+    const productsSearch = searchResult.filter(
+      (product) =>
+        product.comun.toLowerCase().includes(valueSearchLowerCase) ||
+        product.clave.toLowerCase().includes(valueSearchLowerCase)
+    );
+    setProducts(productsSearch);
+  };
+
+  const getCodeDetected = (barCode) => {
+    const [productDetected] = products.filter(
+      (product) => product.codigoBarras === Number(barCode)
+    );
+    const { idProducto } = productDetected;
+    addProductToCar(idProducto, productDetected);
+    console.log(productDetected);
+  };
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -118,14 +161,14 @@ function Home() {
     showProductsListCarrito();
   }, [carrito]);
 
-  console.log(carrito);
+  console.log(searchResult);
 
   return (
     <ContentGrid>
       <div
         className={`${
           tab === 1 ? "grid" : "hidden"
-        } lg:grid col-span-6 row-span-1 lg:col-span-4 md:row-span-4`}
+        } col-span-6 lg:grid  row-span-1 lg:col-span-4 md:row-span-4`}
       >
         <ContentLeft
           title="Favoritos"
@@ -149,6 +192,7 @@ function Home() {
             >
               <CardProduct
                 product={product}
+                addFavorite={(e) => console.log(e)}
                 addShoppingCard={() =>
                   addProductToCar(product.idProducto, product)
                 }
@@ -169,22 +213,31 @@ function Home() {
               actionPaymend={paymendListShoppingCar}
               selectAction={selectMethodPaymend}
               costoTotal={getCostoTotal()}
+              actionScan={showModal}
             ></ControlsShopping>
           }
         >
           {/* volver el alerta un componente con el setTimeout */}
-          {/* {productDuplicado ? (
-            <Alert message="Success Text" type="success" />
+          {productDuplicado ? (
+            <Alert message="El producto ya fue agregado" type="error" />
           ) : (
             ""
-          )} */}
+          )}
           {showProductsListCarrito()}
+          {visibleModal ? (
+            <Modal closeModal={closeModal}>
+              <Scan getCodeDetected={getCodeDetected} />
+            </Modal>
+          ) : (
+            ""
+          )}
         </ContentRight>
       </div>
       {/* Hacer el tab en componentes */}
-      <div className=" absolute flex items-center justify-center bottom-2 w-full h-[5%] lg:hidden">
-        <div className="flex px-6 w-full h-full  text-white text-base">
-          <div className="w-full h-full border border-pink-0">
+
+      <div className=" absolute flex items-center justify-center bottom-0 w-full h-[5%] py-4 lg:hidden">
+        <div className="flex w-2/3 md:h-[90%] text-white text-base">
+          <div className="w-full">
             <button
               type="button"
               className={`w-full h-full px-2 flex items-center justify-center rounded-l-full ${
