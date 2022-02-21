@@ -127,7 +127,7 @@ function FormProduct({
         </div>
         <div className=" col-span-2 ">
           <InputForm
-            type="text"
+            type="number"
             label="Codigo de Barras"
             nameInput="codigoBarras"
           />
