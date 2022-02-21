@@ -4,7 +4,7 @@ const PATH = "productos";
 
 const getProducts = async () => {
   const response = await fetch(`${constants.API_URL}${PATH}`);
-  if (!response.ok) response.json();
+  return response.json();
 };
 
 const updateProduct = async (data, id) => {
@@ -25,7 +25,7 @@ const postProduct = async (data) => {
     ...data,
     fechaCreacion: fecha,
     fechaModificacion: fecha,
-    favorito: 0,
+    favorito: 1,
     eliminar: 0,
   };
   const response = await fetch(`${constants.API_URL}${PATH}`, {
@@ -38,4 +38,15 @@ const postProduct = async (data) => {
   return response.json();
 };
 
-export { getProducts, updateProduct, postProduct };
+const logicDeleteProduct = async (id) => {
+  const response = await fetch(`${constants.API_URL}${PATH}/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ eliminar: true }),
+  });
+  return response.json();
+};
+
+export { getProducts, updateProduct, postProduct, logicDeleteProduct };

@@ -28,6 +28,7 @@ function Stock() {
   const getProducts = async () => {
     const data = await serviceProduct.getProducts();
     if (data === undefined) {
+      console.log(data);
       setGetError(true);
       return;
     }
@@ -60,8 +61,10 @@ function Stock() {
     console.log("Failed:", errorInfo);
   };
 
-  const onDeleteWithForm = () => {
-    console.log("delete", dataProduct);
+  const onDeleteWithForm = async () => {
+    const id = dataProduct.idProducto;
+    await serviceProduct.logicDeleteProduct(id);
+    onClose();
   };
 
   useEffect(() => {
