@@ -8,4 +8,9 @@ const getTickets = async () => {
   return response.json();
 };
 
-export { getTickets };
+const getDetailsTicket = async () => {
+  const response = await fetch(`${constants.API_URL}${PATH}`);
+
+  return response.json();
+};
+export { getTickets, getDetailsTicket };

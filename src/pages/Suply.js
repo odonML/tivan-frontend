@@ -11,6 +11,7 @@ import ButtonText from "../components/shared/ButtonText";
 function Suply() {
   const [tab] = useState(1);
   const [suply, setSuply] = useState([]);
+
   const handleCaptureDataPieces = ({ id, piezas }) => {
     console.log("suplyId", id, piezas);
   };
@@ -21,16 +22,19 @@ function Suply() {
 
   const getProducts = async () => {
     const data = await serviceProduct.getProducts();
-    setSuply(data);
+
+    const toSuplyProducts = data.filter(
+      (product) => product.cantidad <= product.cantidadMinima
+    );
+
+    console.log(toSuplyProducts);
+
+    setSuply(toSuplyProducts);
   };
+
   useEffect(() => {
     getProducts();
   }, []);
-  console.log(suply);
-  // 1- filtrar comparando el minimo de piezas con las piezas actuales
-  // 2- crear un estado donde tendre mis productos filtrados
-  // 3- renderizar las cards en el estado que tiene el filtrado
-  // * usar metodo filter *
 
   return (
     <ContentGrid
