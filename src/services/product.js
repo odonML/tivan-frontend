@@ -38,21 +38,6 @@ const postProduct = async (data) => {
   return response.json();
 };
 
-const logicDeleteProduct = async (id) => {
-  const body = {
-    eliminar: true,
-  };
-  const response = await fetch(`${constants.API_URL}${PATH}/${id}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  });
-  return response.json();
-  // console.log("este producto es favorito", id, fav);
-};
-
 const addProductToFavorites = async (id, fav) => {
   const body = {
     favorito: fav,
@@ -68,10 +53,4 @@ const addProductToFavorites = async (id, fav) => {
   // console.log("este producto es favorito", id, fav);
 };
 
-export {
-  getProducts,
-  updateProduct,
-  postProduct,
-  logicDeleteProduct,
-  addProductToFavorites,
-};
+export { getProducts, updateProduct, postProduct, addProductToFavorites };
