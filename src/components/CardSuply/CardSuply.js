@@ -1,5 +1,5 @@
 import React from "react";
-import CardDescription from "../shared/CardDescription";
+// import CardDescription from "../shared/CardDescription";
 import CardTitle from "../shared/CardTitle";
 import Image from "../shared/Image";
 import MinusPlusInput from "../shared/MinusPlusInput";
@@ -8,8 +8,8 @@ function CardSuply({
   productSuply: {
     idProducto,
     comun = "",
-    descripcion = "",
     clave = "",
+    cantidad = "",
     cantidadMinima = "",
   },
   handleCapture,
@@ -26,8 +26,8 @@ function CardSuply({
       <div className="w-full h-full flex flex-col justify-between pl-1">
         <div className="flex flex-col">
           <CardTitle text={comun} />
-          <CardDescription text={descripcion} />
           <p>{clave}</p>
+          <p>{cantidad} piezas</p>
           <p>minimo de piezas: {cantidadMinima}</p>
         </div>
         <div className="flex justify-end">

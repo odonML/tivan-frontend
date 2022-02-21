@@ -6,19 +6,17 @@ function MinusPlusInput({ callback, id, value = 1, minValue = 1 }) {
 
   const handlePlus = () => {
     setPiezas(piezas + 1);
-    callback({ piezas, id });
   };
+
   const handleMinus = () => {
     if (piezas > minValue) {
       setPiezas(piezas - 1);
     }
-    callback({ piezas, id });
   };
 
   const handleWrite = (e) => {
     const data = Number(e.target.value);
     if (!isNaN(data) && data >= minValue) setPiezas(data);
-    callback({ piezas, id });
   };
 
   useEffect(() => {
