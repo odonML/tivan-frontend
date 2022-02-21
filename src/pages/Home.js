@@ -45,6 +45,7 @@ function Home() {
   };
 
   const handleCaptureDataPieces = ({ piezas, id }) => {
+    console.log("data: ", piezas, id);
     const newCarrito = { ...carrito };
     const { precio } = newCarrito[id];
     newCarrito[id].amountProductByCar = piezas;
@@ -148,6 +149,24 @@ function Home() {
     console.log(productDetected);
   };
 
+  const allProductsToObj = (arrayToObj) => {
+    const objAllProducts = arrayToObj.reduce((objAcumulador, product) => {
+      const id = product.idProducto;
+      return { ...objAcumulador, [id]: product };
+    }, {});
+    return objAllProducts;
+  };
+
+  const addProductToFavorites = async (id) => {
+    const allProductsInObj = allProductsToObj(products);
+    const numberFav = allProductsInObj[id].favorito;
+    let fav;
+    if (numberFav === 0) fav = false;
+    else fav = true;
+    await serviceProduct.addProductToFavorites(id, !fav);
+    getProducts();
+  };
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -187,7 +206,7 @@ function Home() {
             >
               <CardProduct
                 product={product}
-                addFavorite={(e) => console.log(e)}
+                addFavorite={() => addProductToFavorites(product.idProducto)}
                 addShoppingCard={() =>
                   addProductToCar(product.idProducto, product)
                 }

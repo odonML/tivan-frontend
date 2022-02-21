@@ -29,6 +29,7 @@ function Stock() {
     const allData = await serviceProduct.getProducts();
     const data = allData.filter((product) => product.eliminar === 0);
     if (data === undefined) {
+      console.log(data);
       setGetError(true);
       return;
     }
@@ -61,8 +62,10 @@ function Stock() {
     console.log("Failed:", errorInfo);
   };
 
-  const onDeleteWithForm = () => {
-    console.log("delete", dataProduct);
+  const onDeleteWithForm = async () => {
+    const id = dataProduct.idProducto;
+    await serviceProduct.logicDeleteProduct(id);
+    onClose();
   };
 
   useEffect(() => {
