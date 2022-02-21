@@ -33,6 +33,11 @@ function Home() {
 
   const getProducts = async () => {
     const allData = await serviceProduct.getProducts();
+    console.log(allData);
+    if (allData === undefined) {
+      setGetError(true);
+      return;
+    }
     const data = allData.filter((product) => product.eliminar === 0);
     const favoritos = data.filter((product) => product.favorito === 1);
     setSearchResult(data);
@@ -104,16 +109,6 @@ function Home() {
         </div>
       ))
       .reverse();
-
-  const getProducts = async () => {
-    const data = await serviceProduct.getProducts();
-    if (data === undefined) {
-      setGetError(true);
-      return;
-    }
-    setProducts(data);
-  };
-
 
   const paymendListShoppingCar = () => {
     const total = getCostoTotal();
