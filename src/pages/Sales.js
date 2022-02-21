@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { RiScissors2Line } from "react-icons/ri";
+// import { RiScissors2Line } from "react-icons/ri";
 import ContentLeft from "components/shared/ContentLeft";
 import ContentRight from "components/shared/ContentRight";
 import CardTicket from "../components/CardTicket/CardTicket";
 import ContentGrid from "../components/shared/ContentGrid";
-import ButtonIcon from "../components/shared/ButtonIcon";
+// import ButtonIcon from "../components/shared/ButtonIcon";
 import TicketDetails from "../components/sub-pages/TicketDetails";
 import * as serviceSales from "../services/sales";
 
 function Sales() {
   const [tab, setTab] = useState(1);
   const [sales, setSales] = useState([]);
+  const [details, setDetails] = useState([]);
+
   const getTickets = async () => {
     const data = await serviceSales.getTickets();
     setSales(data);
@@ -19,6 +21,15 @@ function Sales() {
     getTickets();
   }, []);
   console.log(sales);
+
+  const getDetailsTicket = async () => {
+    const data = await serviceSales.getDetailsTicket();
+    setDetails(data);
+  };
+  useEffect(() => {
+    getDetailsTicket();
+  }, []);
+  console.log(details);
 
   return (
     <ContentGrid
@@ -57,9 +68,11 @@ function Sales() {
         } lg:grid lg:col-span-2 md:row-span-4`}
       >
         <ContentRight title="Ticket">
-          {/* <div className="col-span-2 h-full">
-            <TicketDetails />
-          </div> */}
+          {/* {details.map((ticketDetails) => (
+            <div className="col-span-2 h-full">
+              <TicketDetails />
+            </div>
+          ))} */}
         </ContentRight>
       </div>
       <div className=" absolute bottom-0 w-full h-[5%] py-1 flex items-center justify-center lg:hidden">

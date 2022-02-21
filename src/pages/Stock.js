@@ -26,7 +26,8 @@ function Stock() {
     console.log(response);
   };
   const getProducts = async () => {
-    const data = await serviceProduct.getProducts();
+    const allData = await serviceProduct.getProducts();
+    const data = allData.filter((product) => product.eliminar === 0);
     if (data === undefined) {
       console.log(data);
       setGetError(true);
