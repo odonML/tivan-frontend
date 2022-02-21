@@ -21,7 +21,7 @@ function CardTicket({
         <div className="text-lg text-black">#{idOrden}</div>
         <div className="text-lg">{fechaCreacion}</div>
         <div className="text-lg">{horaCreacion}</div>
-        <div className="text-lg text-black">{costoTotal}</div>
+        <div className="text-lg text-black">${costoTotal}</div>
         <div className="px-1">
           <div className="absolute flex h-15 items-center rounded-r-lg inset-y-0 right-0 bg-pink-0">
             <ButtonDelete
