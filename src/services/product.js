@@ -64,10 +64,26 @@ const addProductToFavorites = async (id, fav) => {
   // console.log("este producto es favorito", id, fav);
 };
 
+const uploadFileProduct = async (file) => {
+  try {
+    const response = await fetch(`${constants.API_URL}${PATH}/uploadImage`, {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+      },
+      body: file,
+    });
+    console.log(response);
+  } catch (ex) {
+    console.log(ex);
+  }
+};
+
 export {
   getProducts,
   updateProduct,
   postProduct,
   logicDeleteProduct,
   addProductToFavorites,
+  uploadFileProduct,
 };

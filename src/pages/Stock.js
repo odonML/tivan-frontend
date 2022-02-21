@@ -19,11 +19,12 @@ function Stock() {
   const [visible, setVisible] = useState(false);
 
   const postProduct = async (data) => {
-    await serviceProduct.postProduct(data);
+    // console.log(urlImage);
+    // await serviceProduct.postProduct(data);
   };
   const updateProduct = async (data, id) => {
-    const response = await serviceProduct.updateProduct(data, id);
-    console.log(response);
+    // const response = await serviceProduct.updateProduct(data, id);
+    // console.log(response);
   };
   const getProducts = async () => {
     const allData = await serviceProduct.getProducts();
@@ -48,12 +49,14 @@ function Stock() {
   };
 
   // form
-  const onFinish = (values, image) => {
+  const onFinish = async (values, image) => {
     const obj = { ...values, image };
-    console.log("form data", obj);
-    // post -----------------------------
-    // if (operation === "add") postProduct(values);
-    // else updateProduct(values, dataProduct.idProducto);
+    const formDataImage = new FormData();
+    formDataImage.append("image", image);
+    const urlImage = await serviceProduct.uploadFileProduct(formDataImage);
+    console.log(urlImage);
+    // if (operation === "add") postProduct(obj);
+    // else updateProduct(obj, obj.idProducto);
     onClose();
   };
 
