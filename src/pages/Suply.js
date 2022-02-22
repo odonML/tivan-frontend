@@ -6,7 +6,6 @@ import ContentLeft from "../components/shared/ContentLeft";
 import ButtonIcon from "../components/shared/ButtonIcon";
 import Search from "../components/shared/Search";
 import * as serviceProduct from "../services/product";
-// import ButtonText from "../components/shared/ButtonText";
 
 function Suply() {
   const [tab] = useState(1);

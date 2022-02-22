@@ -1,5 +1,4 @@
 import React from "react";
-// import CardDescription from "../shared/CardDescription";
 import CardTitle from "../shared/CardTitle";
 import Image from "../shared/Image";
 import MinusPlusInput from "../shared/MinusPlusInput";
