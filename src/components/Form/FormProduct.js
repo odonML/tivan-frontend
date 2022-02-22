@@ -40,6 +40,7 @@ function FormProduct({
   const { loading, imagenInfo = null } = load;
 
   const loadProfile = () => {
+    console.log(data);
     form.setFieldsValue(data);
     setImage(
       data.image ||
