@@ -1,9 +1,9 @@
+import CardSuply from "components/CardSuply/CardSuply";
 import React, { useEffect, useState } from "react";
 import { TiCloudStorage } from "react-icons/ti";
-import ContentGrid from "../components/shared/ContentGrid";
-import CardSuply from "../components/CardSuply/CardSuply";
-import ContentLeft from "../components/shared/ContentLeft";
 import ButtonIcon from "../components/shared/ButtonIcon";
+import ContentGrid from "../components/shared/ContentGrid";
+import ContentLeft from "../components/shared/ContentLeft";
 import Search from "../components/shared/Search";
 import * as serviceProduct from "../services/product";
 
@@ -22,7 +22,17 @@ function Suply() {
       },
     };
     setSendProductsToSuply(newProductsToSuply);
-    console.log(newProductsToSuply);
+  };
+
+  const sendProductsSuply = () => {
+    const productsToSuply = { ...sendProductsToSuply };
+    const arrayOfProductsForSuply = Object.values(productsToSuply).filter(
+      (product) => product.piezas > 0
+    );
+    const obj = {
+      productsToSuply: arrayOfProductsForSuply,
+    };
+    console.log(obj);
   };
 
   const getProducts = async () => {
@@ -31,6 +41,7 @@ function Suply() {
     const toSuplyProducts = data.filter(
       (product) => product.cantidad <= product.cantidadMinima
     );
+    // producto 10: cantidad = 7 y su minimo es 5
     // console.log(toSuplyProducts);
     setSearchValueResult(data);
     setSuply(toSuplyProducts);
@@ -65,7 +76,10 @@ function Suply() {
           title="Surtir"
           element={
             <div className="flex flex-row gap-4 items-center">
-              <ButtonIcon icon={<TiCloudStorage size={22} />} />
+              <ButtonIcon
+                click={sendProductsSuply}
+                icon={<TiCloudStorage size={22} />}
+              />
               <Search handleSearch={handleSearch} />
             </div>
           }
@@ -81,9 +95,6 @@ function Suply() {
               />
             </div>
           ))}
-          {/* <div className="flex w-40 justify-self-end m-5 col-span-1 sm:col-span-2">
-            <ButtonText>Surtir</ButtonText>
-          </div> */}
         </ContentLeft>
       </div>
     </ContentGrid>

@@ -7,7 +7,7 @@ import Image from "../shared/Image";
 function CardCarrito({
   product: {
     idProducto,
-    img = "",
+    image = "",
     comun = "",
     clave = "",
     totalPricesByProduct,
@@ -21,7 +21,7 @@ function CardCarrito({
         <Image
           className="object-cover rounded-t-lg md:h-auto md:w-48
           md:rounded-none md:rounded-l-lg"
-          img={img}
+          img={image}
         />
       </div>
       <div className="w-full h-full flex flex-col justify-between pl-1">

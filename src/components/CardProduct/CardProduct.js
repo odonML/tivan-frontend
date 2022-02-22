@@ -8,7 +8,7 @@ import Image from "../shared/Image";
 
 function CardProduct({
   product: {
-    img = "",
+    image = "",
     comun = "",
     clave = "",
     descripcion = "",
@@ -32,7 +32,7 @@ function CardProduct({
         <Image
           click={clickCard}
           className="object-cover rounded-t-lg md:rounded-none md:rounded-l-lg"
-          img={img}
+          img={image}
         />
         <div className="absolute bottom-0 left-0 m-1">
           {/* Favorite */}
