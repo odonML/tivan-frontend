@@ -16,12 +16,6 @@ function FormProduct({
   const [image, setImage] = useState("");
   const [form] = Form.useForm();
 
-  // const getBase64 = (img, callback) => {
-  //   const reader = new FileReader();
-  //   reader.readAsDataURL(img);
-  //   reader.addEventListener("load", () => callback(reader.result));
-  // };
-
   const beforeUpload = (file) => {
     // VALIDACIONES de formato
     const isValidFormat =
@@ -42,17 +36,11 @@ function FormProduct({
     const imgUrl = URL.createObjectURL(imagenInfo);
     setLoad({ loading: false, imagenInfo });
     setImage(imgUrl);
-    // Get this url from response in real world.
-    // getBase64(info.file.originFileObj, (imageUrl) =>
-    //   setLoad({
-    //     imageUrl,
-    //     loading: false,
-    //   })
-    // );
   };
   const { loading, imagenInfo = null } = load;
 
   const loadProfile = () => {
+    console.log(data);
     form.setFieldsValue(data);
     setImage(
       data.image ||
@@ -97,6 +85,7 @@ function FormProduct({
         <div className="col-span-2 flex items-center justify-center">
           <Upload
             listType="picture-card"
+            // action="http://localhost:8081/api/productos/uploadImage"
             showUploadList={false}
             beforeUpload={beforeUpload}
             onChange={handleChange}

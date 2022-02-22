@@ -14,16 +14,16 @@ function Stock() {
   const [products, setProducts] = useState([]);
   const [getError, setGetError] = useState(false);
 
-  console.log(products);
   // drawer
   const [visible, setVisible] = useState(false);
 
   const postProduct = async (data) => {
+    // console.log(data);
     await serviceProduct.postProduct(data);
   };
   const updateProduct = async (data, id) => {
+    // console.log(data, id);
     const response = await serviceProduct.updateProduct(data, id);
-    console.log(response);
   };
   const getProducts = async () => {
     const allData = await serviceProduct.getProducts();
@@ -48,12 +48,15 @@ function Stock() {
   };
 
   // form
-  const onFinish = (values, image) => {
-    const obj = { ...values, image };
-    console.log("form data", obj);
-    // post -----------------------------
-    // if (operation === "add") postProduct(values);
-    // else updateProduct(values, dataProduct.idProducto);
+  const onFinish = async (values, image) => {
+    const formDataImage = new FormData();
+    formDataImage.append("image", image);
+    const urlImage = await serviceProduct.uploadFileProduct(formDataImage);
+    console.log(urlImage);
+    console.log(values);
+    const newObj = { ...values, image: urlImage };
+    if (operation === "add") postProduct(newObj);
+    else updateProduct(newObj, dataProduct.idProducto);
     onClose();
   };
 
@@ -71,6 +74,8 @@ function Stock() {
   useEffect(() => {
     getProducts();
   }, []);
+
+  console.log(products);
   return (
     <ContentGrid>
       <div className="grid md:grid col-span-1 row-span-1 md:col-span-3 lg:col-span-6 md:row-span-4">

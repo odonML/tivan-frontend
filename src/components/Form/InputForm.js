@@ -4,7 +4,7 @@ import React from "react";
 function InputForm({ type, label, nameInput, textCenter = false }) {
   const rexNumber = /[0-9]/;
   const rexClave = /\B(#[a-zA-Z]+$\b)/;
-  const rexText = /^([a-zA-Z0-9]+$)/;
+  const rexText = /^([a-zA-Z0-9 ])/;
   const validations = {
     comun: [
       { required: true, message: "El nombre es obligatorio" },

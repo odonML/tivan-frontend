@@ -16,7 +16,7 @@ function CardProduct({
     precio = 0,
     favorito = 0,
   },
-  addFavorite,
+  addFavorite = null,
   addShoppingCard = null,
   clickCard = null,
 }) {
@@ -36,12 +36,16 @@ function CardProduct({
         />
         <div className="absolute bottom-0 left-0 m-1">
           {/* Favorite */}
-          <ButtonCheckbox
-            iconActive={<AiFillStar size={20} />}
-            iconNoActice={<AiOutlineStar size={20} />}
-            click={addFavorite}
-            fav={favorito}
-          />
+          {addFavorite !== null ? (
+            <ButtonCheckbox
+              iconActive={<AiFillStar size={20} />}
+              iconNoActice={<AiOutlineStar size={20} />}
+              click={addFavorite}
+              fav={favorito}
+            />
+          ) : (
+            ""
+          )}
         </div>
       </div>
       <div
