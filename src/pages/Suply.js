@@ -1,37 +1,52 @@
 import React, { useEffect, useState } from "react";
-// import { AiOutlinePlus } from "react-icons/ai";
+import { TiCloudStorage } from "react-icons/ti";
 import ContentGrid from "../components/shared/ContentGrid";
 import CardSuply from "../components/CardSuply/CardSuply";
 import ContentLeft from "../components/shared/ContentLeft";
-// import ButtonIcon from "../components/shared/ButtonIcon";
+import ButtonIcon from "../components/shared/ButtonIcon";
 import Search from "../components/shared/Search";
 import * as serviceProduct from "../services/product";
-import ButtonText from "../components/shared/ButtonText";
 
 function Suply() {
   const [tab] = useState(1);
   const [suply, setSuply] = useState([]);
+  const [searchValueResult, setSearchValueResult] = useState([]);
+  const [sendProductsToSuply, setSendProductsToSuply] = useState({});
 
-  const handleCaptureDataPieces = ({ id, piezas }) => {
-    console.log("suplyId", id, piezas);
-  };
-
-  const handleSearch = (e) => {
-    console.log(e);
+  const handleCaptureDataPieces = ({ piezas, id }) => {
+    const newProductsToSuply = {
+      ...sendProductsToSuply,
+      [id]: {
+        piezas,
+        id,
+      },
+    };
+    setSendProductsToSuply(newProductsToSuply);
+    console.log(newProductsToSuply);
   };
 
   const getProducts = async () => {
-    const data = await serviceProduct.getProducts();
-
+    const allData = await serviceProduct.getProducts();
+    const data = allData.filter((product) => product.eliminar === 0);
     const toSuplyProducts = data.filter(
       (product) => product.cantidad <= product.cantidadMinima
     );
-
-    console.log(toSuplyProducts);
-
+    // console.log(toSuplyProducts);
+    setSearchValueResult(data);
     setSuply(toSuplyProducts);
   };
 
+  const handleSearch = (nombreProducto) => {
+    if (nombreProducto === "") getProducts();
+    const nombreProductoLowerCase = nombreProducto.toLowerCase();
+    const searchValue = searchValueResult.filter(
+      (product) =>
+        product.comun.toLowerCase().includes(nombreProductoLowerCase) ||
+        product.clave.toLowerCase().includes(nombreProductoLowerCase)
+    );
+    setSuply(searchValue);
+  };
+  // console.log(sendProductsToSuply);
   useEffect(() => {
     getProducts();
   }, []);
@@ -49,12 +64,10 @@ function Suply() {
         <ContentLeft
           title="Surtir"
           element={
-            <div>
+            <div className="flex flex-row gap-4 items-center">
+              <ButtonIcon icon={<TiCloudStorage size={22} />} />
               <Search handleSearch={handleSearch} />
             </div>
-            /* <div>
-            <ButtonIcon icon={<AiOutlinePlus size={22} />} />
-          </div> */
           }
         >
           {suply.map((product) => (
@@ -68,9 +81,9 @@ function Suply() {
               />
             </div>
           ))}
-          <div className="flex w-40 justify-self-end m-5 col-span-1 sm:col-span-2">
+          {/* <div className="flex w-40 justify-self-end m-5 col-span-1 sm:col-span-2">
             <ButtonText>Surtir</ButtonText>
-          </div>
+          </div> */}
         </ContentLeft>
       </div>
     </ContentGrid>

@@ -1,6 +1,6 @@
 import * as constants from "../utils/constants";
 
-const PATH = "sales";
+const PATH = "order";
 
 const getTickets = async () => {
   const response = await fetch(`${constants.API_URL}${PATH}`);
