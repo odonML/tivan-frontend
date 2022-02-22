@@ -22,18 +22,14 @@ function CardProduct({
 }) {
   return (
     <div
-      className={` relative w-full h-full flex items-center justify-center bg-white rounded-lg shadow-md`}
+      className={` relative w-full h-full p-1 flex items-center justify-center bg-white rounded-lg shadow-md`}
     >
       <div
-        className={`w-16 sm:w-20 h-full flex items-center justify-center ${
+        className={`w-16 sm:w-20 h-full flex items-center justify-center mr-3 overflow-hidden rounded-lg ${
           clickCard !== null ? "cursor-pointer" : ""
         }`}
       >
-        <Image
-          click={clickCard}
-          className="object-cover rounded-t-lg md:rounded-none md:rounded-l-lg"
-          img={image}
-        />
+        <Image click={clickCard} className="object-cover" img={image} />
         <div className="absolute bottom-0 left-0 m-1">
           {/* Favorite */}
           {addFavorite !== null ? (

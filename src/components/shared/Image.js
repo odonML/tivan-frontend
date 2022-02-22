@@ -2,8 +2,8 @@ import React from "react";
 
 function Image({ img, text, click = null }) {
   return (
-    <div onClick={click}>
-      <img className="w-full h-full" src={img} alt={text} />
+    <div className="" onClick={click}>
+      <img className="rounded-lg" src={img} alt={text} />
     </div>
   );
 }

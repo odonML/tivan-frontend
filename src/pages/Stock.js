@@ -9,7 +9,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import * as serviceProduct from "../services/product";
 
 function Stock() {
-  const [dataProduct, setDataProduct] = useState();
+  const [dataProduct, setDataProduct] = useState({});
   const [operation, setOperation] = useState("add");
   const [products, setProducts] = useState([]);
   const [getError, setGetError] = useState(false);
@@ -18,18 +18,15 @@ function Stock() {
   const [visible, setVisible] = useState(false);
 
   const postProduct = async (data) => {
-    // console.log(data);
     await serviceProduct.postProduct(data);
   };
   const updateProduct = async (data, id) => {
-    // console.log(data, id);
     const response = await serviceProduct.updateProduct(data, id);
   };
   const getProducts = async () => {
     const allData = await serviceProduct.getProducts();
     const data = allData.filter((product) => product.eliminar === 0);
     if (data === undefined) {
-      console.log(data);
       setGetError(true);
       return;
     }
@@ -40,6 +37,7 @@ function Stock() {
     setVisible(true);
     setOperation(op);
   };
+
   const onClose = () => {
     setVisible(false);
     setDataProduct({});
@@ -52,8 +50,6 @@ function Stock() {
     const formDataImage = new FormData();
     formDataImage.append("image", image);
     const urlImage = await serviceProduct.uploadFileProduct(formDataImage);
-    console.log(urlImage);
-    console.log(values);
     const newObj = { ...values, image: urlImage };
     if (operation === "add") postProduct(newObj);
     else updateProduct(newObj, dataProduct.idProducto);
@@ -75,7 +71,6 @@ function Stock() {
     getProducts();
   }, []);
 
-  console.log(products);
   return (
     <ContentGrid>
       <div className="grid md:grid col-span-1 row-span-1 md:col-span-3 lg:col-span-6 md:row-span-4">
@@ -84,7 +79,10 @@ function Stock() {
           element={
             <ButtonIcon
               icon={<AiOutlinePlus />}
-              click={() => showDrawer("add")}
+              click={() => {
+                showDrawer("add");
+                setDataProduct({});
+              }}
             />
           }
           gridCols="sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4"
@@ -99,7 +97,7 @@ function Stock() {
           {products.map((product) => (
             <div
               key={product.idProducto}
-              className="col-span-1 md:col-span-2 lg:col-span-1 h-auto"
+              className="col-span-1 md:col-span-2 lg:col-span-1 h-28"
             >
               <CardProduct
                 product={product}

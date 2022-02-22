@@ -40,7 +40,6 @@ function FormProduct({
   const { loading, imagenInfo = null } = load;
 
   const loadProfile = () => {
-    console.log(data);
     form.setFieldsValue(data);
     setImage(
       data.image ||
@@ -60,7 +59,9 @@ function FormProduct({
 
   useEffect(() => {
     if (operation === "edit") loadProfile();
-    else resetFields();
+    else {
+      resetFields();
+    }
   }, [data]);
 
   return (

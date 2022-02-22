@@ -98,10 +98,7 @@ function Home() {
   const showProductsListCarrito = () =>
     Object.values(carrito)
       .map((product) => (
-        <div
-          key={product.idProducto}
-          className="col-span-1 h-auto sm:h-20 md:min-h-24 md:max-h-28 md:h-auto"
-        >
+        <div key={product.idProducto} className="col-span-1 h-24 ">
           <CardCarrito
             product={product}
             actionDeleteOfCar={() => deleteProductOfCar(product.idProducto)}
@@ -202,7 +199,7 @@ function Home() {
           {products.map((product) => (
             <div
               key={product.idProducto}
-              className="col-span-1 md:col-span-2 lg:col-span-1 h-auto md:max-h-28 md:h-auto"
+              className="col-span-1 md:col-span-2 lg:col-span-1 h-28"
             >
               <CardProduct
                 product={product}
