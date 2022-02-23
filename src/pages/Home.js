@@ -1,10 +1,11 @@
-import { Alert } from "antd";
+import { message } from "antd";
 import CardCarrito from "components/CardCarrito/CardCarrito";
 import CardProduct from "components/CardProduct/CardProduct";
 import ContentGrid from "components/shared/ContentGrid";
 import ContentLeft from "components/shared/ContentLeft";
 import ContentRight from "components/shared/ContentRight";
 import ControlsShopping from "components/shared/ControlsShopping";
+import DataTicket from "components/shared/DataTicket";
 import Modal from "components/shared/Modal";
 import Scan from "components/shared/Scan";
 import Search from "components/shared/Search";
@@ -16,36 +17,30 @@ function Home() {
   const [searchResult, setSearchResult] = useState([]);
   const [carrito, setCarrito] = useState({});
   const [totalCarrito, setTotalCarrito] = useState({});
-
+  const [objListShoppingCar, setObjListShoppingCar] = useState({});
   const [tab, setTab] = useState(1);
   const [metodoPago, setMetodoPago] = useState("");
   const [getError, setGetError] = useState(false);
-  const [productDuplicado, setProductDuplicado] = useState(false);
-  const [visibleModal, setVisibleModal] = useState(false);
-
-  const showModal = () => {
-    setVisibleModal(true);
-  };
-
-  const closeModal = () => {
-    setVisibleModal(false);
-  };
+  const [visibleModalScan, setVisibleModalScan] = useState(false);
+  const [visibleModalOfCambio, setVisibleModalOfCambio] = useState(false);
+  const [pago, setPago] = useState(0);
 
   const getProducts = async () => {
     const allData = await serviceProduct.getProducts();
-    console.log(allData);
     if (allData === undefined) {
       setGetError(true);
       return;
     }
     const data = allData.filter((product) => product.eliminar === 0);
     const favoritos = data.filter((product) => product.favorito === 1);
-    setSearchResult(data);
-    setProducts(favoritos);
+    if (favoritos.length === 0) setProducts(data);
+    else {
+      setSearchResult(data);
+      setProducts(favoritos);
+    }
   };
 
   const handleCaptureDataPieces = ({ piezas, id }) => {
-    console.log("data: ", piezas, id);
     const newCarrito = { ...carrito };
     const { precio } = newCarrito[id];
     newCarrito[id].amountProductByCar = piezas;
@@ -61,28 +56,27 @@ function Home() {
     const newCarrito = { ...carrito };
     const newTotalCarrito = { ...totalCarrito };
     if (delete newCarrito[id] && delete newTotalCarrito[id]) {
+      message.error("Producto eliminado del carrito");
       setCarrito(newCarrito);
       setTotalCarrito(newTotalCarrito);
     }
   };
 
   const addProductToCar = (id, product) => {
-    console.log("add === ", id, product);
-
     if (id in carrito) {
-      setProductDuplicado(true);
-      setTimeout(() => {
-        setProductDuplicado(false);
-      }, 2000);
+      message.error("El producto ya esta el agregado");
+      // hacer la suma en las piezas
     }
-    setCarrito({
+    const objAddToCarrito = {
       ...carrito,
       [id]: {
         ...product,
         amountProductByCar: 1,
         totalPricesByProduct: product.precio,
       },
-    });
+    };
+    setCarrito(objAddToCarrito);
+    message.success("El producto fue agregado al carrido");
   };
 
   const selectMethodPaymend = (methodPaymend) => {
@@ -98,10 +92,7 @@ function Home() {
   const showProductsListCarrito = () =>
     Object.values(carrito)
       .map((product) => (
-        <div
-          key={product.idProducto}
-          className="col-span-1 h-auto sm:h-20 md:min-h-24 md:max-h-28 md:h-auto"
-        >
+        <div key={product.idProducto} className="col-span-1 h-24 ">
           <CardCarrito
             product={product}
             actionDeleteOfCar={() => deleteProductOfCar(product.idProducto)}
@@ -110,6 +101,10 @@ function Home() {
         </div>
       ))
       .reverse();
+
+  const postTicket = async (list) => {
+    // const ticketPost = await serviceTicket.postTicket(list);
+  };
 
   const paymendListShoppingCar = () => {
     const total = getCostoTotal();
@@ -120,13 +115,21 @@ function Home() {
         totalPricesByProduct,
       })
     );
-    const objListShoppingCar = {
-      method: metodoPago,
-      totalPorPagar: total,
-      products: productos,
-    };
-    // hacer post -------------------------------------
-    console.log(objListShoppingCar);
+    if (metodoPago === "") message.warning("Selecciona un metodo de pago!");
+    if (productos.length !== 0) {
+      const listShoppingCar = {
+        method: metodoPago,
+        costoTotal: total,
+        products: productos,
+      };
+      setObjListShoppingCar(listShoppingCar);
+      if (metodoPago === "Efectivo") {
+        setVisibleModalOfCambio(true);
+      } else {
+        // hacer post -------------------------------------------------------------------------------------
+        postTicket(listShoppingCar);
+      }
+    } else message.error("No hay productos en el carrito");
   };
 
   const handleSearch = (valueSearch) => {
@@ -140,13 +143,16 @@ function Home() {
     setProducts(productsSearch);
   };
 
-  const getCodeDetected = (barCode) => {
-    const [productDetected] = products.filter(
+  const getCodeDetected = async (barCode) => {
+    const [productDetected] = await searchResult.filter(
       (product) => product.codigoBarras === Number(barCode)
     );
     const { idProducto } = productDetected;
-    addProductToCar(idProducto, productDetected);
-    console.log(productDetected);
+
+    await addProductToCar(idProducto, productDetected);
+    message.success("Producto Agregado al carrito!");
+    setVisibleModalScan(false);
+    setVisibleModalScan(true);
   };
 
   const allProductsToObj = (arrayToObj) => {
@@ -164,7 +170,14 @@ function Home() {
     if (numberFav === 0) fav = false;
     else fav = true;
     await serviceProduct.addProductToFavorites(id, !fav);
+    if (fav) message.error("El producto se elimino de favoritos");
+    else message.success("El producto se agrego a favoritos");
     getProducts();
+  };
+
+  const handlePago = (e) => {
+    const pagoInputValue = e.target.value;
+    setPago(pagoInputValue);
   };
 
   useEffect(() => {
@@ -174,8 +187,6 @@ function Home() {
   useEffect(() => {
     showProductsListCarrito();
   }, [carrito]);
-
-  console.log(searchResult);
 
   return (
     <ContentGrid>
@@ -202,7 +213,7 @@ function Home() {
           {products.map((product) => (
             <div
               key={product.idProducto}
-              className="col-span-1 md:col-span-2 lg:col-span-1 h-auto md:max-h-28 md:h-auto"
+              className="col-span-1 md:col-span-2 lg:col-span-1 h-28"
             >
               <CardProduct
                 product={product}
@@ -227,20 +238,47 @@ function Home() {
               actionPaymend={paymendListShoppingCar}
               selectAction={selectMethodPaymend}
               costoTotal={getCostoTotal()}
-              actionScan={showModal}
+              actionScan={() => setVisibleModalScan(true)}
             ></ControlsShopping>
           }
         >
           {/* volver el alerta un componente con el setTimeout */}
-          {productDuplicado ? (
-            <Alert message="El producto ya fue agregado" type="error" />
+          {showProductsListCarrito()}
+          {visibleModalScan ? (
+            <Modal closeModal={() => setVisibleModalScan(false)}>
+              <Scan getCodeDetected={getCodeDetected} />
+            </Modal>
           ) : (
             ""
           )}
-          {showProductsListCarrito()}
-          {visibleModal ? (
-            <Modal closeModal={closeModal}>
-              <Scan getCodeDetected={getCodeDetected} />
+          {visibleModalOfCambio ? (
+            <Modal
+              closeModal={() => {
+                setVisibleModalOfCambio(false);
+                setPago(0);
+              }}
+            >
+              <div className="w-full h-full flex flex-col text-sm">
+                <DataTicket
+                  label="Tipo de pago:"
+                  result={objListShoppingCar.method}
+                />
+                <DataTicket
+                  label="Total:"
+                  result={objListShoppingCar.costoTotal}
+                />
+                <DataTicket
+                  label="Pago:"
+                  result={
+                    <input
+                      type="number"
+                      className="w-20 text-sm p-1 border rounded-sm text-purple-0 outline-none"
+                      value={pago}
+                      onChange={handlePago}
+                    />
+                  }
+                />
+              </div>
             </Modal>
           ) : (
             ""
