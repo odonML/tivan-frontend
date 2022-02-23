@@ -5,6 +5,7 @@ import ContentGrid from "components/shared/ContentGrid";
 import ContentLeft from "components/shared/ContentLeft";
 import ContentRight from "components/shared/ContentRight";
 import ControlsShopping from "components/shared/ControlsShopping";
+import DataTicket from "components/shared/DataTicket";
 import Modal from "components/shared/Modal";
 import Scan from "components/shared/Scan";
 import Search from "components/shared/Search";
@@ -14,41 +15,15 @@ import * as serviceProduct from "../services/product";
 function Home() {
   const [products, setProducts] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
-  const [carrito, setCarrito] = useState({
-    // 1302: {
-    //   amountProductByCar: 1,
-    //   cantidad: 2,
-    //   cantidadMinima: 2,
-    //   clave: "#a",
-    //   codigoBarras: 2,
-    //   comun: "Leche delite",
-    //   descripcion: "a",
-    //   eliminar: 0,
-    //   favorito: 1,
-    //   fechaCreacion: null,
-    //   fechaModificacion: "2022-02-22",
-    //   idProducto: 1302,
-    //   image: null,
-    //   precio: 2,
-    //   totalPricesByProduct: 2,
-    //   userCreacion: null,
-    // },
-  });
+  const [carrito, setCarrito] = useState({});
   const [totalCarrito, setTotalCarrito] = useState({});
-
+  const [objListShoppingCar, setObjListShoppingCar] = useState({});
   const [tab, setTab] = useState(1);
   const [metodoPago, setMetodoPago] = useState("");
   const [getError, setGetError] = useState(false);
-  const [productDuplicado, setProductDuplicado] = useState(false);
-  const [visibleModal, setVisibleModal] = useState(false);
-
-  const showModal = () => {
-    setVisibleModal(true);
-  };
-
-  const closeModal = () => {
-    setVisibleModal(false);
-  };
+  const [visibleModalScan, setVisibleModalScan] = useState(false);
+  const [visibleModalOfCambio, setVisibleModalOfCambio] = useState(false);
+  const [pago, setPago] = useState(0);
 
   const getProducts = async () => {
     const allData = await serviceProduct.getProducts();
@@ -81,6 +56,7 @@ function Home() {
     const newCarrito = { ...carrito };
     const newTotalCarrito = { ...totalCarrito };
     if (delete newCarrito[id] && delete newTotalCarrito[id]) {
+      message.error("Producto eliminado del carrito");
       setCarrito(newCarrito);
       setTotalCarrito(newTotalCarrito);
     }
@@ -88,10 +64,9 @@ function Home() {
 
   const addProductToCar = (id, product) => {
     if (id in carrito) {
-      // message.error("El producto ya esta el agregado");
+      message.error("El producto ya esta el agregado");
       // hacer la suma en las piezas
     }
-    console.log("before to car", carrito);
     const objAddToCarrito = {
       ...carrito,
       [id]: {
@@ -100,8 +75,8 @@ function Home() {
         totalPricesByProduct: product.precio,
       },
     };
-    console.log("after carrito", objAddToCarrito);
     setCarrito(objAddToCarrito);
+    message.success("El producto fue agregado al carrido");
   };
 
   const selectMethodPaymend = (methodPaymend) => {
@@ -114,9 +89,8 @@ function Home() {
       0
     );
 
-  const showProductsListCarrito = () => {
-    console.log("showProducts: ", carrito);
-    return Object.values(carrito)
+  const showProductsListCarrito = () =>
+    Object.values(carrito)
       .map((product) => (
         <div key={product.idProducto} className="col-span-1 h-24 ">
           <CardCarrito
@@ -127,6 +101,9 @@ function Home() {
         </div>
       ))
       .reverse();
+
+  const postTicket = async (list) => {
+    // const ticketPost = await serviceTicket.postTicket(list);
   };
 
   const paymendListShoppingCar = () => {
@@ -138,13 +115,21 @@ function Home() {
         totalPricesByProduct,
       })
     );
-    const objListShoppingCar = {
-      method: metodoPago,
-      totalPorPagar: total,
-      products: productos,
-    };
-    // hacer post -------------------------------------
-    console.log(objListShoppingCar);
+    if (metodoPago === "") message.warning("Selecciona un metodo de pago!");
+    if (productos.length !== 0) {
+      const listShoppingCar = {
+        method: metodoPago,
+        costoTotal: total,
+        products: productos,
+      };
+      setObjListShoppingCar(listShoppingCar);
+      if (metodoPago === "Efectivo") {
+        setVisibleModalOfCambio(true);
+      } else {
+        // hacer post -------------------------------------------------------------------------------------
+        postTicket(listShoppingCar);
+      }
+    } else message.error("No hay productos en el carrito");
   };
 
   const handleSearch = (valueSearch) => {
@@ -159,17 +144,15 @@ function Home() {
   };
 
   const getCodeDetected = async (barCode) => {
-    // console.log("codigo detectador", barCode);
     const [productDetected] = await searchResult.filter(
       (product) => product.codigoBarras === Number(barCode)
     );
     const { idProducto } = productDetected;
-    console.log("add carrito");
 
     await addProductToCar(idProducto, productDetected);
     message.success("Producto Agregado al carrito!");
-    setVisibleModal(false);
-    setVisibleModal(true);
+    setVisibleModalScan(false);
+    setVisibleModalScan(true);
   };
 
   const allProductsToObj = (arrayToObj) => {
@@ -187,7 +170,14 @@ function Home() {
     if (numberFav === 0) fav = false;
     else fav = true;
     await serviceProduct.addProductToFavorites(id, !fav);
+    if (fav) message.error("El producto se elimino de favoritos");
+    else message.success("El producto se agrego a favoritos");
     getProducts();
+  };
+
+  const handlePago = (e) => {
+    const pagoInputValue = e.target.value;
+    setPago(pagoInputValue);
   };
 
   useEffect(() => {
@@ -195,7 +185,6 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    // console.log("carrito ---- ", carrito);
     showProductsListCarrito();
   }, [carrito]);
 
@@ -249,16 +238,47 @@ function Home() {
               actionPaymend={paymendListShoppingCar}
               selectAction={selectMethodPaymend}
               costoTotal={getCostoTotal()}
-              actionScan={showModal}
+              actionScan={() => setVisibleModalScan(true)}
             ></ControlsShopping>
           }
         >
           {/* volver el alerta un componente con el setTimeout */}
           {showProductsListCarrito()}
-          {visibleModal ? (
-            <Modal closeModal={closeModal}>
-              {/* {seniorSinto ? <Scan getCodeDetected={getCodeDetected} /> : ""} */}
+          {visibleModalScan ? (
+            <Modal closeModal={() => setVisibleModalScan(false)}>
               <Scan getCodeDetected={getCodeDetected} />
+            </Modal>
+          ) : (
+            ""
+          )}
+          {visibleModalOfCambio ? (
+            <Modal
+              closeModal={() => {
+                setVisibleModalOfCambio(false);
+                setPago(0);
+              }}
+            >
+              <div className="w-full h-full flex flex-col text-sm">
+                <DataTicket
+                  label="Tipo de pago:"
+                  result={objListShoppingCar.method}
+                />
+                <DataTicket
+                  label="Total:"
+                  result={objListShoppingCar.costoTotal}
+                />
+                <DataTicket
+                  label="Pago:"
+                  result={
+                    <input
+                      type="number"
+                      className="w-20 text-sm p-1 border rounded-sm text-purple-0 outline-none"
+                      value={pago}
+                      onChange={handlePago}
+                    />
+                  }
+                />
+              </div>
             </Modal>
           ) : (
             ""

@@ -7,8 +7,8 @@ function Modal({
   bgTransparent = "bg-gray-100",
   alignItemsModal = "items-center",
   justifyContentModal = "justify-center",
-  widthModal = "w-auto",
-  heightModal = "h-auto",
+  widthModal = "w-auto min-w-[40%]",
+  heightModal = "h-auto ",
   roundedModal = true,
   bgColorModal = "bg-white",
   txColorModal = "text-gray-1",
@@ -27,7 +27,7 @@ function Modal({
         } ${bgColorModal} ${txColorModal}`}
       >
         <div
-          className={`relative w-full h-full p-3 rounded-lg flex flex-col items-center justify-center border text-justify ${borderColorModal}`}
+          className={` w-full h-[100%] p-3 rounded-lg flex flex-col items-center justify-center border text-justify ${borderColorModal}`}
         >
           {closeModal ? (
             <div className="absolute top-0 right-0 p-1">
