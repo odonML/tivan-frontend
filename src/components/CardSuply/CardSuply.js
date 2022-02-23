@@ -6,6 +6,7 @@ import MinusPlusInput from "../shared/MinusPlusInput";
 function CardSuply({
   productSuply: {
     idProducto,
+    image,
     comun = "",
     clave = "",
     cantidad = "",
@@ -15,12 +16,8 @@ function CardSuply({
 }) {
   return (
     <div className="relative w-full h-full pr-6 p-1 flex items-center justify-center bg-white rounded-lg shadow-md">
-      <div className="w-16 sm:w-20 h-full flex items-center justify-center">
-        <Image
-          className="object-cover rounded-t-lg md:h-auto md:w-48
-          md:rounded-none md:rounded-l-lg"
-          img="https://minisupersofy.webnode.es/_files/system_preview_detail_200000017-b9012b9fd7/Bolsa-Sabritas-Original.jpg"
-        />
+      <div className="w-16 sm:w-20 h-full flex items-center justify-center mr-3 overflow-hidden rounded-lg">
+        <Image className="object-cover" img={image} />
       </div>
       <div className="w-full h-full flex flex-col justify-between pl-1">
         <div className="flex flex-col">
