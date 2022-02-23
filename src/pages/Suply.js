@@ -18,21 +18,10 @@ function Suply() {
       ...sendProductsToSuply,
       [id]: {
         piezas,
-        id,
+        idProducto: id,
       },
     };
     setSendProductsToSuply(newProductsToSuply);
-  };
-
-  const sendProductsSuply = () => {
-    const productsToSuply = { ...sendProductsToSuply };
-    const arrayOfProductsForSuply = Object.values(productsToSuply).filter(
-      (product) => product.piezas > 0
-    );
-    const obj = {
-      productsToSuply: arrayOfProductsForSuply,
-    };
-    console.log(obj);
   };
 
   const getProducts = async () => {
@@ -41,10 +30,26 @@ function Suply() {
     const toSuplyProducts = data.filter(
       (product) => product.cantidad <= product.cantidadMinima
     );
-    // producto 10: cantidad = 7 y su minimo es 5
-    // console.log(toSuplyProducts);
     setSearchValueResult(data);
     setSuply(toSuplyProducts);
+  };
+
+  const postProductSuply = async (productsSuply) => {
+    const response = await serviceProduct.postProductSuply(productsSuply);
+    getProducts();
+    console.log(response);
+  };
+
+  const sendProductsSuply = () => {
+    const productsToSuply = { ...sendProductsToSuply };
+    const arrayOfProductsForSuply = Object.values(productsToSuply).filter(
+      (product) => product.piezas > 0
+    );
+
+    const obj = {
+      products: arrayOfProductsForSuply,
+    };
+    postProductSuply(obj);
   };
 
   const handleSearch = (nombreProducto) => {
@@ -57,7 +62,7 @@ function Suply() {
     );
     setSuply(searchValue);
   };
-  // console.log(sendProductsToSuply);
+
   useEffect(() => {
     getProducts();
   }, []);
