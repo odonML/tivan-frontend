@@ -86,6 +86,20 @@ const uploadFileProduct = async (file) => {
   // });
 };
 
+const postProductSuply = async (data) => {
+  const obj = {
+    ...data,
+  };
+  const response = await fetch(`${constants.API_URL}${PATH}/suply`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(obj),
+  });
+  return response.json();
+};
+
 export {
   getProducts,
   updateProduct,
@@ -93,4 +107,5 @@ export {
   logicDeleteProduct,
   addProductToFavorites,
   uploadFileProduct,
+  postProductSuply,
 };
