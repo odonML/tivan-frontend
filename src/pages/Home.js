@@ -1,4 +1,4 @@
-import { Alert } from "antd";
+import { message } from "antd";
 import CardCarrito from "components/CardCarrito/CardCarrito";
 import CardProduct from "components/CardProduct/CardProduct";
 import ContentGrid from "components/shared/ContentGrid";
@@ -14,7 +14,26 @@ import * as serviceProduct from "../services/product";
 function Home() {
   const [products, setProducts] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
-  const [carrito, setCarrito] = useState({});
+  const [carrito, setCarrito] = useState({
+    // 1302: {
+    //   amountProductByCar: 1,
+    //   cantidad: 2,
+    //   cantidadMinima: 2,
+    //   clave: "#a",
+    //   codigoBarras: 2,
+    //   comun: "Leche delite",
+    //   descripcion: "a",
+    //   eliminar: 0,
+    //   favorito: 1,
+    //   fechaCreacion: null,
+    //   fechaModificacion: "2022-02-22",
+    //   idProducto: 1302,
+    //   image: null,
+    //   precio: 2,
+    //   totalPricesByProduct: 2,
+    //   userCreacion: null,
+    // },
+  });
   const [totalCarrito, setTotalCarrito] = useState({});
 
   const [tab, setTab] = useState(1);
@@ -33,19 +52,20 @@ function Home() {
 
   const getProducts = async () => {
     const allData = await serviceProduct.getProducts();
-    console.log(allData);
     if (allData === undefined) {
       setGetError(true);
       return;
     }
     const data = allData.filter((product) => product.eliminar === 0);
     const favoritos = data.filter((product) => product.favorito === 1);
-    setSearchResult(data);
-    setProducts(favoritos);
+    if (favoritos.length === 0) setProducts(data);
+    else {
+      setSearchResult(data);
+      setProducts(favoritos);
+    }
   };
 
   const handleCaptureDataPieces = ({ piezas, id }) => {
-    console.log("data: ", piezas, id);
     const newCarrito = { ...carrito };
     const { precio } = newCarrito[id];
     newCarrito[id].amountProductByCar = piezas;
@@ -67,22 +87,21 @@ function Home() {
   };
 
   const addProductToCar = (id, product) => {
-    console.log("add === ", id, product);
-
     if (id in carrito) {
-      setProductDuplicado(true);
-      setTimeout(() => {
-        setProductDuplicado(false);
-      }, 2000);
+      // message.error("El producto ya esta el agregado");
+      // hacer la suma en las piezas
     }
-    setCarrito({
+    console.log("before to car", carrito);
+    const objAddToCarrito = {
       ...carrito,
       [id]: {
         ...product,
         amountProductByCar: 1,
         totalPricesByProduct: product.precio,
       },
-    });
+    };
+    console.log("after carrito", objAddToCarrito);
+    setCarrito(objAddToCarrito);
   };
 
   const selectMethodPaymend = (methodPaymend) => {
@@ -95,8 +114,9 @@ function Home() {
       0
     );
 
-  const showProductsListCarrito = () =>
-    Object.values(carrito)
+  const showProductsListCarrito = () => {
+    console.log("showProducts: ", carrito);
+    return Object.values(carrito)
       .map((product) => (
         <div key={product.idProducto} className="col-span-1 h-24 ">
           <CardCarrito
@@ -107,6 +127,7 @@ function Home() {
         </div>
       ))
       .reverse();
+  };
 
   const paymendListShoppingCar = () => {
     const total = getCostoTotal();
@@ -137,13 +158,18 @@ function Home() {
     setProducts(productsSearch);
   };
 
-  const getCodeDetected = (barCode) => {
-    const [productDetected] = products.filter(
+  const getCodeDetected = async (barCode) => {
+    // console.log("codigo detectador", barCode);
+    const [productDetected] = await searchResult.filter(
       (product) => product.codigoBarras === Number(barCode)
     );
     const { idProducto } = productDetected;
-    addProductToCar(idProducto, productDetected);
-    console.log(productDetected);
+    console.log("add carrito");
+
+    await addProductToCar(idProducto, productDetected);
+    message.success("Producto Agregado al carrito!");
+    setVisibleModal(false);
+    setVisibleModal(true);
   };
 
   const allProductsToObj = (arrayToObj) => {
@@ -169,10 +195,9 @@ function Home() {
   }, []);
 
   useEffect(() => {
+    // console.log("carrito ---- ", carrito);
     showProductsListCarrito();
   }, [carrito]);
-
-  console.log(searchResult);
 
   return (
     <ContentGrid>
@@ -229,14 +254,10 @@ function Home() {
           }
         >
           {/* volver el alerta un componente con el setTimeout */}
-          {productDuplicado ? (
-            <Alert message="El producto ya fue agregado" type="error" />
-          ) : (
-            ""
-          )}
           {showProductsListCarrito()}
           {visibleModal ? (
             <Modal closeModal={closeModal}>
+              {/* {seniorSinto ? <Scan getCodeDetected={getCodeDetected} /> : ""} */}
               <Scan getCodeDetected={getCodeDetected} />
             </Modal>
           ) : (
