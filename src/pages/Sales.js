@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
 import ContentLeft from "components/shared/ContentLeft";
 import ContentRight from "components/shared/ContentRight";
+import React, { useEffect, useState } from "react";
 import CardTicket from "../components/CardTicket/CardTicket";
 import ContentGrid from "../components/shared/ContentGrid";
 import TicketDetails from "../components/sub-pages/TicketDetails";
@@ -11,30 +11,26 @@ function Sales() {
   const [sales, setSales] = useState([]);
   const [details, setDetails] = useState({});
 
+  const getDetailsTicketById = async (idOrden) => {
+    const data = await serviceSales.getDetailsTicketById(idOrden);
+    setDetails(data);
+  };
+
   const getTickets = async () => {
     const data = await serviceSales.getTickets();
     const eliminatedTicket = data.filter((ticket) => ticket.eliminar === null);
     const lastTicketPrinted = eliminatedTicket[eliminatedTicket.length - 1];
-    console.log("aqui es", lastTicketPrinted);
-    setDetails(lastTicketPrinted);
+    getDetailsTicketById(lastTicketPrinted.idOrden);
     // cambiar null a 0
     setSales(eliminatedTicket);
   };
 
-  const getDetailsTicketById = async (idOrden) => {
-    const data = await serviceSales.getDetailsTicketById(idOrden);
-    console.log(data);
-    setDetails(data);
-  };
-
   const showTicketDetails = (idOrden) => {
     getDetailsTicketById(idOrden);
-    console.log("aqui salen los detaies", idOrden);
   };
 
   const logicDeleteTicket = async (id) => {
     const data = await serviceSales.logicDeleteTicket(id);
-    console.log("boton borrar", data);
     getTickets();
   };
 
@@ -77,7 +73,7 @@ function Sales() {
       >
         <ContentRight title="Ticket">
           <div className="col-span-2 h-full">
-            <TicketDetails ticketDetails={details} />
+            <TicketDetails ticketDaraDetails={details} />
           </div>
         </ContentRight>
       </div>
