@@ -24,7 +24,7 @@ function CardSuply({
           <CardTitle text={comun} />
           <p>{clave}</p>
           <p>{cantidad} piezas</p>
-          <p>minimo de piezas: {cantidadMinima}</p>
+          <p>MÍnimo de piezas: {cantidadMinima}</p>
         </div>
         <div className="flex justify-end">
           <div className="w-24 sm:w-20 h-5">

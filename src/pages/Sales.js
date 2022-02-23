@@ -1,35 +1,47 @@
 import React, { useEffect, useState } from "react";
-// import { RiScissors2Line } from "react-icons/ri";
 import ContentLeft from "components/shared/ContentLeft";
 import ContentRight from "components/shared/ContentRight";
 import CardTicket from "../components/CardTicket/CardTicket";
 import ContentGrid from "../components/shared/ContentGrid";
-// import ButtonIcon from "../components/shared/ButtonIcon";
 import TicketDetails from "../components/sub-pages/TicketDetails";
 import * as serviceSales from "../services/sales";
 
 function Sales() {
   const [tab, setTab] = useState(1);
   const [sales, setSales] = useState([]);
-  const [details, setDetails] = useState([]);
+  const [details, setDetails] = useState({});
 
   const getTickets = async () => {
     const data = await serviceSales.getTickets();
-    setSales(data);
+    const eliminatedTicket = data.filter((ticket) => ticket.eliminar === null);
+    const lastTicketPrinted = eliminatedTicket[eliminatedTicket.length - 1];
+    console.log("aqui es", lastTicketPrinted);
+    setDetails(lastTicketPrinted);
+    // cambiar null a 0
+    setSales(eliminatedTicket);
   };
+
+  const getDetailsTicketById = async (idOrden) => {
+    const data = await serviceSales.getDetailsTicketById(idOrden);
+    console.log(data);
+    setDetails(data);
+  };
+
+  const showTicketDetails = (idOrden) => {
+    getDetailsTicketById(idOrden);
+    console.log("aqui salen los detaies", idOrden);
+  };
+
+  const logicDeleteTicket = async (id) => {
+    const data = await serviceSales.logicDeleteTicket(id);
+    console.log("boton borrar", data);
+    getTickets();
+  };
+
   useEffect(() => {
     getTickets();
   }, []);
-  console.log(sales);
-
-  const getDetailsTicket = async () => {
-    const data = await serviceSales.getDetailsTicket();
-    setDetails(data);
-  };
-  useEffect(() => {
-    getDetailsTicket();
-  }, []);
-  console.log(details);
+  // console.log(sales);
 
   return (
     <ContentGrid
@@ -41,25 +53,21 @@ function Sales() {
           tab === 1 ? "grid" : "hidden"
         } grid col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-4 row-span-4`}
       >
-        <ContentLeft
-          title="Ventas"
-          // element={
-          //   <div className="flex justify-end py-1">
-          //     <ButtonIcon
-          //       click={() => console.log("corte de caja")}
-          //       icon={<RiScissors2Line size={22} />}
-          //     />
-          //   </div>
-          // }
-        >
-          {sales.map((ticket) => (
-            <div
-              key={ticket.idOrden}
-              className="col-span-1 md:col-span-1 lg:col-span-1"
-            >
-              <CardTicket ticket={ticket} />
-            </div>
-          ))}
+        <ContentLeft title="Ventas">
+          {sales
+            .map((ticket) => (
+              <div
+                key={ticket.idOrden}
+                className="col-span-1 md:col-span-1 lg:col-span-1"
+              >
+                <CardTicket
+                  ticket={ticket}
+                  clickCard={showTicketDetails}
+                  clickDelete={logicDeleteTicket}
+                />
+              </div>
+            ))
+            .reverse()}
         </ContentLeft>
       </div>
       <div
@@ -68,11 +76,9 @@ function Sales() {
         } lg:grid lg:col-span-2 md:row-span-4`}
       >
         <ContentRight title="Ticket">
-          {/* {details.map((ticketDetails) => (
-            <div className="col-span-2 h-full">
-              <TicketDetails />
-            </div>
-          ))} */}
+          <div className="col-span-2 h-full">
+            <TicketDetails ticketDetails={details} />
+          </div>
         </ContentRight>
       </div>
       <div className=" absolute bottom-0 w-full h-[5%] py-1 flex items-center justify-center lg:hidden">
