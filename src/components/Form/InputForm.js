@@ -2,7 +2,7 @@ import { Form, Input } from "antd";
 import React from "react";
 
 function InputForm({ type, label, nameInput, textCenter = false }) {
-  const rexNumber = /[0-9]/;
+  const rexNumber = /^\b[0-9]+$/;
   const rexClave = /\B(#[a-zA-Z]+$\b)/;
   const rexText = /^([a-zA-Z0-9 ])/;
   const validations = {
@@ -29,36 +29,36 @@ function InputForm({ type, label, nameInput, textCenter = false }) {
         message: "Solo se aceptan letras y numeros",
       },
     ],
-    cantidad: [
-      {
-        required: true,
-        message: "Las piezas son obligatorias",
-      },
-      {
-        pattern: new RegExp(rexNumber),
-        message: "Solo se aceptan numeros",
-      },
-    ],
     cantidadMinima: [
+      { pattern: new RegExp(rexNumber), message: "Solo se aceptan numeros" },
       {
         required: true,
         message: "La piezas minimas es obligatorias",
       },
-      { pattern: new RegExp(rexNumber), message: "Solo se aceptan numeros" },
+    ],
+    cantidad: [
+      {
+        pattern: new RegExp(rexNumber),
+        message: "Solo se aceptan numeros",
+      },
+      {
+        required: true,
+        message: "Las piezas son obligatorias",
+      },
     ],
     precio: [
+      { pattern: new RegExp(rexNumber), message: "Solo se aceptan numeros" },
       {
         required: true,
         message: "El precio es obligatorio",
       },
-      { pattern: new RegExp(rexNumber), message: "Solo se aceptan numeros" },
     ],
     codigoBarras: [
+      { pattern: new RegExp(rexNumber), message: "Solo se aceptan numeros" },
       {
         required: true,
         message: "El codigo de barras es obligatorio",
       },
-      { pattern: new RegExp(rexNumber), message: "Solo se aceptan numeros" },
     ],
   };
   let validation;
@@ -74,7 +74,7 @@ function InputForm({ type, label, nameInput, textCenter = false }) {
     >
       <Input
         type={type}
-        className={`mb-0 max-w-full ${textCenter ? "text-center" : ""}`}
+        className={`max-w-full ${textCenter ? "text-center" : ""}`}
       />
     </Form.Item>
   );

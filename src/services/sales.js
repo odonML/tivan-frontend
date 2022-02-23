@@ -59,10 +59,32 @@ const getDetailsTicketById = async (id) => {
   return response.json();
 };
 
+const postTicket = async (data) => {
+  const d = new Date();
+  const fecha = d.toISOString().split("T")[0];
+  const obj = {
+    ...data,
+    fechaCreacion: fecha,
+    fechaModificacion: fecha,
+    eliminar: 0,
+  };
+  const response = await fetch(`${constants.API_URL}${PATH}/detailed`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(obj),
+  });
+  return response.json();
+};
+
 export {
   getTickets,
+  postTicket,
   updateTicket,
   postTicketDetail,
   logicDeleteTicket,
   getDetailsTicketById,
 };
+
+
