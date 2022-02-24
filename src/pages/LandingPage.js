@@ -1,7 +1,5 @@
-import { Button, Drawer } from "antd";
-import Logo from "components/shared/Logo";
-import Navbar from "components/shared/Navbar";
-import React, { useState } from "react";
+import { Button } from "antd";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function LandingPage() {

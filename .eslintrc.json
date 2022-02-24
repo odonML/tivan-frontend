@@ -48,6 +48,7 @@
     "no-restricted-globals": 0,
     "no-unused-vars": 1,
     "import/prefer-default-export": "off",
-    "disallowRedundantWrapping": "off"
+    "disallowRedundantWrapping": "off",
+    "consistent-return": "off"
   }
 }

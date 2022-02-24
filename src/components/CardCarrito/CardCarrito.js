@@ -9,7 +9,7 @@ function CardCarrito({
     idProducto,
     image = "",
     comun = "",
-    clave = "",
+    cantidad,
     totalPricesByProduct,
   },
   actionDeleteOfCar = null,
@@ -23,7 +23,9 @@ function CardCarrito({
       <div className="w-full h-full flex flex-col justify-between pl-1">
         <div className="flex flex-col">
           <CardTitle text={comun} />
-          <p className="text-sm sm:hidden md:block lg:block">{clave}</p>
+          <p className="text-sm sm:hidden md:block lg:block">
+            {cantidad} piezas
+          </p>
         </div>
         <div className="flex flex-row items-start justify-between flex-wrap lg:flex-row lg:items-center ">
           <div>

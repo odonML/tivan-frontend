@@ -38,6 +38,9 @@ function CardProduct({
               iconNoActice={<AiOutlineStar size={20} />}
               click={addFavorite}
               fav={favorito}
+              bgColorActive="bg-purple-0"
+              txColorActive="text-yellow-0"
+              bgColorNoActive="bg-gray-0"
             />
           ) : (
             ""

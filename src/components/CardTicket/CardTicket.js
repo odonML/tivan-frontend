@@ -8,11 +8,12 @@ function CardTicket({
   clickDelete,
 }) {
   return (
-    <div className="relative flex w-full h-10 m-2">
+    <div
+      onClick={() => clickCard(idOrden)}
+      className="relative flex w-full h-10 m-2"
+    >
       <div className="flex flex-row items-center justify-between w-full h-full sm:grow-0 bg-white rounded-lg shadow-md px-1 py-2 cursor-pointer hover:bg-pink-3">
-        <div onClick={() => clickCard(idOrden)} className="text-lg text-black">
-          #{idOrden}
-        </div>
+        <div className="text-lg text-black">#{idOrden}</div>
         <div className="text-lg">{fechaCreacion}</div>
         <div className="text-lg text-black">${costoTotal}</div>
         <div className="px-1">
