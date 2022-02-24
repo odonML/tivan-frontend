@@ -138,21 +138,22 @@ function Home() {
         fechaCreacion: fechaModificacion,
       })
     );
-    if (metodoPago === "") message.warning("Selecciona un metodo de pago!");
     if (productos.length !== 0) {
-      const listShoppingCar = {
-        metodoPago,
-        costoTotal: total,
-        products: productos,
-      };
-      console.log("objOrden", listShoppingCar);
-      setObjListShoppingCar(listShoppingCar);
-      if (metodoPago === "Efectivo") {
-        setVisibleModalOfCambio(true);
-      } else {
-        // hacer post -------------------------------------------------------------------------------------
-        postTicket(listShoppingCar);
-      }
+      if (metodoPago !== "") {
+        const listShoppingCar = {
+          metodoPago,
+          costoTotal: total,
+          products: productos,
+        };
+        console.log("objOrden", listShoppingCar);
+        setObjListShoppingCar(listShoppingCar);
+        if (metodoPago === "Efectivo") {
+          setVisibleModalOfCambio(true);
+        } else {
+          // hacer post -------------------------------------------------------------------------------------
+          postTicket(listShoppingCar);
+        }
+      } else message.warning("Selecciona un metodo de pago!");
     } else message.error("No hay productos en el carrito");
   };
 
