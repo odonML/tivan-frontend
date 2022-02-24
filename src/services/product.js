@@ -56,8 +56,9 @@ const logicDeleteProduct = async (id) => {
 };
 
 const addProductToFavorites = async (id, fav) => {
+  const favorito = fav ? 1 : 0;
   const body = {
-    favorito: fav,
+    favorito,
   };
   const response = await fetch(`${constants.API_URL}${PATH}/${id}/favorito`, {
     method: "PATCH",

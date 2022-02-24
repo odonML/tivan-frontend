@@ -1,3 +1,4 @@
+import { message } from "antd";
 import CardSuply from "components/CardSuply/CardSuply";
 import React, { useEffect, useState } from "react";
 import { TiCloudStorage } from "react-icons/ti";
@@ -36,7 +37,10 @@ function Suply() {
 
   const postProductSuply = async (productsSuply) => {
     const response = await serviceProduct.postProductSuply(productsSuply);
-    getProducts();
+    if (response) {
+      message.success("Se agregaron piezas al stock");
+      getProducts();
+    }
     console.log(response);
   };
 

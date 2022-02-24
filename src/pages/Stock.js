@@ -16,12 +16,6 @@ function Stock() {
   // drawer
   const [visible, setVisible] = useState(false);
 
-  const postProduct = async (data) => {
-    // console.log(data);
-    await serviceProduct.postProduct(data);
-    message.success("Producto Agregado!");
-  };
-
   const getProducts = async () => {
     const allData = await serviceProduct.getProducts();
     const data = allData.filter((product) => product.eliminar === 0);
@@ -44,6 +38,15 @@ function Stock() {
     setOperation("add");
   };
 
+  const postProduct = async (data) => {
+    // console.log(data);
+    const response = await serviceProduct.postProduct(data);
+    if (response) {
+      onClose();
+      message.success("Producto Agregado!");
+    }
+  };
+
   const updateProduct = async (data, id) => {
     const response = await serviceProduct.updateProduct(data, id);
     console.log("update ", response);
@@ -56,23 +59,15 @@ function Stock() {
   // form
   const onFinish = async (values, image, code) => {
     let newObj;
-    const codeExist = products.filter(
-      (product) => product.codigoBarras === Number(code)
-    );
-    if (codeExist.length === 0) {
-      if (operation === "add") {
-        const formDataImage = new FormData();
-        formDataImage.append("image", image);
-        const urlImage = await serviceProduct.uploadFileProduct(formDataImage);
-        newObj = { ...values, image: urlImage, codigoBarras: code };
-        postProduct(newObj);
-        onClose();
-      } else {
-        newObj = { ...values, image, codigoBarras: code };
-        updateProduct(newObj, dataProduct.idProducto);
-      }
+    if (operation === "add") {
+      const formDataImage = new FormData();
+      formDataImage.append("image", image);
+      const urlImage = await serviceProduct.uploadFileProduct(formDataImage);
+      newObj = { ...values, image: urlImage, codigoBarras: code };
+      postProduct(newObj);
     } else {
-      message.error("el Codigo de barras ya existe");
+      newObj = { ...values, image, codigoBarras: code };
+      updateProduct(newObj, dataProduct.idProducto);
     }
   };
 
@@ -83,9 +78,11 @@ function Stock() {
 
   const onDeleteWithForm = async () => {
     const id = dataProduct.idProducto;
-    await serviceProduct.logicDeleteProduct(id);
-    message.error("El producto fue eliminado!");
-    onClose();
+    const response = await serviceProduct.logicDeleteProduct(id);
+    if (response) {
+      message.error("El producto fue eliminado!");
+      onClose();
+    }
   };
 
   useEffect(() => {
