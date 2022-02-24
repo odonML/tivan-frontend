@@ -164,3 +164,32 @@ code {
   max-width: none;
   margin-top: 5px;
 }
+
+.custom-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #3d2967;
+  color: #f21d81;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.cardGlass {
+  background: rgba(162, 162, 162, 0.35);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  /* background: rgba(162, 162, 162, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  */
+}
