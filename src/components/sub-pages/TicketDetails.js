@@ -6,7 +6,8 @@ function ticketDetails({ ticketDaraDetails }) {
   const [orden = {}] = Orden;
   const [...products] = Producto;
   const { idOrden = 0, costoTotal = 0 } = orden;
-  console.log(products);
+
+  console.log(ticketDaraDetails);
 
   return (
     <Content>
@@ -28,7 +29,7 @@ function ticketDetails({ ticketDaraDetails }) {
               <p className="">{product.Nombre}</p>
               <div className="flex gap-4">
                 <p>{product.Cantidad} pz</p>
-                <p>${product.Costo}</p>
+                <p>$ {product.Costo}</p>
               </div>
             </div>
           ))}
