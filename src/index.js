@@ -6,6 +6,7 @@ import SignIn from "pages/auth/SignIn";
 import Home from "pages/Home";
 import LandingPage from "pages/LandingPage";
 import Layout from "pages/Layout";
+import NotFound from "pages/NotFound";
 import Sales from "pages/Sales";
 import Stock from "pages/Stock";
 import Suply from "pages/Suply";
@@ -18,7 +19,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="*" element={<h1>Not Found</h1>} />
+        <Route path="*" element={<NotFound />} />
         <Route path="ui" element={<Demo />} />
         <Route path="/" element={<App />}>
           <Route index element={<LandingPage />} />

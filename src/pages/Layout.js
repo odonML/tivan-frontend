@@ -57,7 +57,10 @@ function Layout() {
       >
         <Sidebar buttonsOfPages={buttonsOfPages}>
           <div className="hidden lg:flex lg:flex-col md:items-center md:gap-2">
-            <ButtonIcon icon={<BsFillDoorOpenFill size={28} />} />
+            <ButtonIcon
+              click={() => navigate("/")}
+              icon={<BsFillDoorOpenFill size={28} />}
+            />
           </div>
         </Sidebar>
 

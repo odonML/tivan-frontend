@@ -164,3 +164,15 @@ code {
   max-width: none;
   margin-top: 5px;
 }
+
+.custom-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #3d2967;
+  color: #f21d81;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
