@@ -4,7 +4,6 @@ const PATH = "order";
 
 const getTickets = async () => {
   const response = await fetch(`${constants.API_URL}${PATH}`);
-
   return response.json();
 };
 
@@ -61,13 +60,19 @@ const getDetailsTicketById = async (id) => {
 
 const postTicket = async (data) => {
   const d = new Date();
-  const fecha = d.toISOString().split("T")[0];
+  const dia = d.getDate();
+  const mes = d.getMonth() + 1;
+  const año = d.getFullYear();
+  const fecha = `${dia}/${mes}/${año}`;
   const obj = {
     ...data,
     fechaCreacion: fecha,
     fechaModificacion: fecha,
+    estadoOrden: "",
+    usuarioCreacion: "",
     eliminar: 0,
   };
+
   const response = await fetch(`${constants.API_URL}${PATH}/detailed`, {
     method: "POST",
     headers: {

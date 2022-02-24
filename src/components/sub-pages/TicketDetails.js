@@ -6,7 +6,7 @@ function ticketDetails({ ticketDaraDetails }) {
   const [orden = {}] = Orden;
   const [...products] = Producto;
   const { idOrden = 0, costoTotal = 0 } = orden;
-  console.log(ticketDaraDetails);
+  console.log(products);
 
   return (
     <Content>
@@ -23,12 +23,12 @@ function ticketDetails({ ticketDaraDetails }) {
           {products.map((product) => (
             <div
               key={product.idProducto}
-              className="flex flex-row p-2 gap-4 items-center justify-between text-sm"
+              className="flex flex-row p-2 gap-4 items-center justify-between text-lg"
             >
-              <p className="text-black">{product.comun}</p>
+              <p className="">{product.Nombre}</p>
               <div className="flex gap-4">
-                <p>2 piezas</p>
-                <p>$12.00</p>
+                <p>{product.Cantidad} pz</p>
+                <p>${product.Costo}</p>
               </div>
             </div>
           ))}

@@ -1,6 +1,7 @@
 import { message } from "antd";
 import CardCarrito from "components/CardCarrito/CardCarrito";
 import CardProduct from "components/CardProduct/CardProduct";
+import ButtonText from "components/shared/ButtonText";
 import ContentGrid from "components/shared/ContentGrid";
 import ContentLeft from "components/shared/ContentLeft";
 import ContentRight from "components/shared/ContentRight";
@@ -11,6 +12,7 @@ import Scan from "components/shared/Scan";
 import Search from "components/shared/Search";
 import React, { useEffect, useState } from "react";
 import * as serviceProduct from "../services/product";
+import * as serviceTicket from "../services/sales";
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -24,6 +26,7 @@ function Home() {
   const [visibleModalScan, setVisibleModalScan] = useState(false);
   const [visibleModalOfCambio, setVisibleModalOfCambio] = useState(false);
   const [pago, setPago] = useState(0);
+  const [cambio, setCambio] = useState(0);
 
   const getProducts = async () => {
     const allData = await serviceProduct.getProducts();
@@ -35,9 +38,9 @@ function Home() {
     const favoritos = data.filter((product) => product.favorito === 1);
     if (favoritos.length === 0) setProducts(data);
     else {
-      setSearchResult(data);
       setProducts(favoritos);
     }
+    setSearchResult(data);
   };
 
   const handleCaptureDataPieces = ({ piezas, id }) => {
@@ -103,25 +106,38 @@ function Home() {
       .reverse();
 
   const postTicket = async (list) => {
-    // const ticketPost = await serviceTicket.postTicket(list);
+    const ticketPost = await serviceTicket.postTicket(list);
+    setCarrito({});
+    setTotalCarrito({});
+    setMetodoPago("");
+    message.success("se realizo la compra");
+    console.log("post ", ticketPost);
   };
 
   const paymendListShoppingCar = () => {
     const total = getCostoTotal();
     const productos = Object.values(carrito).map(
-      ({ idProducto, amountProductByCar, totalPricesByProduct }) => ({
+      ({
         idProducto,
         amountProductByCar,
         totalPricesByProduct,
+        fechaModificacion,
+      }) => ({
+        id: idProducto,
+        cantidadProducto: amountProductByCar,
+        costoTotalProducto: totalPricesByProduct,
+        // Cambiar la fecha
+        fechaCreacion: fechaModificacion,
       })
     );
     if (metodoPago === "") message.warning("Selecciona un metodo de pago!");
     if (productos.length !== 0) {
       const listShoppingCar = {
-        method: metodoPago,
+        metodoPago,
         costoTotal: total,
         products: productos,
       };
+      console.log("objOrden", listShoppingCar);
       setObjListShoppingCar(listShoppingCar);
       if (metodoPago === "Efectivo") {
         setVisibleModalOfCambio(true);
@@ -163,16 +179,25 @@ function Home() {
     return objAllProducts;
   };
 
-  const addProductToFavorites = async (id) => {
+  //
+  const addProductToFavorites = async (id, e) => {
     const allProductsInObj = allProductsToObj(products);
     const numberFav = allProductsInObj[id].favorito;
-    let fav;
-    if (numberFav === 0) fav = false;
-    else fav = true;
-    await serviceProduct.addProductToFavorites(id, !fav);
-    if (fav) message.error("El producto se elimino de favoritos");
-    else message.success("El producto se agrego a favoritos");
+    // let fav;
+    // if (numberFav === 0) fav = false;
+    // else fav = true;
+    console.log(e);
+    await serviceProduct.addProductToFavorites(id, e);
+    // if (fav) message.error("El producto se elimino de favoritos");
+    // else message.success("El producto se agrego a favoritos");
     getProducts();
+  };
+
+  const calculate = () => {
+    if (pago > objListShoppingCar.costoTotal) {
+      const cambioPago = pago - objListShoppingCar.costoTotal;
+      setCambio(cambioPago);
+    } else setCambio(0);
   };
 
   const handlePago = (e) => {
@@ -180,14 +205,24 @@ function Home() {
     setPago(pagoInputValue);
   };
 
+  const postOfModalCambio = async () => {
+    await postTicket(objListShoppingCar);
+    setVisibleModalOfCambio(false);
+  };
+
   useEffect(() => {
     getProducts();
   }, []);
 
   useEffect(() => {
+    calculate();
+  }, [pago]);
+
+  useEffect(() => {
     showProductsListCarrito();
   }, [carrito]);
 
+  // console.log(carrito);
   return (
     <ContentGrid>
       <div
@@ -217,7 +252,9 @@ function Home() {
             >
               <CardProduct
                 product={product}
-                addFavorite={() => addProductToFavorites(product.idProducto)}
+                addFavorite={(e) =>
+                  addProductToFavorites(product.idProducto, e)
+                }
                 addShoppingCard={() =>
                   addProductToCar(product.idProducto, product)
                 }
@@ -258,13 +295,14 @@ function Home() {
                 setPago(0);
               }}
             >
-              <div className="w-full h-full flex flex-col text-sm">
+              <div className="w-full h-full flex flex-col text-lg">
                 <DataTicket
                   label="Tipo de pago:"
                   result={objListShoppingCar.method}
                 />
                 <DataTicket
                   label="Total:"
+                  signo={true}
                   result={objListShoppingCar.costoTotal}
                 />
                 <DataTicket
@@ -278,6 +316,22 @@ function Home() {
                     />
                   }
                 />
+                <hr className="my-3" />
+                <DataTicket
+                  label="Cambio:"
+                  result={<p className="text-2xl">${cambio}</p>}
+                />
+                <div className="w-full flex justify-end">
+                  <div className="w-20">
+                    <ButtonText
+                      bgColor="bg-aqua-0"
+                      txColor="text-purple-0"
+                      click={postOfModalCambio}
+                    >
+                      Cobrar
+                    </ButtonText>
+                  </div>
+                </div>
               </div>
             </Modal>
           ) : (

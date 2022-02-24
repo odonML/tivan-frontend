@@ -21,11 +21,7 @@ function Stock() {
     await serviceProduct.postProduct(data);
     message.success("Producto Agregado!");
   };
-  const updateProduct = async (data, id) => {
-    console.log("update ", data);
-    const response = await serviceProduct.updateProduct(data, id);
-    message.success("Producto Actualizado!");
-  };
+
   const getProducts = async () => {
     const allData = await serviceProduct.getProducts();
     const data = allData.filter((product) => product.eliminar === 0);
@@ -33,7 +29,7 @@ function Stock() {
       setGetError(true);
       return;
     }
-    setProducts(data);
+    if (data) setProducts(data);
   };
 
   const showDrawer = (op) => {
@@ -42,10 +38,19 @@ function Stock() {
   };
 
   const onClose = () => {
+    getProducts();
     setVisible(false);
     setDataProduct({});
     setOperation("add");
-    getProducts();
+  };
+
+  const updateProduct = async (data, id) => {
+    const response = await serviceProduct.updateProduct(data, id);
+    console.log("update ", response);
+    if (response) {
+      onClose();
+      message.success("Producto Actualizado!");
+    } else message.error("No se actualizo!");
   };
 
   // form
@@ -65,7 +70,6 @@ function Stock() {
       } else {
         newObj = { ...values, image, codigoBarras: code };
         updateProduct(newObj, dataProduct.idProducto);
-        onClose();
       }
     } else {
       message.error("el Codigo de barras ya existe");
