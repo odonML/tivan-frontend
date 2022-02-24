@@ -1,3 +1,4 @@
+import { message } from "antd";
 import ContentLeft from "components/shared/ContentLeft";
 import ContentRight from "components/shared/ContentRight";
 import React, { useEffect, useState } from "react";
@@ -31,7 +32,10 @@ function Sales() {
 
   const logicDeleteTicket = async (id) => {
     const data = await serviceSales.logicDeleteTicket(id);
-    getTickets();
+    if (data) {
+      message.success("Se elimino la venta");
+      getTickets();
+    }
   };
 
   useEffect(() => {

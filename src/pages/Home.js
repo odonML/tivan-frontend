@@ -34,8 +34,12 @@ function Home() {
       setGetError(true);
       return;
     }
-    const data = allData.filter((product) => product.eliminar === 0);
-    const favoritos = data.filter((product) => product.favorito === 1);
+    const data = allData.filter(
+      (product) => product.eliminar === 0 && product.cantidad !== 0
+    );
+    const favoritos = data.filter(
+      (product) => product.favorito === 1 && product.cantidad !== 0
+    );
     if (favoritos.length === 0) setProducts(data);
     else {
       setProducts(favoritos);
@@ -45,14 +49,19 @@ function Home() {
 
   const handleCaptureDataPieces = ({ piezas, id }) => {
     const newCarrito = { ...carrito };
-    const { precio } = newCarrito[id];
-    newCarrito[id].amountProductByCar = piezas;
-    newCarrito[id].totalPricesByProduct = precio * piezas;
-    setCarrito(newCarrito);
-    setTotalCarrito({
-      ...totalCarrito,
-      [id]: newCarrito[id].totalPricesByProduct,
-    });
+    const { precio, cantidad } = newCarrito[id];
+    const comparacion = cantidad - piezas;
+    if (comparacion > 0) {
+      newCarrito[id].amountProductByCar = piezas;
+      newCarrito[id].totalPricesByProduct = precio * piezas;
+      setCarrito(newCarrito);
+      setTotalCarrito({
+        ...totalCarrito,
+        [id]: newCarrito[id].totalPricesByProduct,
+      });
+    } else {
+      message.error("No hay suficientes piezas");
+    }
   };
 
   const deleteProductOfCar = (id) => {
@@ -109,7 +118,6 @@ function Home() {
     const ticketPost = await serviceTicket.postTicket(list);
     setCarrito({});
     setTotalCarrito({});
-    setMetodoPago("");
     message.success("se realizo la compra");
     console.log("post ", ticketPost);
   };
@@ -179,18 +187,12 @@ function Home() {
     return objAllProducts;
   };
 
-  //
   const addProductToFavorites = async (id, e) => {
-    const allProductsInObj = allProductsToObj(products);
-    const numberFav = allProductsInObj[id].favorito;
-    // let fav;
-    // if (numberFav === 0) fav = false;
-    // else fav = true;
-    console.log(e);
-    await serviceProduct.addProductToFavorites(id, e);
-    // if (fav) message.error("El producto se elimino de favoritos");
-    // else message.success("El producto se agrego a favoritos");
-    getProducts();
+    const response = await serviceProduct.addProductToFavorites(id, e);
+    if (response) {
+      message.success("Se agrego el producto a favoritos");
+      getProducts();
+    }
   };
 
   const calculate = () => {
@@ -206,8 +208,11 @@ function Home() {
   };
 
   const postOfModalCambio = async () => {
-    await postTicket(objListShoppingCar);
-    setVisibleModalOfCambio(false);
+    const response = await postTicket(objListShoppingCar);
+    if (response) {
+      message.success("Se realizo una compra!");
+      setVisibleModalOfCambio(false);
+    }
   };
 
   useEffect(() => {
@@ -222,7 +227,7 @@ function Home() {
     showProductsListCarrito();
   }, [carrito]);
 
-  // console.log(carrito);
+  console.log("home", products);
   return (
     <ContentGrid>
       <div
@@ -321,16 +326,14 @@ function Home() {
                   label="Cambio:"
                   result={<p className="text-2xl">${cambio}</p>}
                 />
-                <div className="w-full flex justify-end">
-                  <div className="w-20">
-                    <ButtonText
-                      bgColor="bg-aqua-0"
-                      txColor="text-purple-0"
-                      click={postOfModalCambio}
-                    >
-                      Cobrar
-                    </ButtonText>
-                  </div>
+                <div className="w-full flex items-center justify-center ">
+                  <ButtonText
+                    bgColor="bg-aqua-0"
+                    txColor="text-purple-0"
+                    click={postOfModalCambio}
+                  >
+                    Cobrar
+                  </ButtonText>
                 </div>
               </div>
             </Modal>
@@ -354,7 +357,7 @@ function Home() {
               <p>Favoritos</p>
             </button>
           </div>
-          <div className="w-full h-full border border-pink-0">
+          <div className="w-full h-full">
             <button
               type="button"
               className={`w-full h-full px-2 flex items-center justify-center  rounded-r-full ${

@@ -5,7 +5,7 @@ import Navbar from "components/shared/Navbar";
 import Sidebar from "components/shared/Sidebar";
 import React from "react";
 import { AiOutlineDropbox } from "react-icons/ai";
-import { BsUpcScan } from "react-icons/bs";
+import { BsFillDoorOpenFill } from "react-icons/bs";
 import { HiViewGridAdd } from "react-icons/hi";
 import { MdAttachMoney, MdHome } from "react-icons/md";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -57,7 +57,7 @@ function Layout() {
       >
         <Sidebar buttonsOfPages={buttonsOfPages}>
           <div className="hidden lg:flex lg:flex-col md:items-center md:gap-2">
-            <ButtonIcon icon={<BsUpcScan size={35} />} />
+            <ButtonIcon icon={<BsFillDoorOpenFill size={28} />} />
           </div>
         </Sidebar>
 
